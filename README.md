@@ -2,6 +2,11 @@
 
 ##
 
+Build documentation locally via
+
+    sphinx-build -j 4 -nW --keep-going -b html content/ tmp/
+
+
 - Content: `develop` and `master` branches.
 - Build: `public_develop` and `public_master` branches.
 

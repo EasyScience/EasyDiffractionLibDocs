@@ -22,7 +22,9 @@ exclude_patterns = []
 
 myst_enable_extensions = ['amsmath',
                           'dollarmath']
-nb_execution_mode = 'off'
+
+nb_execution_mode = 'force'  # Fore run all notebooks not included in nb_execution_excludepatterns
+nb_execution_excludepatterns = ['advanced/*.ipynb']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -32,5 +34,5 @@ html_static_path = ['_static']
 
 html_logo = "_static/logo_wname.png"
 html_theme_options = {
-  "logo_only": True,
+    "logo_only": True,
 }
