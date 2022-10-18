@@ -33,6 +33,7 @@ jobs:
         run: python -m pip install sphinx sphinx-book-theme myst-nb
 
       - name: Build site
+        continue-on-error: true
         run: sphinx-build -j 4 -nW --keep-going -b html content/ public/
 
       - name: Deploy built site to 'public_...' branch
