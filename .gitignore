@@ -5,3 +5,4 @@
 .venv
 public/
 jupyter_execute
+.ipynb_checkpoints
