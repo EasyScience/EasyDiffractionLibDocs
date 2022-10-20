@@ -34,7 +34,6 @@
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Advanced tutorials" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -96,7 +95,7 @@
   Tutorials
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../basic/index.html">
    Basic tutorials
@@ -112,26 +111,26 @@
      Simulation of the diffraction pattern
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basic/fitting.html">
-     Fitting to the experimental data
-    </a>
-   </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index.html">
    Advanced tutorials
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Fitting a simple slab model
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="refinement_emcee.html">
+     Refinement with emcee: Neutron data for PbSO4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="refinement_bumps_dream.html">
+     Refinement with bumps-dream PbSO4
     </a>
    </li>
   </ul>
@@ -357,7 +356,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="fitting-a-simple-slab-model">
+  <section class="tex2jax_ignore mathjax_ignore" id="fitting-a-simple-slab-model">
 <h1>Fitting a simple slab model<a class="headerlink" href="#fitting-a-simple-slab-model" title="Permalink to this headline">#</a></h1>
 <p>In order to show one of the simplest analyses that <code class="docutils literal notranslate"><span class="pre">EasyReflectometry</span></code> can perform, we will use the <a class="reference external" href="https://refnx.readthedocs.io/en/latest/getting_started.html#Fitting-a-neutron-reflectometry-dataset">great example from the <em>refnx</em> documentation</a>.
 This involves the analysis of a single neutron reflectometry dataset from a hydrated polymer film system.
@@ -374,18 +373,6 @@ Before we start on any analysis, we will import the necessary packages and funct
 <span class="kn">from</span> <span class="nn">EasyReflectometry.interface</span> <span class="kn">import</span> <span class="n">InterfaceFactory</span> <span class="k">as</span> <span class="n">Interface</span>
 <span class="kn">from</span> <span class="nn">EasyReflectometry.fitting</span> <span class="kn">import</span> <span class="n">Fitter</span>
 <span class="kn">from</span> <span class="nn">EasyReflectometry.plot</span> <span class="kn">import</span> <span class="n">plot</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">EasyReflectometry</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">refnx</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">EasyReflectometry.data</span> <span class="kn">import</span> <span class="n">load</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;EasyReflectometry&#39;
 </pre></div>
 </div>
 </div>
@@ -638,13 +625,6 @@ This will return a new <code class="docutils literal notranslate"><span class="p
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Advanced tutorials</p>
-        </div>
-    </a>
 </div>
             </footer>
         </div>

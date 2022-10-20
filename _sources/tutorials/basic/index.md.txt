@@ -6,5 +6,4 @@ Basic tutorials associated with using EasyDiffraction will be collected here.
 :maxdepth: 1
 
 simulation
-fitting
 ```
