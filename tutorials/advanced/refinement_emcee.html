@@ -416,16 +416,16 @@ title="Print to PDF"
 <li><p>Simulated diffraction pattern <span class="math notranslate nohighlight">\(y^\text{sim}=f(\boldsymbol{x})\)</span></p></li>
 </ul>
 <p>The posterior for parameters is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8c2c890b-3c83-4789-b25d-bc51e58dee04">
-<span class="eqno">(1)<a class="headerlink" href="#equation-8c2c890b-3c83-4789-b25d-bc51e58dee04" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-80265302-2246-45a0-a83f-48a65439e5e9">
+<span class="eqno">(1)<a class="headerlink" href="#equation-80265302-2246-45a0-a83f-48a65439e5e9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \large
 \underbrace{P(\boldsymbol{x}|D)}_\text{Posterior} = \underbrace{P(D|\boldsymbol{x})}_\text{Likelihood}\, \, \underbrace{P(\boldsymbol{x})}_\text{Priors}
 \end{equation}\]</div>
 <section id="likelihood">
 <h3>Likelihood<a class="headerlink" href="#likelihood" title="Permalink to this headline">#</a></h3>
 <p>We assume independent and (almost)identical normal distributed errors. But we take into account heteroscedasticity that is commonly done for diffraction data, i.e. uncertainty scales with sqrt of intensity, which be achived by modeling the data as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a6b5188b-b8a1-4443-8569-dff9436507a5">
-<span class="eqno">(2)<a class="headerlink" href="#equation-a6b5188b-b8a1-4443-8569-dff9436507a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-839ab663-068f-4e0c-8f59-bbeb75991790">
+<span class="eqno">(2)<a class="headerlink" href="#equation-839ab663-068f-4e0c-8f59-bbeb75991790" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \large
 y^\text{exp}_i = y^\text{sim}_i + \epsilon_i \\
 \large
@@ -433,8 +433,8 @@ y^\text{exp}_i = y^\text{sim}_i + \epsilon_i \\
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon_i\)</span> is the error between the experimental (exp) and simulated (sim) diffraction patterns.</p>
 <p>And then we get a likelihood that looks like</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fe647fa1-c13b-4fcc-9497-14779a30a746">
-<span class="eqno">(3)<a class="headerlink" href="#equation-fe647fa1-c13b-4fcc-9497-14779a30a746" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5479c56c-6d4c-498c-9e1e-45774b3ca33d">
+<span class="eqno">(3)<a class="headerlink" href="#equation-5479c56c-6d4c-498c-9e1e-45774b3ca33d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \large
 P(D|\boldsymbol{x}) \propto \exp{\left (- \frac{\sum_i (y^\text{sim}_i- y^\text{exp}_i)^2 }{\sigma^2 y^\text{exp}_i}\right )}
 \end{equation}\]</div>
@@ -757,7 +757,13 @@ Walker 14: log-posterior -11265.31900 | RMSE 52.701 | MSE-weighted 5.082
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|███▎                                                                                 | 198/5000 [05:36&lt;2:15:26,  1.69s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [2:44:50&lt;00:00,  1.98s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done!
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -768,6 +774,11 @@ Walker 14: log-posterior -11265.31900 | RMSE 52.701 | MSE-weighted 5.082
 <span class="n">logp</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">lnprobability</span>
 <span class="n">steps</span> <span class="o">=</span> <span class="n">n_every</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;samples shape:&#39;</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>samples shape: (15, 5000, 11)
 </pre></div>
 </div>
 </div>
@@ -784,6 +795,9 @@ Walker 14: log-posterior -11265.31900 | RMSE 52.701 | MSE-weighted 5.082
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/55d197c3082742682fe034e4b31d2402cfaefd7fdfa61601ef233a3bb7634c1b.png" src="../../_images/55d197c3082742682fe034e4b31d2402cfaefd7fdfa61601ef233a3bb7634c1b.png" />
 </div>
 </div>
 <p>Next, we’ll plot the MCMC trajectory of the parameters for a few walkers</p>
@@ -807,6 +821,9 @@ Walker 14: log-posterior -11265.31900 | RMSE 52.701 | MSE-weighted 5.082
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d265ddfb92e674d41afd4610307f1b196990c65d29ec476bb693d5be38e1a73b.png" src="../../_images/d265ddfb92e674d41afd4610307f1b196990c65d29ec476bb693d5be38e1a73b.png" />
+</div>
 </div>
 <p>Now we extract the optimal choice of parameters and their standard-deviation.<br />
 We throw away the equilibration period of the MCMC simulations.</p>
@@ -816,6 +833,12 @@ We throw away the equilibration period of the MCMC simulations.</p>
 <span class="n">samples_flat</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[:,</span> <span class="n">n_throw_away</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_parameters</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;samples    shape: &#39;</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;samples_flat shape:&#39;</span><span class="p">,</span> <span class="n">samples_flat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>samples    shape:  (15, 5000, 11)
+samples_flat shape: (45000, 11)
 </pre></div>
 </div>
 </div>
@@ -852,6 +875,22 @@ We throw away the equilibration period of the MCMC simulations.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best model: RMSE 44.156, MSE-weighted 3.420, sigma 1.849
+sigma                1.84876 , err  0.02884
+length_a             8.47696 , err  0.00026
+length_b             5.39573 , err  0.00019
+length_c             6.95589 , err  0.00033
+scale                1.20873 , err  0.00565
+zero_shift           0.15663 , err  0.00281
+resolution_u         0.19472 , err  0.01762
+resolution_v        -0.47475 , err  0.03310
+resolution_w         0.47826 , err  0.01347
+intensity          196.83082 , err  1.28231
+intensity-1        240.06575 , err  1.51024
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -865,6 +904,9 @@ We throw away the equilibration period of the MCMC simulations.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/509677479e55ddc36f769801fcd085a0add788fa44ef6b7cb42de6a8d9877502.png" src="../../_images/509677479e55ddc36f769801fcd085a0add788fa44ef6b7cb42de6a8d9877502.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -876,6 +918,12 @@ We throw away the equilibration period of the MCMC simulations.</p>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 864x864 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/ee5e873796043cdf7f91a02b6a287a90f4ccd3f2e49e094f10443d621dd45606.png" src="../../_images/ee5e873796043cdf7f91a02b6a287a90f4ccd3f2e49e094f10443d621dd45606.png" />
 </div>
 </div>
 </section>

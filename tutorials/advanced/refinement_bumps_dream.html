@@ -590,9 +590,9 @@ See the <a class="reference external" href="https://bumps.readthedocs.io/en/late
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameters</span>
 <span class="n">n_steps</span> <span class="o">=</span> <span class="mi">5000</span>
-<span class="n">n_burn</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">n_burn</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">thin</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">pop</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">alpha</span><span class="o">=</span> <span class="mf">0.0001</span>
 
 <span class="c1"># weights</span>
@@ -606,7 +606,7 @@ See the <a class="reference external" href="https://bumps.readthedocs.io/en/late
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># steps: 5000, # draws: 50000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># steps: 5000, # draws: 100000
 </pre></div>
 </div>
 </div>
@@ -626,17 +626,17 @@ See the <a class="reference external" href="https://bumps.readthedocs.io/en/late
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Parameter &#39;length_a&#39;: 8.47689+/-0.00015 Å, bounds=[0:inf]&gt;
-&lt;Parameter &#39;length_b&#39;: 5.39568+/-0.00012 Å, bounds=[0:inf]&gt;
-&lt;Parameter &#39;length_c&#39;: 6.95584+/-0.00017 Å, bounds=[0:inf]&gt;
-&lt;Parameter &#39;scale&#39;: 1.2101+/-0.0033, bounds=[0:inf]&gt;
-&lt;Parameter &#39;resolution_u&#39;: 0.194+/-0.009, bounds=[-inf:inf]&gt;
-&lt;Parameter &#39;resolution_v&#39;: -0.475+/-0.017, bounds=[-inf:inf]&gt;
-&lt;Parameter &#39;resolution_w&#39;: 0.479+/-0.007, bounds=[-inf:inf]&gt;
-&lt;Parameter &#39;zero_shift&#39;: 0.1578+/-0.0017, bounds=[-inf:inf]&gt;
-&lt;Parameter &#39;intensity&#39;: 197.0+/-0.7, bounds=[-inf:inf]&gt;
-&lt;Parameter &#39;intensity&#39;: 240.4+/-0.9, bounds=[-inf:inf]&gt;
-Refined: RMSE 44.166, MSE-weighted 3.420
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Parameter &#39;length_a&#39;: 8.47691+/-0.00016 Å, bounds=[0:inf]&gt;
+&lt;Parameter &#39;length_b&#39;: 5.39574+/-0.00012 Å, bounds=[0:inf]&gt;
+&lt;Parameter &#39;length_c&#39;: 6.95585+/-0.00019 Å, bounds=[0:inf]&gt;
+&lt;Parameter &#39;scale&#39;: 1.211+/-0.004, bounds=[0:inf]&gt;
+&lt;Parameter &#39;resolution_u&#39;: 0.196+/-0.010, bounds=[-inf:inf]&gt;
+&lt;Parameter &#39;resolution_v&#39;: -0.478+/-0.018, bounds=[-inf:inf]&gt;
+&lt;Parameter &#39;resolution_w&#39;: 0.480+/-0.007, bounds=[-inf:inf]&gt;
+&lt;Parameter &#39;zero_shift&#39;: 0.1572+/-0.0017, bounds=[-inf:inf]&gt;
+&lt;Parameter &#39;intensity&#39;: 197.2+/-0.7, bounds=[-inf:inf]&gt;
+&lt;Parameter &#39;intensity&#39;: 239.5+/-1.0, bounds=[-inf:inf]&gt;
+Refined: RMSE 44.105, MSE-weighted 3.420
 </pre></div>
 </div>
 </div>
@@ -654,7 +654,7 @@ Refined: RMSE 44.166, MSE-weighted 3.420
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a9c3274fd5631bc9391b62c20c5f8f30819aa25f937ef1ce7762443d66a131d4.png" src="../../_images/a9c3274fd5631bc9391b62c20c5f8f30819aa25f937ef1ce7762443d66a131d4.png" />
+<img alt="../../_images/b4f2c7c59cbd561ef2a8b5668bb0f03c5043e598c21638d4c5a8c22f554b9e0a.png" src="../../_images/b4f2c7c59cbd561ef2a8b5668bb0f03c5043e598c21638d4c5a8c22f554b9e0a.png" />
 </div>
 </div>
 </section>
@@ -670,6 +670,9 @@ Refined: RMSE 44.166, MSE-weighted 3.420
 <span class="c1"># extract MCMC-data</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">engine_result</span><span class="o">.</span><span class="n">state</span>
 <span class="n">steps</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">logp</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">chains</span><span class="p">()</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span> <span class="o">/</span> <span class="n">pop</span> <span class="o">/</span> <span class="n">n_parameters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;samples shape:&#39;</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;logp shape:   &#39;</span><span class="p">,</span> <span class="n">logp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="c1"># collect the best parameters and their uncertainties</span>
 <span class="n">params</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">best</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
@@ -703,17 +706,17 @@ Refined: RMSE 44.166, MSE-weighted 3.420
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bumps parameter names [&#39;length_a&#39;, &#39;resolution_w&#39;, &#39;intensity&#39;, &#39;intensity&#39;, &#39;length_b&#39;, &#39;resolution_u&#39;, &#39;scale&#39;, &#39;zero_shift&#39;, &#39;resolution_v&#39;, &#39;length_c&#39;]
-length_a             8.47689 , err  0.00015
-resolution_w         0.47927 , err  0.00686
-intensity          240.44649 , err  0.87329
-intensity-1        196.95110 , err  0.65089
-length_b             5.39568 , err  0.00012
-resolution_u         0.19384 , err  0.00923
-scale                1.21005 , err  0.00328
-zero_shift           0.15775 , err  0.00167
-resolution_v        -0.47471 , err  0.01681
-length_c             6.95584 , err  0.00017
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bumps parameter names [&#39;scale&#39;, &#39;resolution_u&#39;, &#39;resolution_w&#39;, &#39;intensity&#39;, &#39;length_b&#39;, &#39;length_c&#39;, &#39;zero_shift&#39;, &#39;length_a&#39;, &#39;resolution_v&#39;, &#39;intensity&#39;]
+scale                1.21108 , err  0.00359
+resolution_u         0.19622 , err  0.01015
+resolution_w         0.48012 , err  0.00723
+intensity          197.23321 , err  0.73904
+length_b             5.39574 , err  0.00012
+length_c             6.95585 , err  0.00019
+zero_shift           0.15721 , err  0.00170
+length_a             8.47691 , err  0.00016
+resolution_v        -0.47782 , err  0.01849
+intensity-1        239.54249 , err  0.96345
 </pre></div>
 </div>
 </div>
@@ -726,7 +729,7 @@ length_c             6.95584 , err  0.00017
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">walker_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pop</span><span class="o">*</span><span class="n">n_parameters</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">logp</span><span class="p">[:,</span> <span class="n">walker_ind</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Walker </span><span class="si">{</span><span class="n">walker_ind</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Log posterior&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;MCMC iteration&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -734,7 +737,7 @@ length_c             6.95584 , err  0.00017
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/524ac3b1c87f5afd001247478313442df0afe34106a72e84c96e6ef658377638.png" src="../../_images/524ac3b1c87f5afd001247478313442df0afe34106a72e84c96e6ef658377638.png" />
+<img alt="../../_images/1e07dd84fbf3ff06d25d80e9ef25b9a892b1566dcb48ccdeea82f85828804865.png" src="../../_images/1e07dd84fbf3ff06d25d80e9ef25b9a892b1566dcb48ccdeea82f85828804865.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -761,10 +764,10 @@ length_c             6.95584 , err  0.00017
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>samples shape (5011, 10, 10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>samples shape (5011, 20, 10)
 </pre></div>
 </div>
-<img alt="../../_images/f3952fe1d9edf9f67e06212a65b9f4a72f45e80245787cfa77293202c00727cb.png" src="../../_images/f3952fe1d9edf9f67e06212a65b9f4a72f45e80245787cfa77293202c00727cb.png" />
+<img alt="../../_images/d818ed801f3d1edca672dbee5ff4ef38ecf4c63a9517154280b64b63d1e4e2b4.png" src="../../_images/d818ed801f3d1edca672dbee5ff4ef38ecf4c63a9517154280b64b63d1e4e2b4.png" />
 </div>
 </div>
 <p>Next, we’ll make a simple corner to visualize the full joint probability distribution over the parameters</p>
@@ -772,7 +775,7 @@ length_c             6.95584 , err  0.00017
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">corner</span>
 
-<span class="n">n_throw_away</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># if we need to throw away more equilibration steps</span>
+<span class="n">n_throw_away</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># if we need to throw away more equilibration steps</span>
 
 <span class="c1"># flatten samples array</span>
 <span class="n">samples</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:]</span>
@@ -788,14 +791,14 @@ length_c             6.95584 , err  0.00017
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>samples shape (5011, 10, 10)
-samples_flat shape (49110, 10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>samples shape (5011, 20, 10)
+samples_flat shape (80220, 10)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 864x864 with 0 Axes&gt;
 </pre></div>
 </div>
-<img alt="../../_images/01c28713eb1dbf6d2af5c0f92d8b8386f5126d78854d313b581dbf28fa5325e0.png" src="../../_images/01c28713eb1dbf6d2af5c0f92d8b8386f5126d78854d313b581dbf28fa5325e0.png" />
+<img alt="../../_images/1a3ca49d082b04546e87e214ec7bbecdc83a5f9e793140040b52a81016334975.png" src="../../_images/1a3ca49d082b04546e87e214ec7bbecdc83a5f9e793140040b52a81016334975.png" />
 </div>
 </div>
 <p>One can also visualize the MCMC data directly with the bumps-functionality.<br />
@@ -808,25 +811,25 @@ The figure produce may look somewhat strange due to naming of parameters inside 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              Parameter       mean  median    best [   68% interval] [   95% interval]
- 1 p100476968034217852052471804910147700437 8.47696(15) 8.476963 8.476886 [8.47682 8.47712] [8.47666 8.47725]
- 2 p203119304240835719843631088345684744908 0.4842(71)  0.4841  0.4793 [  0.478   0.491] [  0.470   0.499]
- 3 p247991051174718950416355244597789597190 239.87(87) 239.864 240.446 [ 239.02  240.76] [ 238.04  241.57]
- 4 p277160361261759000083168339787278162786 197.02(65) 197.015 196.951 [ 196.36  197.66] [ 195.72  198.33]
- 5 p280442931291096987329256249014283142951 5.39573(11) 5.395727 5.395677 [5.39561 5.39585] [5.39550 5.39595]
- 6 p332786841801781711076467770486112335473 0.2001(94)  0.2006  0.1938 [  0.191   0.209] [  0.180   0.216]
- 7 p43097514090635084089413831366118367056 1.2116(33)  1.2116  1.2101 [  1.208   1.215] [  1.205   1.218]
- 8 p44913178378211356825226213139114456143 0.1570(16) 0.15699 0.15775 [ 0.1553  0.1587] [ 0.1539  0.1602]
- 9 p7732669234857369159388754585589053620 -0.486(18) -0.4869 -0.4747 [ -0.503  -0.469] [ -0.517  -0.448]
-10 p83117382431705365923755841363669616592 6.95583(17) 6.955826 6.955841 [6.95566 6.95600] [6.95549 6.95617]
+ 1 p109728691140263660849399968770219679305  1.209(21)  1.2113  1.2111 [  1.208   1.215] [  1.191   1.218]
+ 2 p128472947866637389279160630254056508292  0.196(15)  0.1986  0.1962 [  0.187   0.208] [  0.149   0.216]
+ 3 p164387166016145265386718001774446713564  0.480(15)  0.4825  0.4801 [  0.475   0.490] [  0.426   0.497]
+ 4 p242618186496329213419010020371187771800 197.11(96) 197.109 197.233 [ 196.37  197.84] [ 195.52  199.12]
+ 5 p26451713086068717653600980058806147694 5.39578(32) 5.39573 5.39574 [ 5.3956  5.3959] [ 5.3955  5.3969]
+ 6 p291692438697284514642669042245653534278 6.95594(60) 6.95583 6.95585 [ 6.9556  6.9560] [ 6.9555  6.9580]
+ 7 p31604684319809757748224974131710916750 0.1558(66)  0.1571  0.1572 [  0.155   0.159] [  0.124   0.160]
+ 8 p318650478931261213421867884443581640014 8.47704(44) 8.47697 8.47691 [ 8.4768  8.4771] [ 8.4767  8.4786]
+ 9 p69361991237832820332050235882293000806 -0.478(30)  -0.483  -0.478 [  -0.50   -0.46] [  -0.52   -0.38]
+10 p86030810922056330715297791490710993013  240.1(19) 239.888 239.542 [ 238.95  240.87] [ 237.97  245.51]
 
-Statistics and plots based on 50110 samples (100.0% of total samples drawn)
+Statistics and plots based on 100220 samples (100.0% of total samples drawn)
 </pre></div>
 </div>
-<img alt="../../_images/6b79b66598cddd1075c33b45fbd24e8d29fd8c9e681ddedc270b60da7335f517.png" src="../../_images/6b79b66598cddd1075c33b45fbd24e8d29fd8c9e681ddedc270b60da7335f517.png" />
-<img alt="../../_images/fb2472988cd211f7aaf2dd007acd15c5446af7f334948c6fa2af38fc0c31875a.png" src="../../_images/fb2472988cd211f7aaf2dd007acd15c5446af7f334948c6fa2af38fc0c31875a.png" />
-<img alt="../../_images/b4ff720f276af5799d9548d9f540d9e821e946e2eb26465094a4ba3c7a7710e6.png" src="../../_images/b4ff720f276af5799d9548d9f540d9e821e946e2eb26465094a4ba3c7a7710e6.png" />
-<img alt="../../_images/84ddacb87631ae68f94314b5e9e8a1d4c746fb808fb5086c7087b3acadccf2b7.png" src="../../_images/84ddacb87631ae68f94314b5e9e8a1d4c746fb808fb5086c7087b3acadccf2b7.png" />
-<img alt="../../_images/dc6fd3fd29cdf352da1158ee80045b432451187a921b8194df9eea6c241a3527.png" src="../../_images/dc6fd3fd29cdf352da1158ee80045b432451187a921b8194df9eea6c241a3527.png" />
+<img alt="../../_images/e5f87cc0aab753f9c93542b06fcddb4c4933a2b40c6111ed4cb4f524d9f96d85.png" src="../../_images/e5f87cc0aab753f9c93542b06fcddb4c4933a2b40c6111ed4cb4f524d9f96d85.png" />
+<img alt="../../_images/5fb12fda7803384f44da3645c21116b2bba278756b930eb09193b5f0b8ece5c4.png" src="../../_images/5fb12fda7803384f44da3645c21116b2bba278756b930eb09193b5f0b8ece5c4.png" />
+<img alt="../../_images/7d8ccb39748964b29c304aa900806fc28770b46d1a20fc49dbacd26845ec6258.png" src="../../_images/7d8ccb39748964b29c304aa900806fc28770b46d1a20fc49dbacd26845ec6258.png" />
+<img alt="../../_images/215f36f3ff20589e909ad5d26276db770e701b6d927eba771b40dbd39891d30f.png" src="../../_images/215f36f3ff20589e909ad5d26276db770e701b6d927eba771b40dbd39891d30f.png" />
+<img alt="../../_images/83697c37faae9d6902817760f804dfb319b3525a91aa200377338a2dd7eb7f6d.png" src="../../_images/83697c37faae9d6902817760f804dfb319b3525a91aa200377338a2dd7eb7f6d.png" />
 </div>
 </div>
 </section>
