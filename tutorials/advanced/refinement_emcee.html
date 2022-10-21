@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Refinement with emcee: Neutron data for PbSO4 &#8212; EasyDiffraction 0.1 documentation</title>
+    <title>Refinement of PbSO4 with emcee &#8212; EasyDiffraction 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -36,8 +36,8 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Refinement with bumps-dream PbSO4" href="refinement_bumps_dream.html" />
-    <link rel="prev" title="Advanced tutorials" href="index.html" />
+    <link rel="next" title="Refinement of PbSO4 with bumps-DREAM" href="refinement_bumps_dream.html" />
+    <link rel="prev" title="Refinement of PbSO4 with least-squares" href="refinement_least_squares.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -127,14 +127,24 @@
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="analyze_refinement_results.html">
+     Analysis of PbSO4 refinement results
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="refinement_least_squares.html">
+     Refinement of PbSO4 with least-squares
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Refinement with emcee: Neutron data for PbSO4
+     Refinement of PbSO4 with emcee
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="refinement_bumps_dream.html">
-     Refinement with bumps-dream PbSO4
+     Refinement of PbSO4 with bumps-DREAM
     </a>
    </li>
   </ul>
@@ -277,18 +287,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#likelihood-iid-normal-errors">
-     Likelihood IID normal errors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#likelihood-with-heteroscedasticity">
-     Likelihood with heteroscedasticity
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#likelihood">
      Likelihood
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#priors">
+     Priors
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -296,7 +301,32 @@ title="Print to PDF"
      Posterior
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-information">
+     More information
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#helper-functions">
+   Helper functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-functions">
+   Probability functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-data-and-setup-job">
+   Load the data and setup Job
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-mcmc-sampling">
+   Run MCMC sampling
+  </a>
  </li>
 </ul>
 
@@ -307,7 +337,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Refinement with emcee: Neutron data for PbSO4</h1>
+                <h1>Refinement of PbSO4 with emcee</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -323,18 +353,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#likelihood-iid-normal-errors">
-     Likelihood IID normal errors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#likelihood-with-heteroscedasticity">
-     Likelihood with heteroscedasticity
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#likelihood">
      Likelihood
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#priors">
+     Priors
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -342,7 +367,32 @@ title="Print to PDF"
      Posterior
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-information">
+     More information
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#helper-functions">
+   Helper functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-functions">
+   Probability functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-data-and-setup-job">
+   Load the data and setup Job
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-mcmc-sampling">
+   Run MCMC sampling
+  </a>
  </li>
 </ul>
 
@@ -354,69 +404,61 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="refinement-with-emcee-neutron-data-for-pbso4">
-<h1>Refinement with emcee: Neutron data for PbSO4<a class="headerlink" href="#refinement-with-emcee-neutron-data-for-pbso4" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="refinement-of-pbso4-with-emcee">
+<h1>Refinement of PbSO4 with emcee<a class="headerlink" href="#refinement-of-pbso4-with-emcee" title="Permalink to this headline">#</a></h1>
+<p>In this example we take a bayesian approach to the refinment process, and rather than looking for the optimal set of parameters we compute the probability distribution over the parameters.</p>
 <section id="bayesian-refinment">
 <h2>Bayesian refinment<a class="headerlink" href="#bayesian-refinment" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Experimental data D (<span class="math notranslate nohighlight">\(y_\text{exp}\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> parameters to be refined <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>=(<span class="math notranslate nohighlight">\(\boldsymbol{x}_\text{experiment}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_\text{instrument}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_\text{sample}\)</span>)</p></li>
-<li><p>Simulated diffraction pattern <span class="math notranslate nohighlight">\(y_\text{sim}=f(\boldsymbol{x})\)</span></p></li>
-</ul>
 <p><strong>Goal:</strong> Finding the posterior probability distribution over parameters, <span class="math notranslate nohighlight">\(P(\boldsymbol{x}|D)\)</span>,  given some data D  and prior knowledge.</p>
+<ul class="simple">
+<li><p>Experimental data D (<span class="math notranslate nohighlight">\(y^\text{exp}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> parameters to be refined <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>=(<span class="math notranslate nohighlight">\(\boldsymbol{x}_\text{experiment}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_\text{instrument}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_\text{sample}\)</span>)</p></li>
+<li><p>Simulated diffraction pattern <span class="math notranslate nohighlight">\(y^\text{sim}=f(\boldsymbol{x})\)</span></p></li>
+</ul>
 <p>The posterior for parameters is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1ca9660f-db1d-4f06-b4a6-1ea23af2985a">
-<span class="eqno">(1)<a class="headerlink" href="#equation-1ca9660f-db1d-4f06-b4a6-1ea23af2985a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8c2c890b-3c83-4789-b25d-bc51e58dee04">
+<span class="eqno">(1)<a class="headerlink" href="#equation-8c2c890b-3c83-4789-b25d-bc51e58dee04" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \large
 \underbrace{P(\boldsymbol{x}|D)}_\text{Posterior} = \underbrace{P(D|\boldsymbol{x})}_\text{Likelihood}\, \, \underbrace{P(\boldsymbol{x})}_\text{Priors}
 \end{equation}\]</div>
-<section id="likelihood-iid-normal-errors">
-<h3>Likelihood IID normal errors<a class="headerlink" href="#likelihood-iid-normal-errors" title="Permalink to this headline">#</a></h3>
-<p>Identical and independent normal distributed errors</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f5e2884c-f24d-4a90-b3fb-02a9b30daa48">
-<span class="eqno">(2)<a class="headerlink" href="#equation-f5e2884c-f24d-4a90-b3fb-02a9b30daa48" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\large
-y_\text{exp,i} = y_\text{sim,i} + \epsilon_i, \quad \epsilon_i \sim \mathcal{N}(\mu=0, \sigma^2)
-\end{equation}\]</div>
-<p>meaning</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fc5d95b9-43a1-482d-9c1e-6f7522706fdb">
-<span class="eqno">(3)<a class="headerlink" href="#equation-fc5d95b9-43a1-482d-9c1e-6f7522706fdb" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\large
-P(D|\boldsymbol{x}) \propto \exp{\left (-\vert\vert \boldsymbol{y}_\text{target} - \boldsymbol{y}_\text{model}\vert\vert^2/2\sigma^2 \right )}
-\end{equation}\]</div>
-</section>
-<section id="likelihood-with-heteroscedasticity">
-<h3>Likelihood with heteroscedasticity<a class="headerlink" href="#likelihood-with-heteroscedasticity" title="Permalink to this headline">#</a></h3>
-<p>Including heteroscedasticity via another approach (common for count data?) is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-152ec716-2dcf-4932-8b0f-ed60e03d5345">
-<span class="eqno">(4)<a class="headerlink" href="#equation-152ec716-2dcf-4932-8b0f-ed60e03d5345" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\large
-\epsilon_i \sim \mathcal{N}(\mu=0, \sigma^2_i = y_\text{exp,i}).
-\end{equation}\]</div>
-</section>
 <section id="likelihood">
 <h3>Likelihood<a class="headerlink" href="#likelihood" title="Permalink to this headline">#</a></h3>
-<p>From paper “Use of Bayesian Inference in Crystallographic Structure Refinement via Full Diffraction Profile Analysis” (doi: https://doi.org/10.1038/srep31625), they use something along the lines of</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8ebc6a37-d7e7-4278-9a29-31c2b94d0272">
-<span class="eqno">(5)<a class="headerlink" href="#equation-8ebc6a37-d7e7-4278-9a29-31c2b94d0272" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<p>We assume independent and (almost)identical normal distributed errors. But we take into account heteroscedasticity that is commonly done for diffraction data, i.e. uncertainty scales with sqrt of intensity, which be achived by modeling the data as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a6b5188b-b8a1-4443-8569-dff9436507a5">
+<span class="eqno">(2)<a class="headerlink" href="#equation-a6b5188b-b8a1-4443-8569-dff9436507a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \large
-\epsilon_i \sim \mathcal{N}(\mu=0, \sigma^2_i = \sigma^2 \cdot y_\text{exp,i}).
+y^\text{exp}_i = y^\text{sim}_i + \epsilon_i \\
+\large
+\epsilon_i \sim \mathcal{N}(\mu=0, \sigma^2_i = \sigma^2 \cdot y^\text{exp}_i).
 \end{equation}\]</div>
-<p>Additionally, they add correlation between <span class="math notranslate nohighlight">\(\epsilon_i\)</span> and <span class="math notranslate nohighlight">\(\epsilon_j\)</span> if i,j are close.</p>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_i\)</span> is the error between the experimental (exp) and simulated (sim) diffraction patterns.</p>
+<p>And then we get a likelihood that looks like</p>
+<div class="amsmath math notranslate nohighlight" id="equation-fe647fa1-c13b-4fcc-9497-14779a30a746">
+<span class="eqno">(3)<a class="headerlink" href="#equation-fe647fa1-c13b-4fcc-9497-14779a30a746" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\large
+P(D|\boldsymbol{x}) \propto \exp{\left (- \frac{\sum_i (y^\text{sim}_i- y^\text{exp}_i)^2 }{\sigma^2 y^\text{exp}_i}\right )}
+\end{equation}\]</div>
+<p>Note here that <span class="math notranslate nohighlight">\(\sigma\)</span> is also a free parameter that we need to include in our modeling.</p>
+</section>
+<section id="priors">
+<h3>Priors<a class="headerlink" href="#priors" title="Permalink to this headline">#</a></h3>
+<p>In this example we encode no information in the priors, but in princple any prior knowledge about the same could and should be encoded in the prior probability distribution.</p>
 </section>
 <section id="posterior">
 <h3>Posterior<a class="headerlink" href="#posterior" title="Permalink to this headline">#</a></h3>
 <p>Finding parameters that maximizes the posterior is equvivalent to regular optimization (least-squares).</p>
-<p>Evaluating the posterior via MCMC-sampling (emcee).</p>
+<p>Obtaining the posterior probability distribution is done via MCMC-sampling with <code class="docutils literal notranslate"><span class="pre">emcee</span></code>, see their <a class="reference external" href="https://emcee.readthedocs.io/en/stable/">documentation</a> for more details.</p>
+</section>
+<section id="more-information">
+<h3>More information<a class="headerlink" href="#more-information" title="Permalink to this headline">#</a></h3>
+<p>See the “Use of Bayesian Inference in Crystallographic Structure Refinement via Full Diffraction Profile Analysis” (doi: https://doi.org/10.1038/srep31625), for more information.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># esyScience</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">emcee</span>
 <span class="kn">import</span> <span class="nn">corner</span>
-
 <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s1">&#39;notebook&#39;</span><span class="p">)</span>
 
 <span class="c1"># esyScience, diffraction</span>
@@ -430,157 +472,113 @@ P(D|\boldsymbol{x}) \propto \exp{\left (-\vert\vert \boldsymbol{y}_\text{target}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GSAS-II binary directory: /home/erikfr/.local/lib/python3.8/site-packages/GSASII/bindist
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GSAS-II binary directory: /home/erik/.local/lib/python3.8/site-packages/GSASII/bindist
 ImportError for wx/mpl in GSASIIctrlGUI: ignore if docs build
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="helper-functions">
+<h2>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">#</a></h2>
+<p>Here we let <code class="docutils literal notranslate"><span class="pre">theta</span></code> be the parameter vector (including <span class="math notranslate nohighlight">\(\sigma\)</span>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># help functions</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># helper functions</span>
 
 <span class="k">def</span> <span class="nf">print_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">phases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">pattern</span><span class="o">.</span><span class="n">zero_shift</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">resolution_u</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">resolution_v</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">resolution_w</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">backgrounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">backgrounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="sd">&quot;&quot;&quot; Print all fit-parameters in job. &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">job</span><span class="o">.</span><span class="n">get_fit_parameters</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     
 
-<span class="k">def</span> <span class="nf">compute_rmse</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
-    <span class="n">delta_y</span> <span class="o">=</span> <span class="n">y1</span><span class="o">-</span><span class="n">y2</span>
+<span class="k">def</span> <span class="nf">compute_rmse</span><span class="p">(</span><span class="n">y_target</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Compute root mean squared error (RMSE) between target and predicted values &quot;&quot;&quot;</span>
+    <span class="n">delta_y</span> <span class="o">=</span> <span class="n">y_target</span> <span class="o">-</span> <span class="n">y_predicted</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">delta_y</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">rmse</span>
+
+<span class="k">def</span> <span class="nf">compute_mse_weighted</span><span class="p">(</span><span class="n">y_target</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Compute the weighted mean squared error. (weighting by y_target) &quot;&quot;&quot;</span>
+    <span class="n">delta_y</span> <span class="o">=</span> <span class="n">y_target</span> <span class="o">-</span> <span class="n">y_predicted</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">y_target</span>
+    <span class="n">mse_weighted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">delta_y</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">weight</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mse_weighted</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">230</span><span class="p">])</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># theta_0 is close to least-square solution</span>
+<span class="n">theta_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">8.477</span><span class="p">,</span> <span class="mf">5.3958</span><span class="p">,</span> <span class="mf">6.9558</span><span class="p">,</span> <span class="mf">1.21</span><span class="p">,</span> <span class="mf">0.157</span><span class="p">,</span> <span class="mf">0.195</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.47</span><span class="p">,</span> <span class="mf">0.47</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">240</span><span class="p">])</span>
+<span class="n">parameter_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="s1">&#39;length_a&#39;</span><span class="p">,</span> <span class="s1">&#39;length_b&#39;</span><span class="p">,</span> <span class="s1">&#39;length_c&#39;</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="s1">&#39;zero_shift&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;resolution_u&#39;</span><span class="p">,</span> <span class="s1">&#39;resolution_v&#39;</span><span class="p">,</span> <span class="s1">&#39;resolution_w&#39;</span><span class="p">,</span> <span class="s1">&#39;intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;intensity-1&#39;</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">generate_starting_theta</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Generate random initial starting point pretty close to theta_0 &quot;&quot;&quot;</span>
+
+    <span class="c1"># parameters defining how much randomness to add to theta_0</span>
+    <span class="n">dx_sigma</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">dx_lattice_parameter</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="n">dx_scale</span> <span class="o">=</span> <span class="mf">0.05</span>
+    <span class="n">dx_zeroshift</span> <span class="o">=</span> <span class="mf">0.03</span>
+    <span class="n">dx_reso</span> <span class="o">=</span> <span class="mf">0.001</span>
+    <span class="n">dx_bkg</span> <span class="o">=</span> <span class="mi">20</span>
+    
+    <span class="c1"># randomize theta</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="n">theta_0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># sigma</span>
-    <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span> <span class="c1"># scale</span>
-    <span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span> <span class="c1"># zero-shift</span>
-    <span class="n">theta</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span> <span class="c1"># u</span>
-    <span class="n">theta</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span> <span class="c1"># v</span>
-    <span class="n">theta</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span> <span class="c1"># w</span>
-    <span class="n">theta</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>   <span class="c1"># bkground-1</span>
-    <span class="n">theta</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>   <span class="c1"># bkground-2</span>
+    <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">dx_sigma</span><span class="p">,</span> <span class="n">dx_sigma</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+        <span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">dx_lattice_parameter</span><span class="p">,</span> <span class="n">dx_lattice_parameter</span><span class="p">)</span>
+
+    <span class="n">theta</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">dx_scale</span><span class="p">,</span> <span class="n">dx_scale</span><span class="p">)</span>
+    <span class="n">theta</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">dx_zeroshift</span><span class="p">,</span> <span class="n">dx_zeroshift</span><span class="p">)</span>
+    
+    <span class="n">theta</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">dx_reso</span><span class="p">,</span> <span class="n">dx_reso</span><span class="p">)</span>
+    <span class="n">theta</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">dx_reso</span><span class="p">,</span> <span class="n">dx_reso</span><span class="p">)</span>
+    <span class="n">theta</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">dx_reso</span><span class="p">,</span> <span class="n">dx_reso</span><span class="p">)</span>
+    
+    <span class="n">theta</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">dx_bkg</span><span class="p">,</span> <span class="n">dx_bkg</span><span class="p">)</span>
+    <span class="n">theta</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">dx_bkg</span><span class="p">,</span> <span class="n">dx_bkg</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">theta</span>
 
 
 <span class="k">def</span> <span class="nf">set_job_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-    <span class="n">job</span><span class="o">.</span><span class="n">phases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">job</span><span class="o">.</span><span class="n">pattern</span><span class="o">.</span><span class="n">zero_shift</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-    <span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">resolution_u</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">resolution_v</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-    <span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">resolution_w</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
-    <span class="n">job</span><span class="o">.</span><span class="n">backgrounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
-    <span class="n">job</span><span class="o">.</span><span class="n">backgrounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set all the parameters for the job.</span>
+<span class="sd">    theta[0] is sigma and is thus not used </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">job</span><span class="o">.</span><span class="n">phases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">length_a</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">phases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">length_b</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">phases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">length_c</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="n">job</span><span class="o">.</span><span class="n">phases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">pattern</span><span class="o">.</span><span class="n">zero_shift</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">resolution_u</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">resolution_v</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">resolution_w</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">backgrounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">backgrounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load cif</span>
-<span class="n">cif_fname</span> <span class="o">=</span> <span class="s1">&#39;../datasets/neutron_powder_PbSO4/PbSO4.cif&#39;</span>
-<span class="n">phases</span> <span class="o">=</span> <span class="n">Phases</span><span class="o">.</span><span class="n">from_cif_file</span><span class="p">(</span><span class="n">cif_fname</span><span class="p">)</span>
-<span class="n">phase</span> <span class="o">=</span> <span class="n">phases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># load diffraction data</span>
-<span class="n">meas_fname</span> <span class="o">=</span> <span class="s1">&#39;../datasets/neutron_powder_PbSO4/D1A@ILL.xye&#39;</span>
-<span class="n">meas_x</span><span class="p">,</span> <span class="n">meas_y</span><span class="p">,</span> <span class="n">meas_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">meas_fname</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">meas_x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">meas_y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2201,) (2201,)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># setup interface to CrysFML and job</span>
-<span class="c1">#calculator = Calculator(interface_name=&#39;CrysFML&#39;)</span>
-<span class="n">calculator</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">(</span><span class="n">interface_name</span><span class="o">=</span><span class="s1">&#39;CrysPy&#39;</span><span class="p">)</span>
-
-<span class="n">job</span> <span class="o">=</span> <span class="n">Job</span><span class="p">(</span><span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="n">calculator</span><span class="p">)</span>
-
-<span class="c1"># setup </span>
-<span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">wavelength</span> <span class="o">=</span> <span class="mf">1.912</span>
-
-<span class="c1"># add background</span>
-<span class="n">bkg</span> <span class="o">=</span> <span class="n">PointBackground</span><span class="p">(</span><span class="n">linked_experiment</span><span class="o">=</span><span class="s1">&#39;PbSO4&#39;</span><span class="p">)</span>
-<span class="n">bkg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BackgroundPoint</span><span class="o">.</span><span class="n">from_pars</span><span class="p">(</span><span class="n">meas_x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">200</span><span class="p">))</span>
-<span class="n">bkg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BackgroundPoint</span><span class="o">.</span><span class="n">from_pars</span><span class="p">(</span><span class="n">meas_x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">250</span><span class="p">))</span>
-<span class="n">job</span><span class="o">.</span><span class="n">set_background</span><span class="p">(</span><span class="n">bkg</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temp CIF: /tmp/easydiffraction_temp.cif
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Before fitting, theta_0</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">theta_0</span><span class="p">)</span>
-
-<span class="n">set_job_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">)</span>
-<span class="n">y_initial</span> <span class="o">=</span> <span class="n">calculator</span><span class="o">.</span><span class="n">fit_func</span><span class="p">(</span><span class="n">meas_x</span><span class="p">)</span>
-<span class="n">rmse_initial</span> <span class="o">=</span> <span class="n">compute_rmse</span><span class="p">(</span><span class="n">meas_y</span><span class="p">,</span> <span class="n">y_initial</span><span class="p">)</span>
-
-<span class="n">print_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Initial RMSE:&#39;</span><span class="p">,</span> <span class="n">rmse_initial</span><span class="p">)</span>
-
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meas_x</span><span class="p">,</span> <span class="n">meas_y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exp&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meas_x</span><span class="p">,</span> <span class="n">y_initial</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Initial&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 5.00e+00  1.00e+00  1.25e-01  1.80e-01 -4.00e-01  4.00e-01  2.10e+02
-  2.30e+02]
-&lt;Parameter &#39;scale&#39;: 1.0+/-0, bounds=[0:inf]&gt;
-&lt;Parameter &#39;zero_shift&#39;: 0.125+/-0 (fixed), bounds=[-inf:inf]&gt;
-&lt;Parameter &#39;resolution_u&#39;: 0.18+/-0 (fixed), bounds=[-inf:inf]&gt;
-&lt;Parameter &#39;resolution_v&#39;: -0.4+/-0 (fixed), bounds=[-inf:inf]&gt;
-&lt;Parameter &#39;resolution_w&#39;: 0.4+/-0 (fixed), bounds=[-inf:inf]&gt;
-&lt;BackgroundPoint &#39;10,0_deg&#39;: 210.0+/-0 (fixed), bounds=[-inf:inf]&gt;
-&lt;BackgroundPoint &#39;120,0_deg&#39;: 230.0+/-0 (fixed), bounds=[-inf:inf]&gt;
-Initial RMSE: 71.60127235042337
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f51f6fef8b0&gt;
-</pre></div>
-</div>
-<img alt="../../_images/6f50a1a69c7ee179ee37accbc0302abb6aa45f48a16e042e25fecaae6d713ce4.png" src="../../_images/6f50a1a69c7ee179ee37accbc0302abb6aa45f48a16e042e25fecaae6d713ce4.png" />
-</div>
-</div>
+</section>
+<section id="probability-functions">
+<h2>Probability functions<a class="headerlink" href="#probability-functions" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define all probabilities, priors, likelihoods, posterios</span>
 
 <span class="k">def</span> <span class="nf">log_gaussian_likelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
 
-    <span class="n">set_job_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+    <span class="c1"># set parameters</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">set_job_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
     
     <span class="c1"># if calculation fails for any reason, return -inf</span>
     <span class="k">try</span><span class="p">:</span>
@@ -594,21 +592,16 @@ Initial RMSE: 71.60127235042337
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  nan found in predicted values, -inf&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
 
-    <span class="n">LL</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">meas_y</span> <span class="o">-</span> <span class="n">y_predicted</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-    
+    <span class="c1"># compute log-likelihood</span>
     <span class="n">sigmas</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">meas_y</span><span class="p">)</span>
     <span class="n">LL</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigmas</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">meas_y</span> <span class="o">-</span> <span class="n">y_predicted</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">sigmas</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-
     <span class="k">return</span> <span class="n">LL</span>
 
 
 <span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    
     <span class="k">if</span> <span class="n">sigma</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">sigma</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
-    
     <span class="k">return</span> <span class="mi">0</span>
 
 
@@ -618,227 +611,273 @@ Initial RMSE: 71.60127235042337
 </div>
 </div>
 </div>
+</section>
+<section id="load-the-data-and-setup-job">
+<h2>Load the data and setup Job<a class="headerlink" href="#load-the-data-and-setup-job" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># MCMC parameters</span>
-<span class="n">n_walkers</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># number of MCMC walkers</span>
-<span class="n">n_every</span> <span class="o">=</span> <span class="mi">10</span>      <span class="c1"># keep every x:th sample</span>
-<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">2000</span> <span class="o">//</span> <span class="n">n_every</span>  <span class="c1"># steps per walker</span>
-<span class="n">n_cols</span> <span class="o">=</span> <span class="mi">8</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load cif</span>
+<span class="n">cif_fname</span> <span class="o">=</span> <span class="s1">&#39;../datasets/neutron_powder_PbSO4/PbSO4.cif&#39;</span>
+<span class="n">phases</span> <span class="o">=</span> <span class="n">Phases</span><span class="o">.</span><span class="n">from_cif_file</span><span class="p">(</span><span class="n">cif_fname</span><span class="p">)</span>
 
-<span class="c1"># starting points for MCMC</span>
+<span class="c1"># load diffraction data</span>
+<span class="n">meas_fname</span> <span class="o">=</span> <span class="s1">&#39;../datasets/neutron_powder_PbSO4/D1A@ILL.xye&#39;</span>
+<span class="n">meas_x</span><span class="p">,</span> <span class="n">meas_y</span><span class="p">,</span> <span class="n">meas_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">meas_fname</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data shape:&#39;</span><span class="p">,</span> <span class="n">meas_x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">meas_y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="n">theta_start</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_walkers</span><span class="p">):</span>
-    <span class="n">theta_start</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">generate_starting_theta</span><span class="p">())</span>
-
-<span class="n">theta_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">theta_start</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="c1"># sanity check starting points such that there is no nans</span>
-<span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">theta_start</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+<span class="c1"># setup interface to CrysPy and Job</span>
+<span class="n">calculator</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">(</span><span class="n">interface_name</span><span class="o">=</span><span class="s1">&#39;CrysPy&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">Job</span><span class="p">(</span><span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">CWParams</span><span class="p">(),</span> <span class="n">interface</span><span class="o">=</span><span class="n">calculator</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-12197.897634880415
--12248.526850508833
--12517.325927566704
--12247.78884971347
--12158.382617088078
--12017.490473372869
--12362.845457047493
--12366.92111589481
--12222.76204723504
--11877.999645031128
--12345.259296537246
--12712.166099804042
--12326.21644648346
--11846.889379830009
--12008.22926420808
--12301.465597300796
--11782.4111836386
--12142.868337841035
--12217.266286674285
--12025.659988914482
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data shape: (2201,) (2201,)
+Temp CIF: /tmp/easydiffraction_temp.cif
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sample</span>
-<span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">n_walkers</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">)</span>
-<span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">theta_start</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">thin_by</span><span class="o">=</span><span class="n">n_every</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;done!&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████| 2000/2000 [2:16:09&lt;00:00,  4.08s/it]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>done!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># setup </span>
+<span class="n">job</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">wavelength</span> <span class="o">=</span> <span class="mf">1.912</span>
+
+<span class="c1"># add background</span>
+<span class="n">bkg</span> <span class="o">=</span> <span class="n">PointBackground</span><span class="p">(</span><span class="n">linked_experiment</span><span class="o">=</span><span class="s1">&#39;PbSO4&#39;</span><span class="p">)</span>
+<span class="n">bkg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BackgroundPoint</span><span class="o">.</span><span class="n">from_pars</span><span class="p">(</span><span class="n">meas_x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">200</span><span class="p">))</span>
+<span class="n">bkg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BackgroundPoint</span><span class="o">.</span><span class="n">from_pars</span><span class="p">(</span><span class="n">meas_x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">250</span><span class="p">))</span>
+<span class="n">job</span><span class="o">.</span><span class="n">set_background</span><span class="p">(</span><span class="n">bkg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Note here that no parameters are set to be refined. The MCMC simulations will be carried out using <code class="docutils literal notranslate"><span class="pre">emcee</span></code> package which will use the <code class="docutils literal notranslate"><span class="pre">log_posterior</span></code> function to sample the posterior.
+The <code class="docutils literal notranslate"><span class="pre">job</span></code> will only be used to calculate the diffraction pattern for the parameters that <code class="docutils literal notranslate"><span class="pre">emcee</span></code> will sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples_chain</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span>
-<span class="n">logp</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">lnprobability</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">logp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sanity check if theta_0 is reasonable </span>
+<span class="n">set_job_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">)</span>
+<span class="n">y_initial</span> <span class="o">=</span> <span class="n">calculator</span><span class="o">.</span><span class="n">fit_func</span><span class="p">(</span><span class="n">meas_x</span><span class="p">)</span>
+<span class="n">rmse_initial</span> <span class="o">=</span> <span class="n">compute_rmse</span><span class="p">(</span><span class="n">meas_y</span><span class="p">,</span> <span class="n">y_initial</span><span class="p">)</span>
+<span class="n">msew_initial</span> <span class="o">=</span> <span class="n">compute_mse_weighted</span><span class="p">(</span><span class="n">meas_y</span><span class="p">,</span> <span class="n">y_initial</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Initial: RMSE </span><span class="si">{</span><span class="n">rmse_initial</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">, MSE-weighted </span><span class="si">{</span><span class="n">msew_initial</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="n">n_eq</span> <span class="o">=</span> <span class="mi">200</span> <span class="o">//</span> <span class="n">n_every</span>
-<span class="n">samples_flat</span> <span class="o">=</span> <span class="n">samples_chain</span><span class="p">[:,</span> <span class="n">n_eq</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20, 200)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sanity plots</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">logp</span><span class="o">.</span><span class="n">T</span><span class="p">);</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples_chain</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">);</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">samples_chain</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20, 200, 8)
-</pre></div>
-</div>
-<img alt="../../_images/5882094f7aaf72c4fbd7658e3494bdc49cd495c6458a63648ddafcb65923f2fe.png" src="../../_images/5882094f7aaf72c4fbd7658e3494bdc49cd495c6458a63648ddafcb65923f2fe.png" />
-<img alt="../../_images/0d14a7486dc1fbbfd6e152ff45f21e2ef55dc12af150371789fe334315fc50ae.png" src="../../_images/0d14a7486dc1fbbfd6e152ff45f21e2ef55dc12af150371789fe334315fc50ae.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sigma (dy)&#39;</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="s1">&#39;zero_shift&#39;</span><span class="p">,</span> <span class="s1">&#39;resolution_u&#39;</span><span class="p">,</span> <span class="s1">&#39;resolution_v&#39;</span><span class="p">,</span> <span class="s1">&#39;resolution_w&#39;</span><span class="p">,</span> <span class="s1">&#39;intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;intensity&#39;</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">print_all_params</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">errs</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">errs</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s1">15</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">12.5f</span><span class="si">}</span><span class="s1"> , err </span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s1">8.5f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="c1"># select best model</span>
-<span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logp</span><span class="p">)</span>
-<span class="n">hp_loc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">logp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">logp</span><span class="p">[</span><span class="n">hp_loc</span><span class="p">]</span> <span class="o">==</span> <span class="n">logp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<span class="n">theta_best</span> <span class="o">=</span> <span class="n">samples_chain</span><span class="p">[</span><span class="n">hp_loc</span><span class="p">]</span>
-
-<span class="n">set_job_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">theta_best</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">calculator</span><span class="o">.</span><span class="n">fit_func</span><span class="p">(</span><span class="n">meas_x</span><span class="p">)</span>
-<span class="n">rmse</span> <span class="o">=</span> <span class="n">compute_rmse</span><span class="p">(</span><span class="n">meas_y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-
-<span class="c1"># estimate errors</span>
-<span class="n">stds</span> <span class="o">=</span> <span class="n">samples_flat</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best model: RMSE </span><span class="si">{</span><span class="n">rmse</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">, sigma </span><span class="si">{</span><span class="n">theta_best</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="n">print_all_params</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">theta_best</span><span class="p">,</span> <span class="n">stds</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best model: RMSE 46.41102, sigma 1.939
-
-sigma (dy)           1.93908 , err  0.02978
-scale                1.20904 , err  0.00684
-zero_shift           0.12200 , err  0.00120
-resolution_u         0.20463 , err  0.01965
-resolution_v        -0.49486 , err  0.03814
-resolution_w         0.48771 , err  0.01610
-intensity          197.16263 , err  1.80352
-intensity          239.69534 , err  1.97808
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meas_x</span><span class="p">,</span> <span class="n">meas_y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exp&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meas_x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Best from MCMC&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meas_x</span><span class="p">,</span> <span class="n">meas_y</span><span class="o">-</span><span class="n">y</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;dIFF&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/3c02b3dd1e212f94badbfa8a76825e38edf5f66776b8b4b3d9ad725e8a0f75ec.png" src="../../_images/3c02b3dd1e212f94badbfa8a76825e38edf5f66776b8b4b3d9ad725e8a0f75ec.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot walker</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">321</span><span class="p">)</span>
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">322</span><span class="p">)</span>
-<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">323</span><span class="p">)</span>
-<span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">324</span><span class="p">)</span>
-<span class="n">ax5</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">325</span><span class="p">)</span>
-<span class="n">ax6</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">326</span><span class="p">)</span>
-
-<span class="n">walker_ind</span> <span class="o">=</span> <span class="mi">13</span>
-
-<span class="n">samples_walker</span> <span class="o">=</span> <span class="n">samples_chain</span><span class="p">[</span><span class="n">walker_ind</span><span class="p">]</span>
-<span class="n">p_walker</span> <span class="o">=</span> <span class="n">logp</span><span class="p">[</span><span class="n">walker_ind</span><span class="p">]</span>
-<span class="c1">#p_walker = np.exp(p_walker-logp.max())</span>
-
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples_walker</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Scale&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples_walker</span><span class="p">[:,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Background-1&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples_walker</span><span class="p">[:,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Background-2&#39;</span><span class="p">)</span>
-
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples_walker</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;zero shift&#39;</span><span class="p">)</span>
-<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples_walker</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
-<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples_walker</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">)</span>
-<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples_walker</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-
-<span class="n">ax5</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples_walker</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sigma&#39;</span><span class="p">)</span>
-
-<span class="n">ax6</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_walker</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;log-p&#39;</span><span class="p">)</span>
-
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax4</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax5</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax6</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-<span class="n">ax5</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;MCMC steps&#39;</span><span class="p">)</span>
-<span class="n">ax6</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;MCMC steps&#39;</span><span class="p">)</span>
-
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meas_x</span><span class="p">,</span> <span class="n">y_initial</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Initial&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4f1fb74e093fdc7c3473d43228862995f47bd5c3aca7203e10ada98ff06d5a13.png" src="../../_images/4f1fb74e093fdc7c3473d43228862995f47bd5c3aca7203e10ada98ff06d5a13.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial: RMSE 43.579, MSE-weighted 3.438
+</pre></div>
+</div>
+<img alt="../../_images/482db408d9e41cb6f130b30c5e2136a31dbcffe9a790ad02862a4b003abd0569.png" src="../../_images/482db408d9e41cb6f130b30c5e2136a31dbcffe9a790ad02862a4b003abd0569.png" />
 </div>
 </div>
+</section>
+<section id="run-mcmc-sampling">
+<h2>Run MCMC sampling<a class="headerlink" href="#run-mcmc-sampling" title="Permalink to this headline">#</a></h2>
+<p>Next, we define the hyper-parameters to be used for the MCMC sampling</p>
+<p>The MCMC is carried out by multiple independent “walkers”.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n_steps</span></code> sets how many steps/iterations each walker will carry out</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_walkers</span></code> sets how many walkers to use</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_parameters</span></code> is the total number of parameters being optimized</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_every</span></code> how often to record store the MCMC trajectory</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="s1">&#39;zero-shift&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;background-1&#39;</span><span class="p">,</span> <span class="s1">&#39;background-2&#39;</span><span class="p">]</span>
-<span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples_flat</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># MCMC parameters</span>
+<span class="n">n_walkers</span> <span class="o">=</span> <span class="mi">15</span>             <span class="c1"># number of MCMC walkers</span>
+<span class="n">n_every</span> <span class="o">=</span> <span class="mi">1</span>               <span class="c1"># keep every x:th sample</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">5000</span> <span class="o">//</span> <span class="n">n_every</span>  <span class="c1"># steps per walker</span>
+<span class="n">n_parameters</span> <span class="o">=</span> <span class="mi">11</span>         <span class="c1"># number of parameters</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we generate the starting parameters for all walkers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate starting points for walkers</span>
+<span class="n">theta_start</span> <span class="o">=</span> <span class="p">[</span><span class="n">theta_0</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_walkers</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">theta_start</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">generate_starting_theta</span><span class="p">())</span>
+<span class="n">theta_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">theta_start</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;theta start shape:&#39;</span><span class="p">,</span> <span class="n">theta_start</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># sanity check starting points such that there is no horribly starting points with e.g. NaNs</span>
+<span class="k">for</span> <span class="n">it</span><span class="p">,</span> <span class="n">theta</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">theta_start</span><span class="p">):</span>
+    <span class="n">set_job_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">calculator</span><span class="o">.</span><span class="n">fit_func</span><span class="p">(</span><span class="n">meas_x</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">compute_rmse</span><span class="p">(</span><span class="n">meas_y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">msew</span> <span class="o">=</span> <span class="n">compute_mse_weighted</span><span class="p">(</span><span class="n">meas_y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">logp</span> <span class="o">=</span> <span class="n">log_posterior</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Walker </span><span class="si">{</span><span class="n">it</span><span class="si">:</span><span class="s1">2</span><span class="si">}</span><span class="s1">: log-posterior </span><span class="si">{</span><span class="n">logp</span><span class="si">:</span><span class="s1">11.5f</span><span class="si">}</span><span class="s1"> | RMSE </span><span class="si">{</span><span class="n">rmse</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> | MSE-weighted </span><span class="si">{</span><span class="n">msew</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5db92ef809d402d8d9a209e2fb5ed1d54b31a0e2c5d7299f81301f9a4a3388b0.png" src="../../_images/5db92ef809d402d8d9a209e2fb5ed1d54b31a0e2c5d7299f81301f9a4a3388b0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta start shape: (15, 11)
+Walker  0: log-posterior -10842.12453 | RMSE 43.579 | MSE-weighted 3.438
+Walker  1: log-posterior -11676.48810 | RMSE 66.453 | MSE-weighted 7.380
+Walker  2: log-posterior -11554.35167 | RMSE 59.526 | MSE-weighted 6.502
+Walker  3: log-posterior -15315.42290 | RMSE 77.296 | MSE-weighted 9.243
+Walker  4: log-posterior -12935.33593 | RMSE 72.482 | MSE-weighted 7.996
+Walker  5: log-posterior -12649.70196 | RMSE 71.052 | MSE-weighted 8.694
+Walker  6: log-posterior -12229.53300 | RMSE 79.497 | MSE-weighted 10.654
+Walker  7: log-posterior -11329.51863 | RMSE 57.199 | MSE-weighted 5.297
+Walker  8: log-posterior -13841.94357 | RMSE 86.030 | MSE-weighted 13.250
+Walker  9: log-posterior -11942.99504 | RMSE 71.125 | MSE-weighted 8.220
+Walker 10: log-posterior -13013.96373 | RMSE 57.783 | MSE-weighted 5.974
+Walker 11: log-posterior -14782.39384 | RMSE 71.719 | MSE-weighted 8.006
+Walker 12: log-posterior -11043.70290 | RMSE 46.783 | MSE-weighted 4.054
+Walker 13: log-posterior -11710.90754 | RMSE 61.968 | MSE-weighted 7.132
+Walker 14: log-posterior -11265.31900 | RMSE 52.701 | MSE-weighted 5.082
+</pre></div>
 </div>
 </div>
-</section>
+</div>
+<p>In order make emcee run with fewer walkers than twice the number of parameters, we need to set <code class="docutils literal notranslate"><span class="pre">sampler._moves[0].live_dangerously</span> <span class="pre">=</span> <span class="pre">True</span> </code>, but this is often unadvisable.</p>
+<p>Due the starting points for the walkers being quite similar we also may need to set <code class="docutils literal notranslate"><span class="pre">skip_initial_state_check=True</span></code> in order to avoid poor conditioned starting point error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sample</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">n_walkers</span><span class="p">,</span> <span class="n">n_parameters</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">)</span>
+<span class="n">sampler</span><span class="o">.</span><span class="n">_moves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">live_dangerously</span> <span class="o">=</span> <span class="kc">True</span> 
+<span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">theta_start</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">thin_by</span><span class="o">=</span><span class="n">n_every</span><span class="p">,</span> <span class="n">skip_initial_state_check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|███▎                                                                                 | 198/5000 [05:36&lt;2:15:26,  1.69s/it]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">chain</span>
+<span class="n">logp</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">lnprobability</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="n">n_every</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;samples shape:&#39;</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First we’ll plot the posterior of all walkers to check convergence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">walker_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_walkers</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">logp</span><span class="p">[</span><span class="n">walker_ind</span><span class="p">,</span> <span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Walker </span><span class="si">{</span><span class="n">walker_ind</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Log posterior&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;MCMC iteration&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we’ll plot the MCMC trajectory of the parameters for a few walkers</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">walkers_to_plot</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_parameters</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">parameter_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">walker_ind</span> <span class="ow">in</span> <span class="n">walkers_to_plot</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">samples</span><span class="p">[</span><span class="n">walker_ind</span><span class="p">,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Walker </span><span class="si">{</span><span class="n">walker_ind</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;MCMC iteration&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we extract the optimal choice of parameters and their standard-deviation.<br />
+We throw away the equilibration period of the MCMC simulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_throw_away</span> <span class="o">=</span> <span class="mi">2000</span> <span class="o">//</span> <span class="n">n_every</span>  <span class="c1"># number of equilibration steps to throw away</span>
+<span class="n">samples_flat</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[:,</span> <span class="n">n_throw_away</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_parameters</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;samples    shape: &#39;</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;samples_flat shape:&#39;</span><span class="p">,</span> <span class="n">samples_flat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># select best model</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logp</span><span class="p">)</span>
+<span class="n">hp_loc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">logp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">logp</span><span class="p">[</span><span class="n">hp_loc</span><span class="p">]</span> <span class="o">==</span> <span class="n">logp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">theta_best</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="n">hp_loc</span><span class="p">]</span>
+
+<span class="c1"># calculate spectra with best model</span>
+<span class="n">set_job_parameters</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">theta_best</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">calculator</span><span class="o">.</span><span class="n">fit_func</span><span class="p">(</span><span class="n">meas_x</span><span class="p">)</span>
+<span class="n">rmse_refined</span> <span class="o">=</span> <span class="n">compute_rmse</span><span class="p">(</span><span class="n">meas_y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">msew_refined</span> <span class="o">=</span> <span class="n">compute_mse_weighted</span><span class="p">(</span><span class="n">meas_y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best model: RMSE </span><span class="si">{</span><span class="n">rmse_refined</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">, MSE-weighted </span><span class="si">{</span><span class="n">msew_refined</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">, sigma </span><span class="si">{</span><span class="n">theta_best</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># estimate errors of parameters</span>
+<span class="n">stds</span> <span class="o">=</span> <span class="n">samples_flat</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Save the data to be analyzed</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="n">parameter_names</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">logp</span><span class="o">=</span><span class="n">logp</span><span class="p">)</span>
+<span class="n">parameter_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">parameter_names</span><span class="p">,</span> <span class="n">theta_best</span><span class="p">,</span> <span class="n">stds</span><span class="p">):</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">parameter_dict</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;-1&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">:</span><span class="s1">15</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s1">12.5f</span><span class="si">}</span><span class="s1"> , err </span><span class="si">{</span><span class="n">err</span><span class="si">:</span><span class="s1">8.5f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">parameter_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameter_dict</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;refinement_results/emcee_steps</span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s1">_walkers</span><span class="si">{</span><span class="n">n_walkers</span><span class="si">}</span><span class="s1">.npy&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot refined diffraction pattern</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meas_x</span><span class="p">,</span> <span class="n">meas_y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exp&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meas_x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simulated&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meas_x</span><span class="p">,</span> <span class="n">meas_y</span> <span class="o">-</span> <span class="n">y</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Diff&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">corner</span>
+
+<span class="c1"># corner plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples_flat</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">parameter_names</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -850,17 +889,17 @@ intensity          239.69534 , err  1.97808
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="refinement_least_squares.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Advanced tutorials</p>
+            <p class="prev-next-title">Refinement of PbSO4 with least-squares</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="refinement_bumps_dream.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Refinement with bumps-dream PbSO4</p>
+        <p class="prev-next-title">Refinement of PbSO4 with bumps-DREAM</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

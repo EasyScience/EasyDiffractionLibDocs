@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Advanced tutorials &#8212; EasyDiffraction 0.1 documentation</title>
+    <title>Analysis of PbSO4 refinement results &#8212; EasyDiffraction 0.1 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,8 +34,8 @@
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Analysis of PbSO4 refinement results" href="analyze_refinement_results.html" />
-    <link rel="prev" title="Simulation of the diffraction pattern" href="../basic/simulation.html" />
+    <link rel="next" title="Refinement of PbSO4 with least-squares" href="refinement_least_squares.html" />
+    <link rel="prev" title="Advanced tutorials" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -116,7 +116,7 @@
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+  <a class="reference internal" href="index.html">
    Advanced tutorials
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -124,9 +124,9 @@
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="analyze_refinement_results.html">
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Analysis of PbSO4 refinement results
     </a>
    </li>
@@ -220,7 +220,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/tutorials/advanced/index.md.txt"
+        <a href="../../_sources/tutorials/advanced/analyze_refinement_results.ipynb.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -231,7 +231,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -257,23 +257,60 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-posterior-distributions-obtained-by-mc-simulations">
+   Analysis of posterior distributions obtained by MC simulations
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Advanced tutorials</h1>
+                <h1>Analysis of PbSO4 refinement results</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-posterior-distributions-obtained-by-mc-simulations">
+   Analysis of posterior distributions obtained by MC simulations
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -281,19 +318,71 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="advanced-tutorials">
-<h1>Advanced tutorials<a class="headerlink" href="#advanced-tutorials" title="Permalink to this headline">#</a></h1>
-<p>Here, a collection of notebooks regarding refinement of a few simple parameters for neutron powder diffraction data for PbSO4 is shown.
-The results from least-squares, bumps-dream, and emcee will be compared and discussed.</p>
-<p>Note here that in order to obtain converged results from bumps-dream and emcee one requires rather long MCMC simulations, and so if you want to analyze the converged data you can fetch it from XYZ.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="analyze_refinement_results.html">Analysis of PbSO4 refinement results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="refinement_least_squares.html">Refinement of PbSO4 with least-squares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="refinement_emcee.html">Refinement of PbSO4 with emcee</a></li>
-<li class="toctree-l1"><a class="reference internal" href="refinement_bumps_dream.html">Refinement of PbSO4 with bumps-DREAM</a></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="analysis-of-pbso4-refinement-results">
+<h1>Analysis of PbSO4 refinement results<a class="headerlink" href="#analysis-of-pbso4-refinement-results" title="Permalink to this headline">#</a></h1>
+<p>The results from least-squares, bumps-dream, and emcee will be compared and discussed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s1">&#39;notebook&#39;</span><span class="p">)</span>
+</pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read all data</span>
+<span class="n">data_least_squares</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;refinement_results/least_squares.npy&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">data_bumps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;refinement_results/bumps_dream_steps5000_burn500_pop1.npy&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data_least_squares</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_bumps</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;length_a&#39;, &#39;length_b&#39;, &#39;length_c&#39;, &#39;scale&#39;, &#39;resolution_u&#39;, &#39;resolution_v&#39;, &#39;resolution_w&#39;, &#39;zero_shift&#39;, &#39;intensity&#39;, &#39;intensity-1&#39;])
+dict_keys([&#39;names&#39;, &#39;samples&#39;, &#39;logp&#39;, &#39;parameters&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The obtained parameters and their respective errorbars.<br />
+There is an systematic underestimation in the errorbars from bumps-DREAM as disucssed <a class="reference external" href="https://github.com/bumps/bumps/pull/94">here</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data_least_squares</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">data_least_squares</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">data_bumps</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s1">15</span><span class="si">}</span><span class="s1">: least-squares </span><span class="si">{</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">9.4f</span><span class="si">}</span><span class="s1"> +- </span><span class="si">{</span><span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">8.6f</span><span class="si">}</span><span class="s1"> | bumps </span><span class="si">{</span><span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">9.4f</span><span class="si">}</span><span class="s1"> +- </span><span class="si">{</span><span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">8.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>intensity      : least-squares  197.1217 +- 1.242605 | bumps  240.4465 +- 0.873294
+intensity-1    : least-squares  240.0542 +- 1.605187 | bumps  196.9511 +- 0.650893
+length_a       : least-squares    8.4770 +- 0.000271 | bumps    8.4769 +- 0.000151
+length_b       : least-squares    5.3958 +- 0.000187 | bumps    5.3957 +- 0.000117
+length_c       : least-squares    6.9558 +- 0.000319 | bumps    6.9558 +- 0.000168
+resolution_u   : least-squares    0.1948 +- 0.015901 | bumps    0.1938 +- 0.009232
+resolution_v   : least-squares   -0.4756 +- 0.030428 | bumps   -0.4747 +- 0.016805
+resolution_w   : least-squares    0.4787 +- 0.012812 | bumps    0.4793 +- 0.006860
+scale          : least-squares    1.2105 +- 0.005795 | bumps    1.2101 +- 0.003277
+zero_shift     : least-squares    0.1568 +- 0.002768 | bumps    0.1578 +- 0.001670
+</pre></div>
+</div>
+</div>
+</div>
+<section id="analysis-of-posterior-distributions-obtained-by-mc-simulations">
+<h2>Analysis of posterior distributions obtained by MC simulations<a class="headerlink" href="#analysis-of-posterior-distributions-obtained-by-mc-simulations" title="Permalink to this headline">#</a></h2>
+</section>
 </section>
 
 
@@ -304,17 +393,17 @@ The results from least-squares, bumps-dream, and emcee will be compared and disc
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../basic/simulation.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Simulation of the diffraction pattern</p>
+            <p class="prev-next-title">Advanced tutorials</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="analyze_refinement_results.html" title="next page">
+    <a class='right-next' id="next-link" href="refinement_least_squares.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Analysis of PbSO4 refinement results</p>
+        <p class="prev-next-title">Refinement of PbSO4 with least-squares</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
