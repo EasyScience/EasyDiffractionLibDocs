@@ -25,4 +25,5 @@ getting-started
 
 tutorials/basic/index
 tutorials/advanced/index
+tutorials/developer/index
 ```
