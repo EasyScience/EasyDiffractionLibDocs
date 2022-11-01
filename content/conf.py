@@ -29,7 +29,7 @@ nb_execution_excludepatterns = ['advanced/*.ipynb']
 
 html_static_path = ['_static']
 html_extra_path = ['_static/.nojekyll']
-html_logo = "_static/logo_wname.png"
+html_logo = "_static/logo-lib_lightmode.png"
 
 html_theme = "sphinx_book_theme"
 html_theme_options = { "logo_only": True }
