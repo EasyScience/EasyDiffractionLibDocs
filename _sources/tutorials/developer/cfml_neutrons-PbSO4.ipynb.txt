@@ -1,0 +1,413 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "26bea4e7",
+   "metadata": {
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   },
+   "source": [
+    "# CrysFML: Neutrons PbSO4"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "9ecc4733",
+   "metadata": {
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# Misc\n",
+    "import sys, os\n",
+    "import numpy as np\n",
+    "\n",
+    "# CrysFML\n",
+    "import CFML_api\n",
+    "\n",
+    "# Vizualization\n",
+    "import py3Dmol\n",
+    "from bokeh.io import show, output_notebook\n",
+    "from bokeh.plotting import figure"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d76d50fc",
+   "metadata": {
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "output_notebook()\n",
+    "FIGURE_WIDTH = 700\n",
+    "FIGURE_HEIGHT = 300"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "9bc7ab53",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def diffraction_pattern_xy(space_group, cell, atom_list, job_info):\n",
+    "    reflection_list = CFML_api.ReflectionList(cell, space_group, \n",
+    "                                              True, \n",
+    "                                              job_info)\n",
+    "    reflection_list.compute_structure_factors(space_group, \n",
+    "                                              atom_list, \n",
+    "                                              job_info)\n",
+    "    diffraction_pattern = CFML_api.DiffractionPattern(job_info,\n",
+    "                                                  reflection_list, \n",
+    "                                                  cell.reciprocal_cell_vol)\n",
+    "    return diffraction_pattern.x, diffraction_pattern.ycalc"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b90d6f69",
+   "metadata": {
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   },
+   "source": [
+    "## Define sample model"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "45dbea02",
+   "metadata": {},
+   "source": [
+    "### Create space group object"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "85719689",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "space_group = CFML_api.SpaceGroup('P n m a')\n",
+    "#space_group.print_description()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7318fe30",
+   "metadata": {},
+   "source": [
+    "### Create unit cell object"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3331332e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "lengths = np.asarray([8.477,5.396,6.957], dtype='float32')\n",
+    "angles = np.asarray([90,90,90], dtype='float32')\n",
+    "unit_cell = CFML_api.Cell(lengths, angles)\n",
+    "#unit_cell.print_description()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f7abc667",
+   "metadata": {},
+   "source": [
+    "### Create list of atoms"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "990fd6f8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cif_str = '''\n",
+    "loop_\n",
+    " _atom_site_label\n",
+    " _atom_site_type_symbol\n",
+    " _atom_site_occupancy\n",
+    " _atom_site_fract_x\n",
+    " _atom_site_fract_y\n",
+    " _atom_site_fract_z\n",
+    " _atom_site_adp_type\n",
+    " _atom_site_U_iso_or_equiv\n",
+    "  Pb  Pb  1.0  0.1880  0.25    0.1668  Uiso  0.0169\n",
+    "  S   S   1.0  0.0650  0.25    0.6850  Uiso  0.0025\n",
+    "  O1  O   1.0  0.9080  0.25    0.5950  Uiso  0.0246\n",
+    "  O2  O   1.0  0.1935  0.25    0.5432  Uiso  0.0180\n",
+    "  O3  O   1.0  0.0814  0.0274  0.8085  Uiso  0.0165\n",
+    "'''\n",
+    "atom_list = CFML_api.AtomList(cif_str.split('\\n'))\n",
+    "atom_list.set_mult_occ_cif(space_group)\n",
+    "#atom_list.print_description()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7e5916ec",
+   "metadata": {
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   },
+   "source": [
+    "## Load experimental data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e85b2978",
+   "metadata": {},
+   "source": [
+    "### Load measured data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "9651c148",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fpath_obs = '../datasets/neutron_powder_PbSO4/D1A@ILL.xye'\n",
+    "x_obs, y_obs, sy_obs = np.loadtxt(fpath_obs, unpack=True)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7ce93460",
+   "metadata": {},
+   "source": [
+    "### Visualize measured data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ec519e4d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fig = figure(width=FIGURE_WIDTH, height=FIGURE_HEIGHT)\n",
+    "fig.line(x_obs, y_obs, legend_label='Iobs', color='darkgray', line_width=2)\n",
+    "show(fig)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c5fcc713",
+   "metadata": {
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   },
+   "source": [
+    "## Analyse data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5d18762c",
+   "metadata": {},
+   "source": [
+    "### Create job definition object"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0c65bae0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cfl_str = '''\n",
+    "Title PbSO4\n",
+    "'''\n",
+    "job_info = CFML_api.JobInfo(cfl_str.split('\\n'))\n",
+    "job_info.print_description()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8d2a501f",
+   "metadata": {},
+   "source": [
+    "### Modify job definition object"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a54b8c2b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "job_info.pattern_type = \"NEUT_2THE\"\n",
+    "job_info.range_2theta = (10.0, 155.45)\n",
+    "job_info.theta_step = 0.05\n",
+    "job_info.lambdas = (1.9122, 1.9122)\n",
+    "job_info.lambda_ratio = 1.0\n",
+    "job_info.u_resolution = 0.1421\n",
+    "job_info.v_resolution = -0.4181\n",
+    "job_info.w_resolution = 0.3864\n",
+    "job_info.x_resolution = 0.0\n",
+    "job_info.y_resolution = 0.0904\n",
+    "job_info.print_description()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0d389b01",
+   "metadata": {},
+   "source": [
+    "### Calculate and plot diffraction pattern"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "6b6bea96",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x_calc, y_clac = diffraction_pattern_xy(space_group, unit_cell, atom_list, job_info)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ff08fbf0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fig = figure(width=FIGURE_WIDTH, height=FIGURE_HEIGHT)\n",
+    "fig.line(x_calc, y_clac, legend_label='Icalc', color='orangered', line_width=1)\n",
+    "show(fig)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "01a70bff",
+   "metadata": {},
+   "source": [
+    "### Compare observed and calculated data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "55b67444",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "scale = 480\n",
+    "background = 200\n",
+    "zero_shift = -0.15"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ef100f22",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x_calc, y_calc = diffraction_pattern_xy(space_group, unit_cell, atom_list, job_info)\n",
+    "x_calc = x_calc + zero_shift\n",
+    "y_calc = y_calc * scale + background"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "fd33f1f0",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "fig = figure(width=FIGURE_WIDTH, height=FIGURE_HEIGHT)\n",
+    "fig.line(x_obs, y_obs, legend_label='Iobs', color='darkgray', line_width=2)\n",
+    "fig.line(x_calc, y_calc, legend_label='Icalc', color='orangered', line_width=1)\n",
+    "show(fig)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a5fc811c",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "fig = figure(width=FIGURE_WIDTH, height=FIGURE_HEIGHT, x_range=(45,60))\n",
+    "fig.line(x_obs, y_obs, legend_label='Iobs', color='darkgray', line_width=2)\n",
+    "fig.line(x_calc, y_calc, legend_label='Icalc', color='orangered', line_width=1)\n",
+    "show(fig)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7a7afb07",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "fig = figure(width=FIGURE_WIDTH, height=FIGURE_HEIGHT, x_range=(54,57))\n",
+    "fig.line(x_obs, y_obs, legend_label='Iobs', color='darkgray', line_width=2)\n",
+    "fig.line(x_calc, y_calc, legend_label='Icalc', color='orangered', line_width=1)\n",
+    "show(fig)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d522a167",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.10"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
