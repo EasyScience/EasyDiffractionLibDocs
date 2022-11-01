@@ -1,16 +1,41 @@
-[![w3c-master][80]][85] [![url-master][60]][65] [![w3c-develop][90]][95] [![url-develop][70]][75]
+This repository contains user documentation for the [EasyDiffraction library](https://github.com/easyscience/easyDiffractionLib).
 
-##
+## CI build status
 
-- Content: `develop` and `master` branches.
-- Build: `public_develop` and `public_master` branches.
+* Develop branch  
+  [![w3c-develop][90]][95] [![url-develop][70]][75]
+* Master branch  
+  [![w3c-master][80]][85] [![url-master][60]][65]
 
-### Build documentation locally via
+## Build locally
 
-```
-sphinx-build -j 4 -nW --keep-going -b html content/ tmp/
-```    
-    
+* Create virtual environment and activate it (*optional*)
+  ```
+  python -m venv .venv
+  source .venv/bin/activate
+  ```
+* Upgrade pip (*optional*)
+  ```
+  pip install --upgrade pip
+  ```
+* Install [Sphinx](https://www.sphinx-doc.org) documentation generator (*if not done already*)
+  ```
+  pip install sphinx
+  ```
+* Install [Sphinx book theme](https://sphinx-book-theme.readthedocs.io) (*if not done already*)
+  ```
+  pip install sphinx-book-theme
+  ```  
+* Install [Sphinx MyST-NB extension](https://sphinx-book-theme.readthedocs.io) for _Markdown_ and _Jupyter Notebooks_ (*if not done already*)
+  ```
+  pip install myst-nb
+  ```    
+* Generate documentation from the files in _content/_ and places it in _public/_
+  ```
+  sphinx-build -j 4 -nW --keep-going -b html content/ public/
+  ```
+
+      
 <!---URLs--->
 
 [60]: https://img.shields.io/badge/url--master-docs.easydiffraction.org/lib-blue
