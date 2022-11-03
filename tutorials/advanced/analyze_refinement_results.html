@@ -335,8 +335,8 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read all data</span>
 <span class="n">data_least_squares</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;refinement_results/least_squares.npy&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-<span class="n">data_bumps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;refinement_results/bumps_dream_steps5000_burn500_pop1.npy&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-<span class="n">data_emcee</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;refinement_results/emcee_steps5000_walkers15.npy&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">data_bumps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;refinement_results/bumps_dream_steps20000_burn1000_pop4.npy&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">data_emcee</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;refinement_results/emcee_steps20000_walkers40.npy&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -354,16 +354,16 @@ There is an systematic underestimation in the errorbars from bumps-DREAM, which 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>intensity      : least-squares  197.1217 +- 1.242605 | emcee  196.8308 +- 1.282312 | bumps  240.4465 +- 0.873294
-intensity-1    : least-squares  240.0542 +- 1.605187 | emcee  240.0658 +- 1.510235 | bumps  196.9511 +- 0.650893
-length_a       : least-squares    8.4770 +- 0.000271 | emcee    8.4770 +- 0.000259 | bumps    8.4769 +- 0.000151
-length_b       : least-squares    5.3958 +- 0.000187 | emcee    5.3957 +- 0.000186 | bumps    5.3957 +- 0.000117
-length_c       : least-squares    6.9558 +- 0.000319 | emcee    6.9559 +- 0.000328 | bumps    6.9558 +- 0.000168
-resolution_u   : least-squares    0.1948 +- 0.015901 | emcee    0.1947 +- 0.017616 | bumps    0.1938 +- 0.009232
-resolution_v   : least-squares   -0.4756 +- 0.030428 | emcee   -0.4747 +- 0.033097 | bumps   -0.4747 +- 0.016805
-resolution_w   : least-squares    0.4787 +- 0.012812 | emcee    0.4783 +- 0.013467 | bumps    0.4793 +- 0.006860
-scale          : least-squares    1.2105 +- 0.005795 | emcee    1.2087 +- 0.005654 | bumps    1.2101 +- 0.003277
-zero_shift     : least-squares    0.1568 +- 0.002768 | emcee    0.1566 +- 0.002811 | bumps    0.1578 +- 0.001670
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>intensity      : least-squares  197.1217 +- 1.242605 | emcee  196.6353 +- 1.257912 | bumps  239.7904 +- 0.876329
+intensity-1    : least-squares  240.0542 +- 1.605187 | emcee  239.9669 +- 1.635925 | bumps  197.3001 +- 0.665146
+length_a       : least-squares    8.4770 +- 0.000271 | emcee    8.4770 +- 0.000276 | bumps    8.4770 +- 0.000144
+length_b       : least-squares    5.3958 +- 0.000187 | emcee    5.3958 +- 0.000193 | bumps    5.3958 +- 0.000108
+length_c       : least-squares    6.9558 +- 0.000319 | emcee    6.9558 +- 0.000318 | bumps    6.9559 +- 0.000169
+resolution_u   : least-squares    0.1948 +- 0.015901 | emcee    0.1936 +- 0.016948 | bumps    0.1960 +- 0.008717
+resolution_v   : least-squares   -0.4756 +- 0.030428 | emcee   -0.4724 +- 0.031855 | bumps   -0.4768 +- 0.016107
+resolution_w   : least-squares    0.4787 +- 0.012812 | emcee    0.4773 +- 0.013121 | bumps    0.4792 +- 0.006595
+scale          : least-squares    1.2105 +- 0.005795 | emcee    1.2114 +- 0.005883 | bumps    1.2113 +- 0.003144
+zero_shift     : least-squares    0.1568 +- 0.002768 | emcee    0.1567 +- 0.002824 | bumps    0.1561 +- 0.001492
 </pre></div>
 </div>
 </div>
@@ -389,8 +389,8 @@ zero_shift     : least-squares    0.1568 +- 0.002768 | emcee    0.1566 +- 0.0028
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5011, 10, 10)
-(50110, 10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20011, 40, 10)
+(800440, 10)
 </pre></div>
 </div>
 </div>
@@ -398,7 +398,7 @@ zero_shift     : least-squares    0.1568 +- 0.002768 | emcee    0.1566 +- 0.0028
 <p>Extract emcee MCMC samples</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_throw</span> <span class="o">=</span> <span class="mi">1900</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_throw</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">n_parameters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_emcee</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">])</span>
 <span class="n">samples_flat</span> <span class="o">=</span> <span class="n">data_emcee</span><span class="p">[</span><span class="s1">&#39;samples&#39;</span><span class="p">][:,</span> <span class="n">n_throw</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_parameters</span><span class="p">)</span>
@@ -414,8 +414,8 @@ zero_shift     : least-squares    0.1568 +- 0.002768 | emcee    0.1566 +- 0.0028
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(15, 5000, 11)
-(46500, 11)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(40, 20000, 11)
+(760000, 11)
 </pre></div>
 </div>
 </div>
@@ -438,7 +438,7 @@ zero_shift     : least-squares    0.1568 +- 0.002768 | emcee    0.1566 +- 0.0028
     <span class="n">val2</span><span class="p">,</span> <span class="n">err2</span> <span class="o">=</span> <span class="n">data_bumps</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
     
     <span class="n">xlim</span> <span class="o">=</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">emcee_samples</span><span class="p">[</span><span class="n">name</span><span class="p">]),</span> <span class="nb">max</span><span class="p">(</span><span class="n">emcee_samples</span><span class="p">[</span><span class="n">name</span><span class="p">])]</span>
-    <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">xlim</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">xlim</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">emcee_samples</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="o">**</span><span class="n">hist_kwargs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;emcee&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col1</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bumps_samples</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="o">**</span><span class="n">hist_kwargs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;bumps-DREAM&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col2</span><span class="p">)</span>
     
@@ -462,7 +462,7 @@ zero_shift     : least-squares    0.1568 +- 0.002768 | emcee    0.1566 +- 0.0028
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3ede5d7252bdaae25f601e2e698b96c4367c2b625e5eac60fcf11969239b0d24.png" src="../../_images/3ede5d7252bdaae25f601e2e698b96c4367c2b625e5eac60fcf11969239b0d24.png" />
+<img alt="../../_images/539cbc8423b291c56ea1ad5e08d22a1e60bbfb38449ed4b3be6e97bdb0a40116.png" src="../../_images/539cbc8423b291c56ea1ad5e08d22a1e60bbfb38449ed4b3be6e97bdb0a40116.png" />
 </div>
 </div>
 </section>
