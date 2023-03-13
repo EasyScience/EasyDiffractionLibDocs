@@ -34,7 +34,6 @@ jobs:
 
       - name: Install EasyDiffraction dependences
         run: |
-#          python -m pip install easyDiffraction --extra-index-url https://easyscience.github.io/pypi
           python -m pip install git+https://github.com/easyScience/easyDiffractionLib.git@minor-fixes --extra-index-url https://easyscience.github.io/pypi
           python -m pip install CFML
           python -m pip install emcee
