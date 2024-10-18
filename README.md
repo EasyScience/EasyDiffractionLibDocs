@@ -1,4 +1,4 @@
-This repository contains user documentation for the [EasyDiffraction library](https://github.com/easyscience/easyDiffractionLib).
+This repository contains user documentation for the [EasyDiffraction library](https://github.com/easyscience/EasyDiffractionLib).
 
 ## CI build status
 
@@ -10,32 +10,24 @@ This repository contains user documentation for the [EasyDiffraction library](ht
 ## Build locally
 
 * Create virtual environment and activate it (*optional*)
-  ```
-  python -m venv .venv
-  source .venv/bin/activate
-  ```
+```
+python -m venv .venv
+source .venv/bin/activate
+```
 * Upgrade pip (*optional*)
-  ```
-  pip install --upgrade pip
-  ```
-* Install [Sphinx](https://www.sphinx-doc.org) documentation generator (*if not done already*)
-  ```
-  pip install sphinx
-  ```
-* Install [Sphinx book theme](https://sphinx-book-theme.readthedocs.io) (*if not done already*)
-  ```
-  pip install sphinx-book-theme
-  ```  
-* Install [Sphinx MyST-NB extension](https://sphinx-book-theme.readthedocs.io) for _Markdown_ and _Jupyter Notebooks_ (*if not done already*)
-  ```
-  pip install myst-nb
-  ```    
-* Generate documentation from the files in _content/_ and places it in _public/_
-  ```
-  sphinx-build -j 4 -nW --keep-going -b html content/ public/
-  ```
+```
+pip install --upgrade pip
+```
+* Install [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/) documentation framework as well as [Jupyter plugin for MkDocs](https://github.com/danielfrg/mkdocs-jupyter) (*if not done already*)
+```
+pip install mkdocs-material mkdocs-jupyter
+```
+* Generate documentation from the files in _docs/_ and places it in _site/_
+```
+mkdocs build
+```
 
-      
+
 <!---URLs--->
 
 [60]: https://img.shields.io/badge/url--master-docs.easydiffraction.org/lib-blue
