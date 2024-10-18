@@ -1,0 +1,107 @@
+# Project information
+site_name: EasyDiffraction
+site_url: https://docs.easydiffraction.org/lib
+
+# Copyright
+copyright: © 2024 EasyDiffraction
+
+# Configuration
+theme:
+  name: material
+  custom_dir: overrides
+  features:
+    - content.action.edit
+    - content.code.annotate
+    - content.code.copy  # Auto generated button to copy a code block's content
+    - content.tooltips
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top  # Back-to-top button
+    - navigation.tracking  # Anchor tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      toggle:
+        icon: fontawesome/solid/sun
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      toggle:
+        icon: fontawesome/solid/moon
+        name: Switch to light mode
+  font:
+    text: Mulish
+    code: Roboto Mono
+  icon:
+    logo: logo-lib
+    edit: material/file-edit-outline
+  favicon: assets/favicon.ico
+
+# Customization
+extra_css:
+  - assets/stylesheets/extra.css
+extra_javascript:
+  - assets/javascripts/extra.js
+
+# Footer
+extra:
+  generator: false  # Disable `Made with Material for MkDocs` (bottom left)
+  social:  # Icons (bottom right)
+    - icon: easydiffraction
+      link: https://easydiffraction.org
+    - icon: fontawesome/brands/github
+      link: https://github.com/easyscience/EasyDiffractionLib
+    - icon: easyscience
+      link: https://easyscience.software
+
+# Repository
+repo_url: https://github.com/easyscience/EasyDiffractionLibDocs
+edit_uri: edit/develop/docs/
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - pymdownx.snippets
+  - pymdownx.highlight  # whether highlighting should be carried out during build time by Pygments
+  - pymdownx.superfences  # whether highlighting should be carried out during build time by Pygments
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      toc_depth: 2
+
+# Plugins
+plugins:
+  - mkdocs-jupyter:
+      include: ["*.ipynb"] # Default: ["*.py", "*.ipynb"]
+      #ignore: ["some-irrelevant-files/*.ipynb"]
+      execute: false
+      #include_source: true
+      include_requirejs: true  # Required for Plotly
+      remove_tag_config:
+        remove_input_tags:
+          - colab
+
+# Page tree
+nav:
+  - Introduction: index.md
+  - Installation:
+    - Standard: installation/standard.md
+  - How to use:
+    - Fitting CW-PD: how-to-use/Fitting_PD-CW_La0.5Ba0.5CoO3-HRPT@PSI.ipynb
+    - Fitting TOF-PD: how-to-use/Fitting_PD-TOF_Si-SEPD@Argonne.ipynb
+  - Project:
+    - Structure: project/structure.md
+    - Dictionaries: project/dictionaries.md
+  - Misc:
+    - Abbreviations: misc/abbreviations.md
