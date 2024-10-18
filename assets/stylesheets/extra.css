@@ -1,0 +1,151 @@
+/* Variables */
+
+:root {
+  --sz-link-color--lightmode: #0184c7;
+  --sz-hovered-link-color--lightmode: #37bdf9;
+  --sz-body-background-color--lightmode: #fafafa;
+  --sz-body-text-color--lightmode: #525252;
+  --sz-body-heading-color--lightmode: #434343;
+  --sz-code-background-color--lightmode: #ececec;
+
+  --sz-link-color--darkmode: #37bdf9;
+  --sz-hovered-link-color--darkmode: #2890c0;
+  --sz-body-background-color--darkmode: #262626;
+  --sz-body-text-color--darkmode: #a3a3a3;
+  --sz-body-heading-color--darkmode: #e5e5e5;
+  --sz-code-background-color--darkmode: #212121;
+}
+
+/* Default styles https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/_typeset.scss */
+
+/* Default light mode https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/_colors.scss */
+
+[data-md-color-scheme="default"] {
+
+  /* Primary color shades */
+  --md-primary-fg-color:               var(--sz-body-background-color--lightmode);  /* Navigation background */
+  --md-primary-bg-color:               var(--sz-body-text-color--lightmode);  /* E.g., Header title and icons */
+  --md-primary-bg-color--light:        var(--sz-body-text-color--lightmode);  /* E.g., Header search */
+
+  /* Accent color shades */
+  --md-accent-fg-color:                var(--sz-hovered-link-color--lightmode);  /* E.g., Hovered `a` elements & copy icon in code */
+
+  /* Default color shades */
+  --md-default-fg-color:               var(--sz-body-text-color--lightmode);
+  --md-default-fg-color--light:        var(--sz-body-heading-color--lightmode);  /* E.g., `h1` color & TOC viewed items & `$` in code */
+  --md-default-fg-color--lighter:      var(--sz-body-text-color--lightmode);  /* E.g., `¶` sign near `h1-h8` */
+  --md-default-fg-color--lightest:     var(--sz-body-text-color--lightmode);  /* E.g., Copy icon in code */
+  --md-default-bg-color:               var(--sz-body-background-color--lightmode);
+
+  /* Code color shades */
+  --md-code-bg-color:                  var(--sz-code-background-color--lightmode);
+
+  /* Typeset color shades */
+  --md-typeset-color:                  var(--sz-body-text-color--lightmode);
+
+  /* Typeset `a` color shades */
+  --md-typeset-a-color:                var(--sz-link-color--lightmode);
+
+  /* Footer color shades */
+  --md-footer-fg-color:                var(--sz-body-text-color--lightmode);  /* E.g., Next -> */
+  --md-footer-fg-color--light:         var(--sz-body-text-color--lightmode);  /* E.g., © 2022 EasyDiffraction, Material for MkDocs */
+  --md-footer-fg-color--lighter:       var(--sz-body-text-color--lightmode);  /* E.g. Made with */
+  --md-footer-bg-color:                hsla(0, 0%, 0%, 0.0);  /* Space with, e.g., Next -> */
+  --md-footer-bg-color--dark:          hsla(0, 0%, 0%, 0.0);  /* Space with, e.g., © 2022 EasyDiffraction */
+}
+
+/* Default dark mode: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/palette/_scheme.scss */
+
+[data-md-color-scheme="slate"] {
+
+  /* Primary color shades */
+  --md-primary-fg-color:               var(--sz-body-background-color--darkmode);  /* Navigation background */
+  --md-primary-bg-color:               var(--sz-body-text-color--darkmode);  /* E.g., Header title and icons */
+  --md-primary-bg-color--light:        var(--sz-body-text-color--darkmode);  /* E.g., Header search */
+
+  /* Accent color shades */
+  --md-accent-fg-color:                var(--sz-hovered-link-color--darkmode);  /* E.g., Hovered `a` elements & copy icon in code */
+
+  /* Default color shades */
+  --md-default-fg-color:               var(--sz-body-text-color--darkmode);
+  --md-default-fg-color--light:        var(--sz-body-heading-color--darkmode);  /* E.g., `h1` color & TOC viewed items & `$` in code */
+  --md-default-fg-color--lighter:      var(--sz-body-text-color--darkmode);  /* E.g., `¶` sign near `h1-h8` */
+  --md-default-fg-color--lightest:     var(--sz-body-text-color--darkmode);  /* E.g., Copy icon in code */
+  --md-default-bg-color:               var(--sz-body-background-color--darkmode);
+
+  /* Code color shades */
+  --md-code-bg-color:                  var(--sz-code-background-color--darkmode);
+
+  /* Typeset color shades */
+  --md-typeset-color:                  var(--sz-body-text-color--darkmode);
+
+  /* Typeset `a` color shades */
+  --md-typeset-a-color:                var(--sz-link-color--darkmode);
+
+  /* Footer color shades */
+  --md-footer-fg-color:                var(--sz-body-text-color--darkmode);  /* E.g., Next -> */
+  --md-footer-fg-color--light:         var(--sz-body-text-color--darkmode);  /* E.g., © 2022 EasyDiffraction, Material for MkDocs */
+  --md-footer-fg-color--lighter:       var(--sz-body-text-color--darkmode);  /* E.g. Made with */
+  --md-footer-bg-color:                hsla(0, 0%, 0%, 0.0);  /* Space with, e.g., Next -> */
+  --md-footer-bg-color--dark:          hsla(0, 0%, 0%, 0.0);  /* Space with, e.g., © 2022 EasyDiffraction */
+}
+
+/* Labels */
+
+.label-cif {
+  vertical-align: 10%;
+  padding-top: 3px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 11px;
+  border-radius: 11px;
+  color: var(--md-default-fg-color) !important;
+  background-color: var(--md-code-bg-color);
+}
+
+.label-cif:hover {
+  color: white !important;
+}
+
+.label-experiment {
+  vertical-align: 10%;
+  padding-top: 3px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 11px;
+  border-radius: 11px;
+  color: var(--md-default-fg-color) !important;
+  background-color: rgba(55, 189, 249, 0.1);
+}
+
+.label-experiment:hover {
+  color: white !important;
+}
+
+/* Hide navigation title */
+label.md-nav__title[for="__drawer"] {
+  height: 0px;
+}
+
+/* Hide header title */
+.md-header__ellipsis {
+  display: none;
+}
+
+/* Increase logo size */
+.md-logo :is(img, svg) {
+  height: 1.8rem !important;
+}
+
+/* Hide GH repo with counts (top right page corner) */
+.md-header__source {
+  display: none;
+}
+
+/* Increase TOC (on the right) width */
+.md-nav--secondary {
+  margin-left: -10px;
+  margin-right: -4px;
+}
