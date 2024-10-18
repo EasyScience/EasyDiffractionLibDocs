@@ -1,4 +1,4 @@
-This repository contains user documentation for the [EasyDiffraction application](https://github.com/easyscience/easyDiffractionApp).
+This repository contains user documentation for the [EasyDiffraction library](https://github.com/easyscience/EasyDiffractionLib).
 
 ## CI build status
 
@@ -27,17 +27,17 @@ pip install mkdocs-material mkdocs-jupyter
 mkdocs build
 ```
 
-      
+
 <!---URLs--->
 
-[60]: https://img.shields.io/badge/url--master-docs.easydiffraction.org/app-blue
-[65]: https://docs.easydiffraction.org/app
-[70]: https://img.shields.io/badge/url--develop-easyscience.github.io%2FEasyDiffractionAppDocs-blue
-[75]: https://easyscience.github.io/EasyDiffractionAppDocs
+[60]: https://img.shields.io/badge/url--master-docs.easydiffraction.org/lib-blue
+[65]: https://docs.easydiffraction.org/lib
+[70]: https://img.shields.io/badge/url--develop-easyscience.github.io%2FEasyDiffractionLibDocs-blue
+[75]: https://easyscience.github.io/EasyDiffractionLibDocs
 
 <!---W3C validation--->
 
-[80]: https://img.shields.io/w3c-validation/default?label=w3c-master&targetUrl=https://docs.easydiffraction.org/app
-[85]: https://validator.w3.org/nu/?doc=https%3A%2F%2Fdocs.easydiffraction.org/app%2F
-[90]: https://img.shields.io/w3c-validation/default?label=w3c-develop&targetUrl=https://easyscience.github.io/EasyDiffractionAppDocs
-[95]: https://validator.w3.org/nu/?doc=https%3A%2F%2Feasyscience.github.io%2FEasyDiffractionAppDocs%2F
+[80]: https://img.shields.io/w3c-validation/default?label=w3c-master&targetUrl=https://docs.easydiffraction.org/lib
+[85]: https://validator.w3.org/nu/?doc=https%3A%2F%2Fdocs.easydiffraction.org/lib%2F
+[90]: https://img.shields.io/w3c-validation/default?label=w3c-develop&targetUrl=https://easyscience.github.io/EasyDiffractionLibDocs
+[95]: https://validator.w3.org/nu/?doc=https%3A%2F%2Feasyscience.github.io%2FEasyDiffractionLibDocs%2F
