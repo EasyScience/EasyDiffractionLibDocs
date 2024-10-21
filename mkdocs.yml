@@ -98,8 +98,10 @@ nav:
   - Installation:
     - Standard: installation/standard.md
   - How to use:
-    - Fitting CW-PD: how-to-use/Fitting_PD-CW_La0.5Ba0.5CoO3-HRPT@PSI.ipynb
-    - Fitting TOF-PD: how-to-use/Fitting_PD-TOF_Si-SEPD@Argonne.ipynb
+    - Fitting PD-NEUT-CW LBCO-HRPT: how-to-use/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
+    - Fitting PD-NEUT-TOF Si-SEPD: how-to-use/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
+    - Fitting PD-NEUT-TOF NCAF-WISH: how-to-use/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
+    - Change minimizer: how-to-use/Change_minimizer.ipynb
   - Project:
     - Structure: project/structure.md
     - Dictionaries: project/dictionaries.md
