@@ -1,6 +1,10 @@
 # Project information
-site_name: EasyDiffraction
+site_name: EasyDiffraction Library
 site_url: https://docs.easydiffraction.org/lib
+
+# Repository
+repo_url: https://github.com/easyscience/EasyDiffractionLibDocs
+edit_uri: edit/develop/docs/
 
 # Copyright
 copyright: © 2024 EasyDiffraction
@@ -11,9 +15,11 @@ theme:
   custom_dir: overrides
   features:
     - content.action.edit
+    #- content.action.view
     - content.code.annotate
     - content.code.copy  # Auto generated button to copy a code block's content
     - content.tooltips
+    - navigation.footer
     - navigation.indexes
     - navigation.sections
     - navigation.top  # Back-to-top button
@@ -45,13 +51,7 @@ theme:
     edit: material/file-edit-outline
   favicon: assets/favicon.ico
 
-# Customization
-extra_css:
-  - assets/stylesheets/extra.css
-extra_javascript:
-  - assets/javascripts/extra.js
-
-# Footer
+# Additional configuration
 extra:
   generator: false  # Disable `Made with Material for MkDocs` (bottom left)
   social:  # Icons (bottom right)
@@ -62,9 +62,11 @@ extra:
     - icon: easyscience
       link: https://easyscience.software
 
-# Repository
-repo_url: https://github.com/easyscience/EasyDiffractionLibDocs
-edit_uri: edit/develop/docs/
+# Customization
+extra_css:
+  - assets/stylesheets/extra.css
+extra_javascript:
+  - assets/javascripts/extra.js
 
 # Extensions
 markdown_extensions:
@@ -88,20 +90,26 @@ plugins:
       execute: false
       #include_source: true
       include_requirejs: true  # Required for Plotly
+      ignore_h1_titles: true  # Use titles difined in the nav section below
       remove_tag_config:
         remove_input_tags:
           - colab
 
 # Page tree
+not_in_nav: |
+  project/dictionaries
+
 nav:
   - Introduction: index.md
   - Installation:
     - Standard: installation/standard.md
   - How to use:
-    - Fitting PD-NEUT-CW LBCO-HRPT: how-to-use/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
-    - Fitting PD-NEUT-TOF Si-SEPD: how-to-use/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
-    - Fitting PD-NEUT-TOF NCAF-WISH: how-to-use/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
-    - Change minimizer: how-to-use/Change_minimizer.ipynb
+    - Fitting:
+      - CW LBCO-HRPT: how-to-use/fitting/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
+      - TOF Si-SEPD: how-to-use/fitting/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
+      - TOF NCAF-WISH: how-to-use/fitting/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
+    - Extra:
+      - Change minimizer: how-to-use/extra/Change_minimizer.ipynb
   - Project:
     - Structure: project/structure.md
     - Dictionaries: project/dictionaries.md
