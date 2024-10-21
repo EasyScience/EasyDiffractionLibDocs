@@ -798,7 +798,6 @@
 
 <h1 id="standard">Standard</h1>
 <h2 id="install-easydiffraction-python-library">Install EasyDiffraction python library</h2>
-<p>Currently <strong>EasyDiffraction</strong> is in beta and has not been released on pypi. Please use the alternative method given below to install easydiffraction from our GitHub repository.</p>
 <ul>
 <li>Create and go to, e.g., easydiffraction directory (<em>optional</em>)
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>mkdir<span class="w"> </span>easydiffraction<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>easydiffraction
@@ -810,19 +809,21 @@
 <li>Upgrade <abbr title="Package installer for Python.">PIP</abbr> (<em>optional</em>)
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 </code></pre></div></li>
-<li>Install easydiffraction with <code>charts</code> extras for visualization
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;easydiffraction[charts] @ git+https://github.com/easyscience/easydiffractionlib.git@new_job_dev2&#39;</span>
+<li>Install easydiffraction
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>easydiffraction
 </code></pre></div></li>
 </ul>
 <h2 id="install-jupyter-notebook-to-run-examples">Install Jupyter Notebook to run examples</h2>
 <h3 id="locally">Locally</h3>
 <ul>
-<li>Install <strong>EasyDiffraction</strong> as described above, including <code>charts</code> extras for visualization</li>
+<li>Install easydiffraction with <code>charts</code> extras for visualization
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;easydiffraction[charts]&#39;</span>
+</code></pre></div></li>
 <li>Install Jupyter Notebook
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>notebook
 </code></pre></div></li>
-<li>Download <strong>EasyDiffraction</strong> examples from GitHub, e.g., using svn (<em>if not done already</em>)
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>svn<span class="w"> </span><span class="nb">export</span><span class="w"> </span>https://github.com/easyscience/easydiffractionlib/branches/new_job_dev2/examples
+<li>Download <strong>EasyDiffraction</strong> examples from GitHub, e.g., using curl (<em>if not done already</em>)
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>curl<span class="w"> </span>https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/develop<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>-xz<span class="w"> </span>--strip<span class="o">=</span><span class="m">1</span><span class="w"> </span>EasyDiffractionLib-develop/examples
 </code></pre></div></li>
 <li>Run Jupyter Notebook server
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>jupyter<span class="w"> </span>notebook<span class="w"> </span>examples/
