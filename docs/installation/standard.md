@@ -2,8 +2,6 @@
 
 ## Install EasyDiffraction python library
 
-Currently **EasyDiffraction** is in beta and has not been released on pypi. Please use the alternative method given below to install easydiffraction from our GitHub repository.
-
 * Create and go to, e.g., easydiffraction directory (_optional_)
 ```console
 $ mkdir easydiffraction && cd easydiffraction
@@ -17,23 +15,26 @@ $ source .venv/bin/activate
 ```console
 $ pip install --upgrade pip
 ```  
-* Install easydiffraction with `charts` extras for visualization
+* Install easydiffraction
 ```console
-$ pip install 'easydiffraction[charts] @ git+https://github.com/easyscience/easydiffractionlib.git@new_job_dev2'
+$ pip install easydiffraction
 ```  
 
 ## Install Jupyter Notebook to run examples
 
 ### Locally
 
-* Install **EasyDiffraction** as described above, including `charts` extras for visualization
+* Install easydiffraction with `charts` extras for visualization
+```console
+$ pip install 'easydiffraction[charts]'
+```  
 * Install Jupyter Notebook
 ```console
 $ pip install notebook
 ```
-* Download **EasyDiffraction** examples from GitHub, e.g., using svn (_if not done already_)
+* Download **EasyDiffraction** examples from GitHub, e.g., using curl (_if not done already_)
 ```console
-$ svn export https://github.com/easyscience/easydiffractionlib/branches/new_job_dev2/examples
+$ curl https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/develop | tar -xz --strip=1 EasyDiffractionLib-develop/examples
 ```
 * Run Jupyter Notebook server
 ```console
