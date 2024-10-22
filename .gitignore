@@ -1,8 +1,11 @@
 # macOS
 .DS_Store
 
+# MkDocs
+site/
+
 # misc
-.venv
+.venv/
 public/
 jupyter_execute
 .ipynb_checkpoints
