@@ -895,39 +895,40 @@
 
 
 <h1 id="standard">Standard</h1>
+<p>Currently, easydiffraction is in beta and has not been released on <abbr title="The Python Package Index is a repository of software for the Python programming language.">PyPI</abbr>. Please use the alternative method given below to install easydiffraction from our GitHub repository.</p>
 <h2 id="install-easydiffraction-python-library">Install EasyDiffraction python library</h2>
 <ul>
 <li>Create and go to, e.g., easydiffraction directory (<em>optional</em>)
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>mkdir<span class="w"> </span>easydiffraction<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>easydiffraction
+  <div class="highlight"><pre><span></span><code><span class="go">mkdir easydiffraction &amp;&amp; cd easydiffraction</span>
 </code></pre></div></li>
 <li>Create Python environment and activate it (<em>optional</em>)
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>python3.11<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
-<span class="gp">$ </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+  <div class="highlight"><pre><span></span><code><span class="go">python3 -m venv .venv</span>
+<span class="go">source .venv/bin/activate</span>
 </code></pre></div></li>
 <li>Upgrade <abbr title="Package installer for Python.">PIP</abbr> (<em>optional</em>)
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+  <div class="highlight"><pre><span></span><code><span class="go">pip install --upgrade pip</span>
 </code></pre></div></li>
 <li>Install easydiffraction
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>easydiffraction
+  <div class="highlight"><pre><span></span><code><span class="go">pip install easydiffraction --extra-index-url https://easyscience.github.io/pypi</span>
 </code></pre></div></li>
 </ul>
 <h2 id="install-jupyter-notebook-to-run-examples">Install Jupyter Notebook to run examples</h2>
 <h3 id="locally">Locally</h3>
 <ul>
 <li>Install easydiffraction with <code>charts</code> extras for visualization
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;easydiffraction[charts]&#39;</span>
+  <div class="highlight"><pre><span></span><code><span class="go">pip install &#39;easydiffraction[charts]&#39; --extra-index-url https://easyscience.github.io/pypi</span>
 </code></pre></div></li>
 <li>Install Jupyter Notebook
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>notebook
+  <div class="highlight"><pre><span></span><code><span class="go">pip install notebook</span>
 </code></pre></div></li>
 <li>Download <strong>EasyDiffraction</strong> examples from GitHub, e.g., using curl (<em>if not done already</em>)
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>curl<span class="w"> </span>https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/develop<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>-xz<span class="w"> </span>--strip<span class="o">=</span><span class="m">1</span><span class="w"> </span>EasyDiffractionLib-develop/examples
+  <div class="highlight"><pre><span></span><code><span class="go">curl https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/develop | tar -xz --strip=1 EasyDiffractionLib-develop/examples</span>
 </code></pre></div></li>
 <li>Run Jupyter Notebook server
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>jupyter<span class="w"> </span>notebook<span class="w"> </span>examples/
+  <div class="highlight"><pre><span></span><code><span class="go">jupyter notebook examples/</span>
 </code></pre></div></li>
 <li>Open your web browser and go to
-<div class="highlight"><pre><span></span><code><span class="go">http://localhost:8888/</span>
+  <div class="highlight"><pre><span></span><code><span class="go">http://localhost:8888/</span>
 </code></pre></div></li>
 <li>Select one of the *.ipynb files</li>
 </ul>
