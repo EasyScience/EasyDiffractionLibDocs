@@ -12,6 +12,8 @@ This category defines various background functions that could be used when calcu
 
 List of X-coordinates used to create many straight-line segments representing the background in a calculated diffractogram.
 
+Supported values: `2theta` and `time-of-flight`
+
 ## [\_pd_background.line_segment_intensity](https://www.iucr.org/resources/cif/dictionaries/browse/cif_pd)
 
 List of intensities used to create many straight-line segments representing the background in a calculated diffractogram.
