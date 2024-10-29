@@ -111,7 +111,9 @@ nav:
     - Extra:
       - Change minimizer: how-to-use/extra/Change_minimizer.ipynb
   - Project:
-    - Structure: project/structure.md
     - Dictionaries: project/dictionaries.md
+    - Structure: project/structure.md
+  - Experiment:
+    - Types: experiment/types.md
   - Misc:
     - Abbreviations: misc/abbreviations.md

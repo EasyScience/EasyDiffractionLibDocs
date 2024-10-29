@@ -14,7 +14,14 @@ This page contains the most common abbreviation labels used in EasyDiffraction d
 
 ## Experiment type labels
 
-* [pd-neut-cw][0]{:.label-experiment} Constant wavelength powder neutron diffraction.
+### Neutron diffraction
+
+* [pd-neut-cwl][0]{:.label-experiment} Powder neutron diffraction with constant wavelength.
+* [pd-neut-tof][0]{:.label-experiment} Powder neutron diffraction with time-of-flight.
+* [sc-neut-cwl][0]{:.label-experiment} Single crystal neutron diffraction with constant wavelength.
+
+### X-ray diffraction
+
 * [pd-xray][0]{:.label-experiment} Powder X-ray diffraction.
 
 <!-- Abbreviations -->

@@ -34,3 +34,40 @@ Peak profile asymmetry parameters as implemented in [CrysPy](https://cryspy.fr).
 * \_pd_instr.reflex_asymmetry_p2
 * \_pd_instr.reflex_asymmetry_p3
 * \_pd_instr.reflex_asymmetry_p4
+
+## [\_pd_instr.2theta_bank](#)
+
+Time-of-flight parameters as implemented in [CrysPy](https://cryspy.fr).
+
+## [\_pd_instr.dtt](#)
+
+Time-of-flight parameters as implemented in [CrysPy](https://cryspy.fr).
+
+* \_pd_instr.dtt1
+* \_pd_instr.dtt2
+
+## [\_pd_instr.zero](#)
+
+Time-of-flight parameters as implemented in [CrysPy](https://cryspy.fr).
+
+## [\_pd_instr.alpha](#)
+
+Time-of-flight parameters as implemented in [CrysPy](https://cryspy.fr).
+
+* \_pd_instr.alpha0
+* \_pd_instr.alpha1
+
+## [\_pd_instr.beta](#)
+
+Time-of-flight parameters as implemented in [CrysPy](https://cryspy.fr).
+
+* \_pd_instr.beta0
+* \_pd_instr.beta1
+
+## [\_pd_instr.sigma](#)
+
+Time-of-flight parameters as implemented in [CrysPy](https://cryspy.fr).
+
+* \_pd_instr.sigma0
+* \_pd_instr.sigma1
+* \_pd_instr.sigma2
