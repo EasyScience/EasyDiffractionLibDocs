@@ -12,9 +12,13 @@ This section contains the measured diffractogram, similar to this [IUCr section]
 
 2θ diffraction angle (in degrees) for intensity points measured in a scanning method.
 
+## [\_pd_meas.time-of-flight](https://raw.githubusercontent.com/COMCIFS/Powder_Dictionary/master/cif_pow.dic)
+
+Measured time (in microseconds) for time-of-flight neutron measurements.
+
 ## [\_pd_meas.intensity_total](https://raw.githubusercontent.com/COMCIFS/Powder_Dictionary/master/cif_pow.dic)
 
-Intensity recorded at each measurement point as a function of angle. 
+Intensity recorded at each measurement point as a function of angle.
 
 ## [\_pd_meas.intensity_total_su](https://raw.githubusercontent.com/COMCIFS/Powder_Dictionary/master/cif_pow.dic)
 
