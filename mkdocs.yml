@@ -89,6 +89,7 @@ plugins:
       include: ["*.ipynb"] # Default: ["*.py", "*.ipynb"]
       #ignore: ["some-irrelevant-files/*.ipynb"]
       execute: true
+      allow_errors: false
       include_source: true
       include_requirejs: true # Required for Plotly
       ignore_h1_titles: true # Use titles difined in the nav section below
