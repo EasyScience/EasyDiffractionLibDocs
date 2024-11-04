@@ -29,8 +29,8 @@ jobs:
       - name: Upgrade PIP
         run: python -m pip install --upgrade pip
 
-      - name: Install MkDocs dependences
-        run: python -m pip install mkdocs-material mkdocs-jupyter
+      - name: Install Python dependences
+        run: python -m pip install mkdocs-material mkdocs-jupyter pooch
 
       - name: Download Jupyter notebooks from EasyDiffractionLib
         run: |
