@@ -1,26 +1,16 @@
 # Standard
 
-Currently, easydiffraction is in beta and has not been released on PyPI. Please use the alternative method given below to install easydiffraction from our GitHub repository.
-
 ## Install EasyDiffraction python library
 
-* Create and go to, e.g., easydiffraction directory (_optional_)
-  ```console
-  mkdir easydiffraction && cd easydiffraction
-  ```
-* Create Python environment and activate it (_optional_)
-  ```console
-  python3 -m venv .venv
-  source .venv/bin/activate
-  ```  
-* Upgrade PIP (_optional_)
-  ```console
-  pip install --upgrade pip
-  ```  
-* Install easydiffraction
-  ```console
-  pip install easydiffraction --extra-index-url https://easyscience.github.io/pypi
-  ```  
+The latest release of EasyDiffraction can be installed with PIP from PyPI:
+```
+pip install easydiffraction
+```
+
+Installing an unreleased version is not recommended and should only be done for testing purposes. Here is an example of how to install EasyDiffraction directly from a GitHub repository, e.g. from the develop branch:
+```
+pip install git+https://github.com/EasyScience/EasyDiffractionLib@develop
+```
 
 ## Install Jupyter Notebook to run examples
 
@@ -28,13 +18,13 @@ Currently, easydiffraction is in beta and has not been released on PyPI. Please 
 
 * Install easydiffraction with `charts` extras for visualization
   ```console
-  pip install 'easydiffraction[charts]' --extra-index-url https://easyscience.github.io/pypi
-  ```  
+  pip install 'easydiffraction[charts]'
+  ```
 * Install Jupyter Notebook
   ```console
   pip install notebook
   ```
-* Download **EasyDiffraction** examples from GitHub, e.g., using curl (_if not done already_)
+* Download EasyDiffraction examples from GitHub, e.g., using curl (_if not done already_)
   ```console
   curl https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/develop | tar -xz --strip=1 EasyDiffractionLib-develop/examples
   ```
@@ -50,8 +40,8 @@ Currently, easydiffraction is in beta and has not been released on PyPI. Please 
 
 ### Via Google Colab (interactive, requires google account)
 
-* Go to the **EasyDiffraction** library documentation page [https://docs.easydiffraction.org/lib](https://docs.easydiffraction.org/lib)
-* At the very top of each example of the **How to use** section there is an icon ![](https://colab.research.google.com/assets/colab-badge.svg)
+* Go to the EasyDiffraction library documentation page [https://docs.easydiffraction.org/lib](https://docs.easydiffraction.org/lib)
+* Click the ![](https://colab.research.google.com/assets/colab-badge.svg) icon at the very top of each example from the **How to use** section to open that example in Google Colab.
 
 <!-- Abbreviations -->
 
