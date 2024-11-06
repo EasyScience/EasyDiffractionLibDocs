@@ -4,7 +4,7 @@ on: push
 
 jobs:
   build-site:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
 
     steps:
       - name: Cancel previous workflow runs
@@ -20,6 +20,17 @@ jobs:
         shell: bash
         run: |
           echo "BRANCH_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      # Activate dark mode to create documentation with Plotly charts in dark mode
+      # Need a better solution to automatically switch the chart colour theme based on the mkdocs material switcher
+      # Something similar to mkdocs_plotly_plugin https://haoda-li.github.io/mkdocs-plotly-plugin/,
+      # but for generating documentation from notepads
+      - name: Activate dark mode
+        run: |
+          brew install dark-mode
+          dark-mode status
+          dark-mode on
+          dark-mode status
 
       - name: Set up Python environment
         uses: actions/setup-python@v4
