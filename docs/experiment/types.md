@@ -1,4 +1,4 @@
-[3]: ../../misc/abbreviations
+[3]: ../misc/abbreviations.md
 
 # Experiment types
 
