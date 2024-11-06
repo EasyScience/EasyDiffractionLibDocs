@@ -40,8 +40,7 @@ pip install git+https://github.com/EasyScience/EasyDiffractionLib@develop
 
 ### Via Google Colab (interactive, requires google account)
 
-* Go to the EasyDiffraction library documentation page [https://docs.easydiffraction.org/lib](https://docs.easydiffraction.org/lib)
-* Click the ![](https://colab.research.google.com/assets/colab-badge.svg) icon at the very top of each example from the **How to use** section to open that example in Google Colab.
+* At the very top of each example from the **How to use** section, there is a button to ![](https://colab.research.google.com/assets/colab-badge.svg)
 
 <!-- Abbreviations -->
 
