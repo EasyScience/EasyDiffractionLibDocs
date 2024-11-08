@@ -3,8 +3,11 @@ site_name: EasyDiffraction Library
 site_url: https://docs.easydiffraction.org/lib
 
 # Repository
-repo_url: https://github.com/easyscience/EasyDiffractionLibDocs
+repo_url: https://github.com/EasyScience/EasyDiffractionLibDocs
 edit_uri: edit/develop/docs/
+
+# Google Colab
+colab_url: https://colab.research.google.com/github/EasyScience/EasyDiffractionLib/blob/more-examples/examples/
 
 # Copyright
 copyright: © 2024 EasyDiffraction
@@ -80,13 +83,19 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - toc:
-      toc_depth: 2
+      toc_depth: 3
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
 
 # Plugins
 plugins:
   - search
   - mkdocs-jupyter:
-      include: ["*.ipynb"] # Default: ["*.py", "*.ipynb"]
+      include: ["*.py", "*.ipynb"] # Default: ["*.py", "*.ipynb"]
       #ignore: ["some-irrelevant-files/*.ipynb"]
       execute: true
       allow_errors: false
@@ -95,27 +104,30 @@ plugins:
       ignore_h1_titles: true # Use titles difined in the nav section below
       remove_tag_config:
         remove_input_tags:
-          - colab
+          - hide_in_docs
 
 # Page tree
 not_in_nav: |
-  project/dictionaries
+  dictionaries
 
 nav:
   - Introduction: index.md
-  - Installation:
-      - Standard: installation/standard.md
-  - How to use:
-      - Fitting:
-          - CW LBCO-HRPT: examples/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
-          - TOF Si-SEPD: examples/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
-          - TOF NCAF-WISH: examples/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
-      - Extra:
-          - Change minimizer: examples/Change_minimizer.ipynb
-  - Project:
-      - Dictionaries: project/dictionaries.md
-      - Structure: project/structure.md
+  - Getting started: getting-started.md
+  - Abbreviations: abbreviations.md
+  - Dictionaries: dictionaries.md
+  - Project structure: project-structure.md
   - Experiment:
       - Types: experiment/types.md
-  - Misc:
-      - Abbreviations: misc/abbreviations.md
+      - Non-CIF data: experiment/non-cif-data.md
+  - How to use:
+      - Basics:
+          - Define model: examples/Define-model.ipynb
+          - Define experiment: examples/Define-experiment.ipynb
+      #- Simulation:
+      #    - XRAY NaCl: examples/Simulation_XRAY_NaCl.ipynb
+      - Fitting:
+          - NEUT-CW LBCO-HRPT: examples/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
+          - NEUT-TOF Si-SEPD: examples/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
+          - NEUT-TOF NCAF-WISH: examples/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
+      - Extras:
+          - Change minimizer: examples/Change-minimizer.ipynb

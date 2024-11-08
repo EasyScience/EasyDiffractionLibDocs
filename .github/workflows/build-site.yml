@@ -41,12 +41,14 @@ jobs:
         run: python -m pip install --upgrade pip
 
       - name: Install Python dependences
-        run: pip install mkdocs-material mkdocs-jupyter 'easydiffraction[charts]'
+        run: |
+          pip install mkdocs-material mkdocs-jupyter
+          pip install 'easydiffraction[charts] @ git+https://github.com/EasyScience/EasyDiffractionLib@more-examples'
 
       - name: Download Jupyter notebooks from EasyDiffractionLib
         run: |
           cd docs/
-          curl https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/develop | tar -xz --strip=1 EasyDiffractionLib-develop/examples
+          curl https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/more-examples | tar -xz --strip=1 EasyDiffractionLib-more-examples/examples
 
       - name: Build site
         run: mkdocs build
