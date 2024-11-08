@@ -7,8 +7,9 @@ site/
 # PyCharm
 .idea/
 
-# misc
+# Python virtual environment
 .venv/
-public/
+
+# Jupyter Notebooks
 jupyter_execute
 .ipynb_checkpoints

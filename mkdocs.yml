@@ -6,9 +6,6 @@ site_url: https://docs.easydiffraction.org/lib
 repo_url: https://github.com/EasyScience/EasyDiffractionLibDocs
 edit_uri: edit/develop/docs/
 
-# Google Colab
-colab_url: https://colab.research.google.com/github/EasyScience/EasyDiffractionLib/blob/more-examples/examples/
-
 # Copyright
 copyright: © 2024 EasyDiffraction
 
@@ -17,7 +14,7 @@ theme:
   name: material
   custom_dir: overrides
   features:
-    - content.action.edit
+    #- content.action.edit  # Temporary disable edit button (until decided on where to host the notebooks)
     #- content.action.view
     - content.code.annotate
     - content.code.copy # Auto generated button to copy a code block's content
@@ -64,6 +61,7 @@ extra:
       link: https://github.com/easyscience/EasyDiffractionLib
     - icon: easyscience
       link: https://easyscience.software
+  ci_branch: !ENV [CI_BRANCH, master]
 
 # Customization
 extra_css:

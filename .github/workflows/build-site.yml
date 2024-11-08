@@ -2,6 +2,9 @@ name: Build static site
 
 on: push
 
+env:
+ CI_BRANCH: more-examples  # ${{ github.head_ref || github.ref_name }}
+
 jobs:
   build-site:
     runs-on: macos-14
@@ -49,6 +52,9 @@ jobs:
         run: |
           cd docs/
           curl https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/more-examples | tar -xz --strip=1 EasyDiffractionLib-more-examples/examples
+
+      - name: Import easydiffraction  # to avoid import info from matplotlib during build
+        run: python -c "import easydiffraction"
 
       - name: Build site
         run: mkdocs build
