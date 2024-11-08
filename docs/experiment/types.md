@@ -1,6 +1,8 @@
-[3]: ../misc/abbreviations.md
+[3]: ../abbreviations.md
 
 # Experiment types
+
+The following examples show the data blocks for different types of diffraction experiments.
 
 ### [pd-neut-cwl][3]{:.label-experiment}
 

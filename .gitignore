@@ -4,6 +4,9 @@
 # MkDocs
 site/
 
+# PyCharm
+.idea/
+
 # misc
 .venv/
 public/
