@@ -1,4 +1,4 @@
-name: Build static site
+name: Build and deploy static site
 
 # Trigger the workflow on push events
 on: push
@@ -62,7 +62,7 @@ jobs:
 
       # The following step is needed to avoid the following message during the build:
       # "Matplotlib is building the font cache; this may take a moment"
-      - name: Initial import of easydiffraction
+      - name: Pre-build site step
         run: python -c "import easydiffraction"
 
       # Build the static files
@@ -75,7 +75,73 @@ jobs:
         uses: actions/configure-pages@v5
 
       # Upload the static files from the site/ directory to be used in the next job
-      - name: Upload static files as artifact
+      # This artifact is named github-pages and is a single gzip archive containing a single tar file
+      # The artifact is then used in the next job by actions/deploy-pages to deploy the static files to GitHub Pages
+      # Unfortunately, the artifact is not available for download, so extra steps below are needed to do similar things
+      - name: Upload built site as artifact (for github-pages)
         uses: actions/upload-pages-artifact@v3
         with:
           path: site/
+
+      # Upload the static files from the site/ directory to be used in the next job
+      # This extra step is needed to allow the download of the artifact in the next job
+      # for pushing its content to the branch named 'easydiffraction.org'
+      - name: Upload built site as artifact (for easydiffraction.org)
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact # name of the artifact (without the extension zip)
+          path: site/
+          if-no-files-found: "error"
+          compression-level: 0
+
+  # Job 2: Deploy the static files
+  # To allow the deployment of the static files to GitHub Pages
+  # No restrictions on the branch name is set on https://github.com/EasyScience/EasyDiffractionLibDocs/settings/environments
+  deploy-docs:
+    needs: build-docs  # previous job 'build-docs' need to be finished first
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      contents: read
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment, originates from an appropriate source
+
+    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages # Artifact name
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download built site as artifact from previous job
+        uses: actions/download-artifact@v4
+        with:  # name or path are taken from the upload step of the previous job
+          name: artifact
+          path: site/ # directory to extract downloaded zipped artifacts
+
+      # Deploy the static files created in the previous job to GitHub Pages
+      # All branches are deployed to GitHub Pages and available at
+      # https://easyscience.github.io/EasyDiffractionLibDocs
+      # This is needed for debugging purposes
+      - name: Deploy to easyscience.github.io/EasyDiffractionLibDocs (all branches)
+        uses: actions/deploy-pages@v4
+
+      # Push the site files created in the previous job to the 'easydiffraction.org' branch
+      # This branch is used to deploy the site to the custom domain https://easydiffraction.org
+      # Deploying is done with a webhook: https://github.com/EasyScience/EasyDiffractionLibDocs/settings/hooks
+      # This is done for the 'master' branch only, when the site is tested with a step above
+      - name: Deploy to easydiffraction.org (master branch only)
+        if: ${{ env.CI_BRANCH == 'master' }}
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+          REPO: self
+          BRANCH: easydiffraction.org
+          FOLDER: site
