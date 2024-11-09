@@ -78,6 +78,8 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.highlight # whether highlighting should be carried out during build time by Pygments
   - pymdownx.superfences # whether highlighting should be carried out during build time by Pygments
+  - pymdownx.tabbed: # enables content tabs
+      alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
   - toc:
@@ -118,7 +120,7 @@ nav:
       - Types: experiment/types.md
       - Non-CIF data: experiment/non-cif-data.md
   - How to use:
-      - Basics:
+      - Basic:
           - Define model: examples/Define-model.ipynb
           - Define experiment: examples/Define-experiment.ipynb
       #- Simulation:
@@ -127,5 +129,5 @@ nav:
           - NEUT-CW LBCO-HRPT: examples/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
           - NEUT-TOF Si-SEPD: examples/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
           - NEUT-TOF NCAF-WISH: examples/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
-      - Extras:
+      - Extra:
           - Change minimizer: examples/Change-minimizer.ipynb
