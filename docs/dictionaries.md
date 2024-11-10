@@ -1,7 +1,7 @@
 [0]: #
 [1]: https://www.iucr.org/resources/cif/dictionaries/browse/cif_core
 [2]: https://www.iucr.org/resources/cif/dictionaries/browse/cif_pd
-[3]: abbreviations.md
+[3]: glossary.md
 
 # Dictionaries
 

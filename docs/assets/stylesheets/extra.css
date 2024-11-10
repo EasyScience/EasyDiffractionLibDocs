@@ -93,15 +93,20 @@
 /* Labels */
 
 .label-cif {
-  vertical-align: 10%;
-  padding-top: 3px;
-  padding-bottom: 4px;
-  padding-left: 8px;
-  padding-right: 8px;
-  font-size: 11px;
-  border-radius: 11px;
+  _vertical-align: 10%;
+  _padding-top: 3px;
+  _padding-bottom: 4px;
+  _padding-left: 8px;
+  _padding-right: 8px;
+  _font-size: 11px;
+  _border-radius: 11px;
+  padding-top: 0.5ex;
+  padding-bottom: 0.5ex;
+  padding-left: 0.9ex;
+  padding-right: 0.9ex;
+  border-radius: 1ex;
   color: var(--md-default-fg-color) !important;
-  background-color: var(--md-code-bg-color);
+  background-color: rgba(55, 189, 249, 0.1);
 }
 
 .label-cif:hover {
@@ -109,15 +114,19 @@
 }
 
 .label-experiment {
-  vertical-align: 10%;
-  padding-top: 3px;
-  padding-bottom: 4px;
-  padding-left: 8px;
-  padding-right: 8px;
-  font-size: 11px;
-  border-radius: 11px;
+  _vertical-align: 10%;
+  _padding-top: 3px;
+  _padding-bottom: 4px;
+  _padding-left: 8px;
+  _padding-right: 8px;
+  _font-size: 11px;
+  _border-radius: 11px;
+  padding-top: 0.5ex;
+  padding-bottom: 0.5ex;
+  padding-left: 0.9ex;
+  padding-right: 0.9ex;
   color: var(--md-default-fg-color) !important;
-  background-color: rgba(55, 189, 249, 0.1);
+  background-color: var(--md-code-bg-color);
 }
 
 .label-experiment:hover {

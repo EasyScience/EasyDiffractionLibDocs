@@ -4,7 +4,7 @@
 
 The EasyDiffraction library is developed in the Python programming language and thus requires Python to be installed on your system. The library is compatible with Python versions from 3.9 to 3.12.
 
-## Environment <small>optional</small> { #environment }
+## Environment setup <small>optional</small> { #environment-setup data-toc-label="Environment setup" }
 
 We recommend using a [virtual environment], which is an isolated Python runtime.
 If you are in a virtual environment, any packages that you install or upgrade
@@ -120,10 +120,3 @@ Google Colab is a free cloud service that allows you to run Jupyter Notebooks in
 To run the examples in Google Colab, you need to have a Google account.
 
 In the top right corner of each example, under the **How to use** section, you will find a button to open that example in Google Colab :google-colab:
-
-<!-- Abbreviations -->
-
-*[PyPI]: The Python Package Index is a repository of software for the Python programming language.
-*[pip]: Package installer for Python.
-*[GitHub]: A web-based platform for version control and collaboration.
-*[Jupyter Notebook]: An open-source web application that allows you to create and share documents that contain live code, equations, visualizations, and narrative text.

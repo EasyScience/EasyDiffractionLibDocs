@@ -9,7 +9,7 @@ edit_uri: edit/develop/docs/
 # Copyright
 copyright: © 2024 EasyDiffraction
 
-# Configuration
+# Sets the theme and theme specific configuration of your documentation site
 theme:
   name: material
   custom_dir: overrides
@@ -51,7 +51,7 @@ theme:
     edit: material/file-edit-outline
   favicon: assets/favicon.ico
 
-# Additional configuration
+# A set of key-value pairs, where the values can be any valid YAML construct, that will be passed to the template
 extra:
   generator: false # Disable `Made with Material for MkDocs` (bottom left)
   social: # Icons (bottom right)
@@ -63,13 +63,13 @@ extra:
       link: https://easyscience.software
   ci_branch: !ENV [CI_BRANCH, master]
 
-# Customization
+# Customization to be included by the theme
 extra_css:
   - assets/stylesheets/extra.css
 extra_javascript:
   - assets/javascripts/extra.js
 
-# Extensions
+# A list of extensions beyond the ones that MkDocs uses by default (meta, toc, tables, and fenced_code)
 markdown_extensions:
   - abbr
   - attr_list
@@ -82,6 +82,9 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
   - toc:
       toc_depth: 3
   - pymdownx.emoji:
@@ -91,29 +94,33 @@ markdown_extensions:
         custom_icons:
           - overrides/.icons
 
-# Plugins
+# A list of plugins (with optional configuration settings) to use when building the site
 plugins:
   - search
   - mkdocs-jupyter:
       include: ["*.py", "*.ipynb"] # Default: ["*.py", "*.ipynb"]
-      #ignore: ["some-irrelevant-files/*.ipynb"]
+      #ignore: ["*.ipynb"]
       execute: true
       allow_errors: false
       include_source: true
       include_requirejs: true # Required for Plotly
-      ignore_h1_titles: true # Use titles difined in the nav section below
+      ignore_h1_titles: true # Use titles defined in the nav section below
       remove_tag_config:
         remove_input_tags:
           - hide_in_docs
 
-# Page tree
+# Determines additional directories to watch when running mkdocs serve
+watch:
+  - includes
+  - overrides
+
+# Format and layout of the global navigation for the site
 not_in_nav: |
   dictionaries
-
 nav:
   - Introduction: index.md
   - Getting started: getting-started.md
-  - Abbreviations: abbreviations.md
+  - Glossary: glossary.md
   - Dictionaries: dictionaries.md
   - Project structure: project-structure.md
   - Experiment:
@@ -124,10 +131,10 @@ nav:
           - Define model: examples/Define-model.ipynb
           - Define experiment: examples/Define-experiment.ipynb
       - Simulation:
-          - XRAY NaCl: examples/Simulation_XRAY_NaCl.ipynb
+          - pd-xray NaCl: examples/Simulation_XRAY_NaCl.ipynb
       - Fitting:
-          - NEUT-CW LBCO-HRPT: examples/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
-          - NEUT-TOF Si-SEPD: examples/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
-          - NEUT-TOF NCAF-WISH: examples/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
+          - pd-neut-cw LBCO-HRPT: examples/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
+          - pd-neut-tof Si-SEPD: examples/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
+          - pd-neut-tof NCAF-WISH: examples/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
       - Extra:
           - Change minimizer: examples/Change-minimizer.ipynb
