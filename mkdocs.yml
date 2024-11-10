@@ -133,7 +133,7 @@ nav:
       - Simulation:
           - pd-xray NaCl: examples/Simulation_XRAY_NaCl.ipynb
       - Fitting:
-          - pd-neut-cw LBCO-HRPT: examples/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
+          - pd-neut-cwl LBCO-HRPT: examples/Fitting_PD-NEUT-CWL_LBCO-HRPT.ipynb
           - pd-neut-tof Si-SEPD: examples/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
           - pd-neut-tof NCAF-WISH: examples/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
       - Extra:
