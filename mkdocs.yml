@@ -123,8 +123,8 @@ nav:
       - Basic:
           - Define model: examples/Define-model.ipynb
           - Define experiment: examples/Define-experiment.ipynb
-      #- Simulation:
-      #    - XRAY NaCl: examples/Simulation_XRAY_NaCl.ipynb
+      - Simulation:
+          - XRAY NaCl: examples/Simulation_XRAY_NaCl.ipynb
       - Fitting:
           - NEUT-CW LBCO-HRPT: examples/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
           - NEUT-TOF Si-SEPD: examples/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb

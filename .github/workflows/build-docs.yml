@@ -86,7 +86,8 @@ jobs:
       # Upload the static files from the site/ directory to be used in the next job
       # This extra step is needed to allow the download of the artifact in the next job
       # for pushing its content to the branch named 'easydiffraction.org'
-      - name: Upload built site as artifact (for easydiffraction.org)
+      - name: Upload built site as artifact (for easydiffraction.org, master branch)
+        if: ${{ env.CI_BRANCH == 'master' }}
         uses: actions/upload-artifact@v4
         with:
           name: artifact # name of the artifact (without the extension zip)
@@ -120,12 +121,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download built site as artifact from previous job
-        uses: actions/download-artifact@v4
-        with:  # name or path are taken from the upload step of the previous job
-          name: artifact
-          path: site/ # directory to extract downloaded zipped artifacts
-
       # Deploy the static files created in the previous job to GitHub Pages
       # All branches are deployed to GitHub Pages and available at
       # https://easyscience.github.io/EasyDiffractionLibDocs
@@ -133,11 +128,18 @@ jobs:
       - name: Deploy to easyscience.github.io/EasyDiffractionLibDocs (all branches)
         uses: actions/deploy-pages@v4
 
+      - name: Download built site as artifact from previous job (for easydiffraction.org, master branch)
+        if: ${{ env.CI_BRANCH == 'master' }}
+        uses: actions/download-artifact@v4
+        with:  # name or path are taken from the upload step of the previous job
+          name: artifact
+          path: site/ # directory to extract downloaded zipped artifacts
+
       # Push the site files created in the previous job to the 'easydiffraction.org' branch
       # This branch is used to deploy the site to the custom domain https://easydiffraction.org
       # Deploying is done with a webhook: https://github.com/EasyScience/EasyDiffractionLibDocs/settings/hooks
       # This is done for the 'master' branch only, when the site is tested with a step above
-      - name: Deploy to easydiffraction.org (master branch only)
+      - name: Deploy to easydiffraction.org (master branch)
         if: ${{ env.CI_BRANCH == 'master' }}
         uses: s0/git-publish-subdir-action@develop
         env:
