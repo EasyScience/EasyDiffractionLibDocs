@@ -106,7 +106,7 @@
   padding-right: 0.9ex;
   border-radius: 1ex;
   color: var(--md-default-fg-color) !important;
-  background-color: rgba(55, 189, 249, 0.1);
+  background-color: var(--md-code-bg-color);
 }
 
 .label-cif:hover {
@@ -121,21 +121,24 @@
   _padding-right: 8px;
   _font-size: 11px;
   _border-radius: 11px;
-  padding-top: 0.5ex;
-  padding-bottom: 0.5ex;
+  padding-top: 0.25ex;
+  padding-bottom: 0.6ex;
   padding-left: 0.9ex;
   padding-right: 0.9ex;
+  border-radius: 1ex;
   color: var(--md-default-fg-color) !important;
-  background-color: var(--md-code-bg-color);
+  background-color: rgba(55, 189, 249, 0.1);
 }
 
 .label-experiment:hover {
   color: white !important;
 }
 
+/* Customize default styles of MkDocs Material */
+
 /* Hide navigation title */
 label.md-nav__title[for="__drawer"] {
-  height: 0px;
+  height: 0;
 }
 
 /* Hide header title */
@@ -157,4 +160,33 @@ label.md-nav__title[for="__drawer"] {
 .md-nav--secondary {
   margin-left: -10px;
   margin-right: -4px;
+}
+
+/* Needed for mkdocs-jupyter to show download and other buttons on top of the notebook */
+.md-content__button {
+    position: relative !important;
+}
+
+/* Customize default style of mkdocs-jupyter plugin */
+
+/* Set the width of the notebook to fill 100% and not reduce by the width of .md-content__button's
+Adjust the margins and paddings to fit the defaults in MkDocs Material and do not crop the label in the header
+*/
+
+.jupyter-wrapper {
+    width: 100% !important;
+    display: flex !important;
+}
+
+.jp-Notebook {
+    padding: 0 !important;
+    margin-top: -2.9em !important;
+}
+
+.jp-Cell {
+    padding: 0 !important;
+}
+
+.jp-RenderedHTMLCommon h1 {
+    padding-top: 0.15em !important;
 }
