@@ -6,10 +6,7 @@ The EasyDiffraction library is developed in the Python programming language and 
 
 ## Environment setup <small>optional</small> { #environment-setup data-toc-label="Environment setup" }
 
-We recommend using a virtual environment, which is an isolated Python runtime.
-If you are in a virtual environment, any packages that you install or upgrade
-will be local to the environment. If you run into problems, you can
-just delete and recreate the environment. It's trivial to set up:
+We recommend using a virtual environment, which is an isolated Python runtime. If you are in a virtual environment, any packages you install or update will be local to that environment. If you run into problems, you can simply delete and recreate the environment. It is straightforward to set up:
 
 * Create a new virtual environment with:
 ```console
@@ -89,19 +86,19 @@ We have a collection of Jupyter Notebook examples that demonstrate how to use Ea
 
 You can also run these Jupyter Notebook examples yourself either locally or in Google Colab. 
 
-The examples can be downloaded as Jupyter Notebooks either one by one from the [How to use](how-to-use/index.md#how-to-use) section or as a zip archive from the [EasyDiffraction releases](https://github.com/EasyScience/EasyDiffractionLib/releases).
+These Jupyter Notebook examples can be downloaded either one by one from the [How to use](how-to-use/index.md#how-to-use) section or all together as a zip archive from the [EasyDiffraction releases](https://github.com/EasyScience/EasyDiffractionLib/releases/latest).
 
 ### Run locally
 
-To run the examples locally, you need to install Jupyter Notebook or JupyterLab. For example, to open examples in Jupyter Notebook, follow these steps:
+To run the examples locally, you need to install Jupyter Notebook or JupyterLab. Here are the steps to take in the case of Jupyter Notebook:
 
 * Install Jupyter Notebook:
   ```console
   pip install notebook
   ```
-* Download EasyDiffraction examples from GitHub, e.g., using `curl`:
+* Download EasyDiffraction examples from GitHub for the latest release, e.g., using curl:
   ```console
-  curl --location --remote-name https://github.com/EasyScience/EasyDiffractionLib/releases/download/v0.1.4/examples.zip
+  curl --location --remote-name https://github.com/EasyScience/EasyDiffractionLib/releases/latest/download/examples.zip
   ```
 * Unzip the downloaded archive:
   ```console
@@ -117,10 +114,12 @@ To run the examples locally, you need to install Jupyter Notebook or JupyterLab.
   ```
 * Select one of the `*.ipynb` files.
 
-### Via Google Colab <small>google account required</small> { #via-google-colab data-toc-label="Via Google Colab" }
+### Via Google Colab
+
+!!! note
+
+    To run the examples in Google Colab, you need to have a Google account.
 
 Google Colab is a free cloud service that allows you to run Jupyter Notebooks in the cloud. So, you can run the examples without installing anything on your local machine.
-
-To run the examples in Google Colab, you need to have a Google account.
 
 In the top right corner of each example, under the [How to use](how-to-use/index.md#how-to-use) section, you will find a button to open that example in Google Colab :google-colab:

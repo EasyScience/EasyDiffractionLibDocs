@@ -72,27 +72,28 @@ extra_javascript:
 # A list of extensions beyond the ones that MkDocs uses by default (meta, toc, tables, and fenced_code)
 markdown_extensions:
   - abbr
+  - admonition
   - attr_list
   - def_list
   - footnotes
-  - pymdownx.snippets
-  - pymdownx.highlight # whether highlighting should be carried out during build time by Pygments
-  - pymdownx.superfences # whether highlighting should be carried out during build time by Pygments
-  - pymdownx.tabbed: # enables content tabs
-      alternate_style: true
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.snippets:
-      auto_append:
-        - includes/abbreviations.md
-  - toc:
-      toc_depth: 3
+  - pymdownx.details
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
       options:
         custom_icons:
           - overrides/.icons
+  - pymdownx.highlight # whether highlighting should be carried out during build time by Pygments
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.superfences # whether highlighting should be carried out during build time by Pygments
+  - pymdownx.tabbed: # enables content tabs
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      toc_depth: 3
 
 # A list of plugins (with optional configuration settings) to use when building the site
 plugins:

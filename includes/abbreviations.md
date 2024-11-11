@@ -1,4 +1,5 @@
 *[CIF]: Crystallographic Information File.
+*[curl]: Command-line tool for transferring data with URLs.
 *[GitHub]: A web-based platform for version control and collaboration.
 *[Google Colab]: Cloud service that allows you to run Jupyter Notebooks in the cloud.
 *[IUCr]: International Union of Crystallography.
