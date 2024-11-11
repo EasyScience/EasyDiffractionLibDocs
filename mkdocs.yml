@@ -100,11 +100,14 @@ plugins:
   - search
   - mkdocs-jupyter:
       include: ['*.py', '*.ipynb'] # Default: ['*.py', '*.ipynb']
-      ignore: ['*emcee*.ipynb']
+      #ignore: ['*emcee*.ipynb']
       execute: true
+      execute_ignore:
+        - '*emcee*.ipynb'
       allow_errors: false
       include_source: true
       include_requirejs: true # Required for Plotly
+      custom_mathjax_url: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML-full,Safe'
       ignore_h1_titles: true # Use titles defined in the nav section below
       remove_tag_config:
         remove_input_tags:
