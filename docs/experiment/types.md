@@ -1,4 +1,4 @@
-[3]: ../abbreviations.md
+[3]: ../glossary.md
 
 # Experiment types
 
