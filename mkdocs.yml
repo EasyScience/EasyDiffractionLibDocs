@@ -132,10 +132,10 @@ nav:
           - Define model: examples/Define-model.ipynb
           - Define experiment: examples/Define-experiment.ipynb
       - Simulation:
-          - pd-xray NaCl: examples/Simulation_XRAY_NaCl.ipynb
+          - pd-neut-cwl NaCl: examples/Simulation_pd-neut-cwl_NaCl.ipynb
       - Fitting:
-          - pd-neut-cwl LBCO-HRPT: examples/Fitting_PD-NEUT-CWL_LBCO-HRPT.ipynb
-          - pd-neut-tof Si-SEPD: examples/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
-          - pd-neut-tof NCAF-WISH: examples/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
+          - pd-neut-cwl LBCO-HRPT: examples/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
+          - pd-neut-tof Si-SEPD: examples/Fitting_pd-neut-cwl_Si-SEPD.ipynb
+          - pd-neut-tof NCAF-WISH: examples/Fitting_pd-neut-tof_NCAF-WISH.ipynb
       - Extra:
           - Change minimizer: examples/Change-minimizer.ipynb
