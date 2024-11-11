@@ -1,6 +1,8 @@
-*[CIF]: Crystallographic Information File
+*[CIF]: Crystallographic Information File.
 *[GitHub]: A web-based platform for version control and collaboration.
-*[IUCr]: International Union of Crystallography
+*[Google Colab]: Cloud service that allows you to run Jupyter Notebooks in the cloud.
+*[IUCr]: International Union of Crystallography.
 *[Jupyter Notebook]: An open-source web application that allows you to create and share documents that contain live code, equations, visualizations, and narrative text.
+*[JupyterLab]: Web-based interactive development environment for notebooks, code, and data.
 *[pip]: Package installer for Python.
 *[PyPI]: The Python Package Index is a repository of software for the Python programming language.

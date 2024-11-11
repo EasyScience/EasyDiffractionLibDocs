@@ -127,6 +127,7 @@ nav:
       - Types: experiment/types.md
       - Non-CIF data: experiment/non-cif-data.md
   - How to use:
+      - how-to-use/index.md
       - Basic:
           - Define model: examples/Define-model.ipynb
           - Define experiment: examples/Define-experiment.ipynb
