@@ -30,14 +30,14 @@ theme:
     - toc.follow
   palette:
     # Palette toggle for light mode
-    - media: "(prefers-color-scheme: light)"
+    - media: '(prefers-color-scheme: light)'
       scheme: default
       primary: custom
       toggle:
         icon: fontawesome/solid/sun
         name: Switch to dark mode
     # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
+    - media: '(prefers-color-scheme: dark)'
       scheme: slate
       primary: custom
       toggle:
@@ -99,8 +99,8 @@ markdown_extensions:
 plugins:
   - search
   - mkdocs-jupyter:
-      include: ["*.py", "*.ipynb"] # Default: ["*.py", "*.ipynb"]
-      #ignore: ["*.ipynb"]
+      include: ['*.py', '*.ipynb'] # Default: ['*.py', '*.ipynb']
+      ignore: ['*emcee*.ipynb']
       execute: true
       allow_errors: false
       include_source: true
@@ -138,5 +138,7 @@ nav:
           - pd-neut-cwl LBCO-HRPT: examples/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
           - pd-neut-tof Si-SEPD: examples/Fitting_pd-neut-tof_Si-SEPD.ipynb
           - pd-neut-tof NCAF-WISH: examples/Fitting_pd-neut-tof_NCAF-WISH.ipynb
+      - Advanced fitting:
+          - MCMC pd-neut-tof NCAF-WISH: examples/Fitting-emcee_pd-neut-cwl_LBCO-HRPT.ipynb
       - Extra:
           - Change minimizer: examples/Change-minimizer.ipynb
