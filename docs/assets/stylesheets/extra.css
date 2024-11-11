@@ -93,13 +93,6 @@
 /* Labels */
 
 .label-cif {
-  _vertical-align: 10%;
-  _padding-top: 3px;
-  _padding-bottom: 4px;
-  _padding-left: 8px;
-  _padding-right: 8px;
-  _font-size: 11px;
-  _border-radius: 11px;
   padding-top: 0.5ex;
   padding-bottom: 0.5ex;
   padding-left: 0.9ex;
@@ -109,23 +102,36 @@
   background-color: var(--md-code-bg-color);
 }
 
+p .label-cif, li .label-cif {
+  vertical-align: 5%;
+  font-size: 12px;
+}
+
 .label-cif:hover {
   color: white !important;
 }
 
 .label-experiment {
-  _vertical-align: 10%;
-  _padding-top: 3px;
-  _padding-bottom: 4px;
-  _padding-left: 8px;
-  _padding-right: 8px;
-  _font-size: 11px;
-  _border-radius: 11px;
   padding-top: 0.25ex;
   padding-bottom: 0.6ex;
   padding-left: 0.9ex;
   padding-right: 0.9ex;
   border-radius: 1ex;
+  color: var(--md-default-fg-color) !important;
+  background-color: rgba(55, 189, 249, 0.1);
+}
+
+p .label-experiment, li .label-experiment {
+  vertical-align: 5%;
+  font-size: 12px;
+}
+
+h1 .label-experiment {
+  padding-top: 0.05ex;
+  padding-bottom: 0.4ex;
+  padding-left: 0.9ex;
+  padding-right: 0.9ex;
+  border-radius: 0.75ex;
   color: var(--md-default-fg-color) !important;
   background-color: rgba(55, 189, 249, 0.1);
 }
@@ -180,13 +186,5 @@ Adjust the margins and paddings to fit the defaults in MkDocs Material and do no
 
 .jp-Notebook {
     padding: 0 !important;
-    margin-top: -2.9em !important;
-}
-
-.jp-Cell {
-    padding: 0 !important;
-}
-
-.jp-RenderedHTMLCommon h1 {
-    padding-top: 0.15em !important;
+    margin-top: -3em !important;
 }
