@@ -1,6 +1,6 @@
 # Project information
 site_name: EasyDiffraction Library
-site_url: https://docs.easydiffraction.org/lib
+site_url: https://easyscience.github.io/EasyDiffractionLibDocs
 
 # Repository
 repo_url: https://github.com/EasyScience/EasyDiffractionLibDocs
@@ -135,7 +135,7 @@ nav:
           - pd-neut-cwl NaCl: examples/Simulation_pd-neut-cwl_NaCl.ipynb
       - Fitting:
           - pd-neut-cwl LBCO-HRPT: examples/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
-          - pd-neut-tof Si-SEPD: examples/Fitting_pd-neut-cwl_Si-SEPD.ipynb
+          - pd-neut-tof Si-SEPD: examples/Fitting_pd-neut-tof_Si-SEPD.ipynb
           - pd-neut-tof NCAF-WISH: examples/Fitting_pd-neut-tof_NCAF-WISH.ipynb
       - Extra:
           - Change minimizer: examples/Change-minimizer.ipynb
