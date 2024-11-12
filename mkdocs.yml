@@ -103,7 +103,7 @@ markdown_extensions:
 
 # A list of plugins (with optional configuration settings) to use when building the site
 plugins:
-  - search
+  - inline-svg
   - mkdocs-jupyter:
       include: ['*.py', '*.ipynb'] # Default: ['*.py', '*.ipynb']
       #ignore: ['*emcee*.ipynb']
@@ -118,7 +118,7 @@ plugins:
       remove_tag_config:
         remove_input_tags:
           - hide_in_docs
-  - inline-svg
+  - search
 
 # Determines additional directories to watch when running mkdocs serve
 watch:
@@ -137,6 +137,7 @@ nav:
   - Project structure: project-structure.md
   - Model: model.md
   - Experiment: experiment.md
+  - Analysis: analysis.md
   - How to use:
       - how-to-use/index.md
       - Basic:
