@@ -2,11 +2,11 @@
 
 ## Requirements
 
-The EasyDiffraction library is developed in Python so Python must be be installed on your system. The library is compatible with Python versions 3.9 through 3.12.
+The EasyDiffraction library is developed in Python, so Python must be installed on your system. The library is compatible with Python versions 3.9 through 3.12.
 
 ## Environment setup <small>optional</small> { #environment-setup data-toc-label="Environment setup" }
 
-We recommend using a virtual environment - an isolated Python runtime where any packages you install or update are contained within that environment. If you encounter issues, you can simply delete and recreate the environment. Setting it up is straightforward:
+We recommend using a virtual environment – an isolated Python runtime where any packages you install or update are contained within that environment. If you encounter issues, you can simply delete and recreate the environment. Setting it up is straightforward:
 
 * Create a new virtual environment with:
 ```console

@@ -2,7 +2,7 @@
 
 ## About
 
-EasyDiffraction is scientific software for the calculating neutron powder diffraction patterns based on a structural model and refining its parameters against experimental data.
+EasyDiffraction is scientific software for calculating neutron powder diffraction patterns based on a structural model and refining its parameters against experimental data.
 
 EasyDiffraction is distributed as both a cross-platform desktop application and a Python library.
 
