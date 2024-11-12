@@ -50,7 +50,12 @@ jobs:
       # Install MkDocs -- static site generator
       # https://www.mkdocs.org
       - name: Install MkDocs and its dependencies
-        run: pip install mkdocs mkdocs-material mkdocs-jupyter
+        run: >
+          pip install 
+          mkdocs 
+          mkdocs-material 
+          mkdocs-jupyter
+          mkdocs-plugin-inline-svg
 
       # Install EasyDiffractionLib to run Jupyter notebooks
       # Install with the [charts] extra

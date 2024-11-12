@@ -1,7 +1,5 @@
 # Project structure
 
-EasyDiffraction input and output files use the simple, human-readable STAR/CIF data format, following the specifications of [International Union of Crystallography](https://www.iucr.org), wherever possible.
-
 ## CIF-based project files
 
 Example project structure for the constant wavelength powder neutron diffraction measurement is given below:

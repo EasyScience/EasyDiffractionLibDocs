@@ -87,7 +87,11 @@ markdown_extensions:
   - pymdownx.snippets:
       auto_append:
         - includes/abbreviations.md
-  - pymdownx.superfences # whether highlighting should be carried out during build time by Pygments
+  - pymdownx.superfences: # whether highlighting should be carried out during build time by Pygments
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed: # enables content tabs
       alternate_style: true
   - pymdownx.tasklist:
@@ -112,6 +116,7 @@ plugins:
       remove_tag_config:
         remove_input_tags:
           - hide_in_docs
+  - inline-svg
 
 # Determines additional directories to watch when running mkdocs serve
 watch:
@@ -123,12 +128,13 @@ not_in_nav: |
   dictionaries
 nav:
   - Introduction: index.md
+  - EasyScience: easyscience.md
   - Getting started: getting-started.md
   - Glossary: glossary.md
   - Dictionaries: dictionaries.md
   - Project structure: project-structure.md
   - Experiment:
-      - Types: experiment/types.md
+      - CIF-based types: experiment/types.md
       - Non-CIF data: experiment/non-cif-data.md
   - How to use:
       - how-to-use/index.md
@@ -138,6 +144,7 @@ nav:
       - Simulation:
           - pd-xray NaCl: examples/Simulation_pd-xray_NaCl.ipynb
       - Fitting:
+          - how-to-use/fitting/index.md
           - pd-neut-cwl LBCO-HRPT: examples/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
           - pd-neut-tof Si-SEPD: examples/Fitting_pd-neut-tof_Si-SEPD.ipynb
           - pd-neut-tof NCAF-WISH: examples/Fitting_pd-neut-tof_NCAF-WISH.ipynb

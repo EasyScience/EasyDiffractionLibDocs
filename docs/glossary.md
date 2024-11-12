@@ -10,7 +10,7 @@ This page contains the most common abbreviations used in EasyDiffraction documen
 
 * [coreCIF][1]{:.label-cif} Core CIF dictionary by the [IUCr](https://www.iucr.org).
 * [pdCIF][2]{:.label-cif} Powder CIF dictionary by the [IUCr](https://www.iucr.org).
-* [customCIF][0]{:.label-cif} Custom CIF dictionary by the [EasyDiffraction](https://easydiffraction.org) developers.
+* [customCIF][0]{:.label-cif} Custom CIF dictionary by the EasyDiffraction developers.
 
 ## Experiment type labels
 
