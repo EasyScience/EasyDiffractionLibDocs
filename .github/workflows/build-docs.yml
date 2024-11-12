@@ -1,7 +1,13 @@
 name: Build and deploy static site
 
-# Trigger the workflow on push events
-on: push
+on:
+  # Trigger the workflow on push
+  push:
+    # Every branch
+    branches:
+      - "**"
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 env:
   # Set environment variable for the branch name
