@@ -1,6 +1,6 @@
 # Project structure
 
-Input/output files for EasyDiffraction are in simple and human-readable data format STAR/CIF with the specifications of [International Union of Crystallography](https://www.iucr.org), where possible.
+EasyDiffraction input and output files use the simple, human-readable STAR/CIF data format, following the specifications of [International Union of Crystallography](https://www.iucr.org), wherever possible.
 
 ## CIF-based project files
 
