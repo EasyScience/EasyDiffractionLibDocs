@@ -4,22 +4,24 @@
 
 Example project structure for the constant wavelength powder neutron diffraction measurement is given below:
 
-```
-La0.5Ba0.5CoO3     - Project directory.
-├── project.cif    - Main project description file.
+<div class="cif">
+<pre>
+<span class="red"><b>La0.5Ba0.5CoO3</b></span>     - Project directory.
+├── <span class="orange"><b>project.cif</b></span>    - Main project description file.
 ├── models         - Folder with individual crystallographic phases.
-│   ├── lbco.cif   - File with La0.5Ba0.5CoO3 phase parameters.
+│   ├── <span class="orange"><b>lbco.cif</b></span>   - File with La0.5Ba0.5CoO3 phase parameters.
 │   └── ...
 ├── experiments    - Folder with instrumental parameters and measured data.
-│   ├── hrpt.cif   - Measured data from HRPT@PSI & instrumental parameters.
+│   ├── <span class="orange"><b>hrpt.cif</b></span>   - Measured data from HRPT@PSI & instrumental parameters.
 │   └── ...
 └── summary
     └── report.cif - Summary report after structure refinement.
-```
+</pre>
+</div>
 
 Here is the content of the project files:
 
-### project.cif
+### <span class="orange">project.cif</span>
 
 <div class="cif">
 <pre>
@@ -37,11 +39,11 @@ hrpt.cif
 </pre>
 </div>
 
-### models / lbco.cif
+### models / <span class="orange">lbco.cif</span>
 
 <div class="cif">
 <pre>
-data_<span class="red"><b>Fe3O4</b></span>
+data_<span class="red"><b>lbco</b></span>
 
 <span class="blue"><b>_space_group</b>.name_H-M_alt</span>              "P m -3 m"
 <span class="blue"><b>_space_group</b>.IT_coordinate_system_code</span> 1
@@ -69,7 +71,7 @@ O  O    0   0.5 0.5   1    Biso 1.4041
 </pre>
 </div>
 
-### experiments / hrpt.cif
+### experiments / <span class="orange">hrpt.cif</span>
 
 <div class="cif">
 <pre>

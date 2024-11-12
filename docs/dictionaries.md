@@ -9,7 +9,7 @@ All parameter names used in EasyDiffraction are divided into several dictionarie
 
 ## Crystallographic information file
 
-EasyDiffraction input and output files use the simple, human-readable STAR/CIF data format, following the specifications of [International Union of Crystallography](https://www.iucr.org), wherever possible.
+EasyDiffraction input and output files use the simple, human-readable STAR/CIF data format, following the specifications of [International Union of Crystallography](https://www.iucr.org) (IUCr), wherever possible.
 
 ## Model dictionary
 

@@ -146,7 +146,6 @@ nav:
       - Simulation:
           - pd-xray NaCl: examples/Simulation_pd-xray_NaCl.ipynb
       - Fitting:
-          - how-to-use/fitting/index.md
           - pd-neut-cwl LBCO-HRPT: examples/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
           - pd-neut-tof Si-SEPD: examples/Fitting_pd-neut-tof_Si-SEPD.ipynb
           - pd-neut-tof NCAF-WISH: examples/Fitting_pd-neut-tof_NCAF-WISH.ipynb

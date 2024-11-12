@@ -57,6 +57,7 @@
   --sz-red-color:   #F44336;
   --sz-blue-color:  #03A9F4;
   --sz-green-color: #4CAF50;
+  --sz-orange-color: #FF9800;
 }
 
 /* Default dark mode: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/palette/_scheme.scss */
@@ -98,6 +99,7 @@
   --sz-red-color:   #EF9A9A;
   --sz-blue-color:  #81D4FA;
   --sz-green-color: #A5D6A7;
+  --sz-orange-color: #FFCC80;
 }
 
 /* Labels */
@@ -217,4 +219,7 @@ Adjust the margins and paddings to fit the defaults in MkDocs Material and do no
 }
 .blue {
   color: var(--sz-blue-color);
+}
+.orange {
+  color: var(--sz-orange-color);
 }
