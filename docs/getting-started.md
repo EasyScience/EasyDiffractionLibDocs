@@ -2,11 +2,11 @@
 
 ## Requirements
 
-The EasyDiffraction library is developed in the Python programming language and thus requires Python to be installed on your system. The library is compatible with Python versions from 3.9 to 3.12.
+The EasyDiffraction library is developed in Python so Python must be be installed on your system. The library is compatible with Python versions 3.9 through 3.12.
 
 ## Environment setup <small>optional</small> { #environment-setup data-toc-label="Environment setup" }
 
-We recommend using a virtual environment, which is an isolated Python runtime. If you are in a virtual environment, any packages you install or update will be local to that environment. If you run into problems, you can simply delete and recreate the environment. It is straightforward to set up:
+We recommend using a virtual environment - an isolated Python runtime where any packages you install or update are contained within that environment. If you encounter issues, you can simply delete and recreate the environment. Setting it up is straightforward:
 
 * Create a new virtual environment with:
 ```console
@@ -120,6 +120,6 @@ To run the examples locally, you need to install Jupyter Notebook or JupyterLab.
 
     To run the examples in Google Colab, you need to have a Google account.
 
-Google Colab is a free cloud service that allows you to run Jupyter Notebooks in the cloud. So, you can run the examples without installing anything on your local machine.
+Google Colab is a free cloud service that allows you to run Jupyter Notebooks online, enabling you to run the examples without installing anything on your local machine.
 
 In the top right corner of each example, under the [How to use](how-to-use/index.md#how-to-use) section, you will find a button to open that example in Google Colab :google-colab:
