@@ -83,7 +83,9 @@ markdown_extensions:
       options:
         custom_icons:
           - overrides/.icons
-  - pymdownx.highlight # whether highlighting should be carried out during build time by Pygments
+  - pymdownx.highlight: # whether highlighting should be carried out during build time by Pygments
+      use_pygments: true
+      pygments_lang_class: true
   - pymdownx.snippets:
       auto_append:
         - includes/abbreviations.md

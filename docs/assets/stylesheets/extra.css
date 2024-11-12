@@ -52,6 +52,11 @@
   --md-footer-fg-color--lighter:       var(--sz-body-text-color--lightmode);  /* E.g. Made with */
   --md-footer-bg-color:                hsla(0, 0%, 0%, 0.0);  /* Space with, e.g., Next -> */
   --md-footer-bg-color--dark:          hsla(0, 0%, 0%, 0.0);  /* Space with, e.g., © 2022 EasyDiffraction */
+
+  /* Custom colors */
+  --sz-red-color:   #F44336;
+  --sz-blue-color:  #03A9F4;
+  --sz-green-color: #4CAF50;
 }
 
 /* Default dark mode: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/palette/_scheme.scss */
@@ -88,6 +93,11 @@
   --md-footer-fg-color--lighter:       var(--sz-body-text-color--darkmode);  /* E.g. Made with */
   --md-footer-bg-color:                hsla(0, 0%, 0%, 0.0);  /* Space with, e.g., Next -> */
   --md-footer-bg-color--dark:          hsla(0, 0%, 0%, 0.0);  /* Space with, e.g., © 2022 EasyDiffraction */
+
+  /* Custom colors */
+  --sz-red-color:   #EF9A9A;
+  --sz-blue-color:  #81D4FA;
+  --sz-green-color: #A5D6A7;
 }
 
 /* Labels */
@@ -187,4 +197,24 @@ Adjust the margins and paddings to fit the defaults in MkDocs Material and do no
 .jp-Notebook {
     padding: 0 !important;
     margin-top: -3em !important;
+}
+
+/* Custom styles for the CIF files */
+
+.cif {
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  background-color: var(--md-code-bg-color);
+  font-size: small;
+}
+.red {
+  color: var(--sz-red-color);
+}
+.green {
+  color: var(--sz-green-color);
+}
+.blue {
+  color: var(--sz-blue-color);
 }

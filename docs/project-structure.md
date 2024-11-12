@@ -21,80 +21,85 @@ Here is the content of the project files:
 
 ### project.cif
 
-```c++
-data_La0.5Ba0.5CoO3
+<div class="cif">
+<pre>
+data_<span class="red"><b>La0.5Ba0.5CoO3</b></span>
 
-_project.description "neutrons, powder, constant wavelength, HRPT@PSI"
+<span class="blue"><b>_project</b>.description</span> "neutrons, powder, constant wavelength, HRPT@PSI"
 
 loop_
-_model.cif_file_name
+<span class="green"><b>_model</b>.cif_file_name</span>
 lbco.cif
 
 loop_
-_experiment.cif_file_name
+<span class="green"><b>_experiment</b>.cif_file_name</span>
 hrpt.cif
-```
+</pre>
+</div>
 
 ### models / lbco.cif
 
-```c++
-data_lbco
+<div class="cif">
+<pre>
+data_<span class="red"><b>Fe3O4</b></span>
 
-_cell.length_a      3.8909(1)
-_cell.length_b      3.8909
-_cell.length_c      3.8909
-_cell.angle_alpha  90
-_cell.angle_beta   90
-_cell.angle_gamma  90
+<span class="blue"><b>_space_group</b>.name_H-M_alt</span>              "P m -3 m"
+<span class="blue"><b>_space_group</b>.IT_coordinate_system_code</span> 1
 
-_space_group.name_H-M_alt               "P m -3 m"
-_space_group.IT_coordinate_system_code  1
+<span class="blue"><b>_cell</b>.length_a</span>      3.8909(1)
+<span class="blue"><b>_cell</b>.length_b</span>      3.8909
+<span class="blue"><b>_cell</b>.length_c</span>      3.8909
+<span class="blue"><b>_cell</b>.angle_alpha</span>  90
+<span class="blue"><b>_cell</b>.angle_beta</span>   90
+<span class="blue"><b>_cell</b>.angle_gamma</span>  90
 
 loop_
-_atom_site.label
-_atom_site.type_symbol
-_atom_site.fract_x
-_atom_site.fract_y
-_atom_site.fract_z
-_atom_site.occupancy
-_atom_site.adp_type
-_atom_site.B_iso_or_equiv
+<span class="green"><b>_atom_site</b>.label</span>
+<span class="green"><b>_atom_site</b>.type_symbol</span>
+<span class="green"><b>_atom_site</b>.fract_x</span>
+<span class="green"><b>_atom_site</b>.fract_y</span>
+<span class="green"><b>_atom_site</b>.fract_z</span>
+<span class="green"><b>_atom_site</b>.occupancy</span>
+<span class="green"><b>_atom_site</b>.adp_type</span>
+<span class="green"><b>_atom_site</b>.B_iso_or_equiv</span>
 La La   0   0   0     0.5  Biso 0.4958
 Ba Ba   0   0   0     0.5  Biso 0.4943
 Co Co   0.5 0.5 0.5   1    Biso 0.2567
 O  O    0   0.5 0.5   1    Biso 1.4041
-```
+</pre>
+</div>
 
 ### experiments / hrpt.cif
 
-```c++
-data_hrpt
+<div class="cif">
+<pre>
+data_<span class="red"><b>hrpt</b></span>
 
-_diffrn_radiation.probe neutron
-_diffrn_radiation_wavelength.wavelength 1.494
+<span class="blue"><b>_diffrn_radiation</b>.probe</span>                 neutron
+<span class="blue"><b>_diffrn_radiation_wavelength</b>.wavelength</span> 1.494
 
-_pd_calib.2theta_offset  0.6225(4)
+<span class="blue"><b>_pd_calib</b>.2theta_offset</span> 0.6225(4)
 
-_pd_instr.resolution_u  0.0834
-_pd_instr.resolution_v -0.1168
-_pd_instr.resolution_w  0.123
-_pd_instr.resolution_x  0
-_pd_instr.resolution_y  0.0797
+<span class="blue"><b>_pd_instr</b>.resolution_u</span>  0.0834
+<span class="blue"><b>_pd_instr</b>.resolution_v</span> -0.1168
+<span class="blue"><b>_pd_instr</b>.resolution_w</span>  0.123
+<span class="blue"><b>_pd_instr</b>.resolution_x</span>  0
+<span class="blue"><b>_pd_instr</b>.resolution_y</span>  0.0797
 
-_pd_instr.reflex_asymmetry_p1 0
-_pd_instr.reflex_asymmetry_p2 0
-_pd_instr.reflex_asymmetry_p3 0
-_pd_instr.reflex_asymmetry_p4 0
+<span class="blue"><b>_pd_instr</b>.reflex_asymmetry_p1</span> 0
+<span class="blue"><b>_pd_instr</b>.reflex_asymmetry_p2</span> 0
+<span class="blue"><b>_pd_instr</b>.reflex_asymmetry_p3</span> 0
+<span class="blue"><b>_pd_instr</b>.reflex_asymmetry_p4</span> 0
 
 loop_
-_pd_phase_block.id
-_pd_phase_block.scale
+<span class="green"><b>_pd_phase_block</b>.id</span>
+<span class="green"><b>_pd_phase_block</b>.scale</span>
 lbco 9.0976(3)
 
 loop_
-_pd_background.line_segment_X
-_pd_background.line_segment_intensity
-_pd_background.X_coordinate
+<span class="green"><b>_pd_background</b>.line_segment_X</span>
+<span class="green"><b>_pd_background</b>.line_segment_intensity</span>
+<span class="green"><b>_pd_background</b>.X_coordinate</span>
  10  174.3  2theta
  20  159.8  2theta
  30  167.9  2theta
@@ -107,9 +112,9 @@ _pd_background.X_coordinate
 165  171.1  2theta
 
 loop_
-_pd_meas.2theta_scan
-_pd_meas.intensity_total
-_pd_meas.intensity_total_su
+<span class="green"><b>_pd_meas</b>.2theta_scan</span>
+<span class="green"><b>_pd_meas</b>.intensity_total</span>
+<span class="green"><b>_pd_meas</b>.intensity_total_su</span>
  10.00  167  12.6
  10.05  157  12.5
  10.10  187  13.3
@@ -123,4 +128,5 @@ _pd_meas.intensity_total_su
 164.75  175  38.2
 164.80  168  30.9
 164.85  109  41.2
-```
+</pre>
+</div>
