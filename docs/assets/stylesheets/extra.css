@@ -223,3 +223,6 @@ Adjust the margins and paddings to fit the defaults in MkDocs Material and do no
 .orange {
   color: var(--sz-orange-color);
 }
+.grey {
+  color: grey;
+}

@@ -135,9 +135,8 @@ nav:
   - Glossary: glossary.md
   - Dictionaries: dictionaries.md
   - Project structure: project-structure.md
-  - Experiment:
-      - CIF-based types: experiment/types.md
-      - Non-CIF data: experiment/non-cif-data.md
+  - Model: model.md
+  - Experiment: experiment.md
   - How to use:
       - how-to-use/index.md
       - Basic:
