@@ -14,7 +14,7 @@ env:
   # NOTE: Use the same branch name as the one of EasyDiffractionLib. This is
   # required to download the Jupyter notebooks from the EasyDiffractionLib repository
   CI_BRANCH: ${{ github.head_ref || github.ref_name }}
-  EDL_LATEST_VERSION: $(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i "tag_name" | awk -F '"' '{print $4}')
+  EDL_LATEST_VERSION2: $(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i "tag_name" | awk -F '"' '{print $4}')
 
 jobs:
 
@@ -32,9 +32,10 @@ jobs:
       # Save the latest release version of EasyDiffractionLib to be used when building the documentation
       # edl_latest_version is then set in the mkdocs.yml from the environment variable EDL_LATEST_VERSION
       # This is needed to display the latest release version of EasyDiffractionLib in the index.md file
-      #- name: Get the latest release version of EasyDiffractionLib
-      #  run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
-      #    echo "EDL_LATEST_VERSION=$(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i "tag_name" | awk -F '"' '{print $4}')" >> $GITHUB_ENV
+      - name: Get the latest release version of EasyDiffractionLib
+        run: |
+          echo "EDL_LATEST_VERSION=$(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i 'tag_name' | awk -F '\"' '{print $4}')" >> $GITHUB_ENV
+          echo "EDL_LATEST_VERSION2=$(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i 'tag_name' | awk -F '"' '{print $4}')" >> $GITHUB_ENV
 
 
       # Activate dark mode to create documentation with Plotly charts in dark mode
