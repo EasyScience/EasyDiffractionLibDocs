@@ -62,6 +62,7 @@ jobs:
           mkdocs-material 
           mkdocs-jupyter
           mkdocs-plugin-inline-svg
+          mkdocs-macros-plugin
 
       # Install EasyDiffractionLib to run Jupyter notebooks
       # Install with the [charts] extra

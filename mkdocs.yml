@@ -105,6 +105,7 @@ markdown_extensions:
 # A list of plugins (with optional configuration settings) to use when building the site
 plugins:
   - inline-svg
+  - macros
   - mkdocs-jupyter:
       include: ['*.py', '*.ipynb'] # Default: ['*.py', '*.ipynb']
       #ignore: ['*emcee*.ipynb']
