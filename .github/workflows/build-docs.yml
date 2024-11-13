@@ -14,7 +14,7 @@ env:
   # NOTE: Use the same branch name as the one of EasyDiffractionLib. This is
   # required to download the Jupyter notebooks from the EasyDiffractionLib repository
   CI_BRANCH: ${{ github.head_ref || github.ref_name }}
-  EDL_LATEST_VERSION: curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i "tag_name" | awk -F '"' '{print $4}'
+  EDL_LATEST_VERSION: $(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i "tag_name" | awk -F '"' '{print $4}')
 
 jobs:
 
