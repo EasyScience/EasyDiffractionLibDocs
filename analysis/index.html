@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#analysis" class="md-skip">
+        <a href="#macro-syntax-error" class="md-skip">
           Skip to content
         </a>
       
@@ -489,17 +489,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Analysis
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -509,52 +498,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#model-dependent-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Model-dependent analysis
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#calculation-engines" class="md-nav__link">
-    <span class="md-ellipsis">
-      Calculation engines
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#minimisation-engines" class="md-nav__link">
-    <span class="md-ellipsis">
-      Minimisation engines
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -1072,41 +1015,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#model-dependent-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Model-dependent analysis
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#calculation-engines" class="md-nav__link">
-    <span class="md-ellipsis">
-      Calculation engines
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#minimisation-engines" class="md-nav__link">
-    <span class="md-ellipsis">
-      Minimisation engines
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1126,33 +1034,11 @@
   
 
 
-<h1 id="analysis">Analysis</h1>
-<p>This section contains information about the analysis of diffraction data in EasyDiffraction.</p>
-<h3 id="model-dependent-analysis">Model-dependent analysis</h3>
-<p>There are two general approaches to the analysis of data: <strong>model-dependent</strong> and <strong>model-independent</strong>. In the following examples, we are going to focus on the former. However, the latter is worth briefly highlighting.</p>
-<p>A model-independent approach to analysis is where no assumptions are made about the system that is being studied and conclusions are drawn only from the data that has been observed. However, in many applications, it is desirable to include what we think we know about the system, and so model-dependent analysis is used.</p>
-<p>Model-dependent analysis involves the development of a mathematical model that describes the model dataset that would be found for our system. This mathematical model usually has parameters that are linked to the physics and chemistry of our system. These parameters are varied to optimise the model, using an optimisation algorithm, with respect to the experimental data, i.e., to get the best agreement between the model data and the experimental data.</p>
-<p>Below is a diagram illustrating this process:</p>
-<pre class="mermaid"><code>flowchart LR
-    a(Propose&lt;br/&gt;model)
-    b(Set/change&lt;br/&gt;model&lt;br/&gt;parameter&lt;br/&gt;values)
-    c{{Calculate&lt;br/&gt;model&lt;br/&gt;data}}
-    d(Compare&lt;br/&gt;model data to&lt;br/&gt;experimental&lt;br/&gt;data)
-    e(Stop&lt;br/&gt;iteration)
-    a --&gt; b
-    b --&gt; c
-    c --&gt; d
-    d-- Threshold&lt;br/&gt;not&lt;br/&gt;reached --&gt;b
-    d-- Threshold&lt;br/&gt;reached --&gt;e</code></pre>
-<p>Model-dependent analysis is popular in the analysis of neutron scattering data, and we will use it in the following examples.</p>
-<h2 id="calculation-engines">Calculation engines</h2>
-<p>EasyDiffraction is designed to be a flexible and extensible tool for calculating diffraction patterns. It can use different calculation engines to perform the calculations.</p>
-<p>We currently rely on <a href="https://www.cryspy.fr">CrysPy</a> as a calculation engine. CrysPy is a Python library originally developed for analysing polarised neutron diffraction data. It is now evolving into a more general purpose library and covers powders and single crystals, nuclear and (commensurate) magnetic structures, unpolarised neutron and X-ray diffraction.</p>
-<p>Another calculation engine is <a href="https://code.ill.fr/scientific-software/CrysFML2008">CrysFML</a>. This library is a collection of Fortran modules for crystallographic computations. It is used in the software package <a href="https://www.ill.eu/sites/fullprof/">FullProf</a>, and we are currently working on its integration into EasyDiffraction.</p>
-<h2 id="minimisation-engines">Minimisation engines</h2>
-<p>EasyDiffraction uses different third-party libraries to perform the model-dependent analysis.</p>
-<p>Most of the examples in this section will use the <a href="https://lmfit.github.io/lmfit-py/">lmfit</a> package, which provides a high-level interface to non-linear optimisation and curve fitting problems for Python. It is one of the tools that can be used to fit models to the experimental data.</p>
-<p>Another package that can be used for the same purpose is <a href="https://bumps.readthedocs.io/en/latest/">bumps</a>. In addition to traditional optimizers which search for the best minimum they can find in the search space, bumps provides Bayesian uncertainty analysis which explores all viable minima and finds confidence intervals on the parameters based on uncertainty in the measured values.</p>
+<h1 id="macro-syntax-error"><em>Macro Syntax Error</em></h1>
+<p><em>File</em>: <code>analysis.md</code></p>
+<p><em>Line 19 in Markdown file:</em> <strong>unexpected '&gt;'</strong>
+<div class="language-markdown highlight"><pre><span></span><code>    c{{Calculate&lt;br/&gt;model&lt;br/&gt;data}}
+</code></pre></div></p>
 
 
 
