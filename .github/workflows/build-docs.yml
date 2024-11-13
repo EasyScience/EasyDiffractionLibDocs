@@ -13,7 +13,7 @@ env:
   # Set environment variable for the branch name
   # NOTE: Use the same branch name as the one of EasyDiffractionLib. This is
   # required to download the Jupyter notebooks from the EasyDiffractionLib repository
-  CI_BRANCH: ${{ github.head_ref || github.ref_name }}
+  CI_BRANCH: develop  # ${{ github.head_ref || github.ref_name }}
 
 jobs:
 
@@ -156,5 +156,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
           REPO: self
-          BRANCH: easydiffraction.org
+          BRANCH: public_master  # easydiffraction.org
           FOLDER: site
