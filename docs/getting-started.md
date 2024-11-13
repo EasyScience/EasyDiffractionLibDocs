@@ -2,13 +2,44 @@
 
 ## Requirements
 
-The EasyDiffraction library is developed in the Python programming language and thus requires Python to be installed on your system. The library is compatible with Python versions from 3.9 to 3.12.
+The EasyDiffraction library is developed in Python, so Python must be installed on your system. The library is compatible with Python versions 3.9 through 3.12.
+
+## Environment setup <small>optional</small> { #environment-setup data-toc-label="Environment setup" }
+
+We recommend using a virtual environment – an isolated Python runtime where any packages you install or update are contained within that environment. If you encounter issues, you can simply delete and recreate the environment. Setting it up is straightforward:
+
+* Create a new virtual environment with:
+```console
+python3 -m venv venv
+```
+
+* Activate the environment with:
+
+    === ":material-apple: macOS"
+        ```console
+        . venv/bin/activate
+        ```
+    === ":fontawesome-brands-windows: Windows"
+        ```console
+        . venv/Scripts/activate
+        ```
+    === ":material-linux: Linux"
+        ```console
+        . venv/bin/activate
+        ```
+
+Your terminal should now print `(venv)` before the prompt, which is how you know that you are inside the virtual environment that you just created.
+
+* Exit the environment with:
+  ```
+  deactivate
+  ```
 
 ## Installation
 
 ### From PyPI <small>recommended</small> { #from-pypi data-toc-label="From PyPI" }
 
-EasyDiffraction is published on the Python Package Index (PyPI) repository and can be installed with the package installer for Python (pip), ideally by using a virtual environment.
+EasyDiffraction is published on the Python Package Index (PyPI) repository and can be installed with the package installer for Python (pip), ideally by using a [virtual environment](#environment-setup).
 
 We recommend installing the latest release of EasyDiffraction with the `charts` extras, which include optional dependencies used for simplified visualization of charts and tables. This can be especially useful for running the Jupyter Notebook examples. To do so, use the following command:
 ```console
@@ -51,23 +82,29 @@ pip install 'easydiffraction[charts] @ git+https://github.com/EasyScience/EasyDi
 
 ## Examples
 
-We have a collection of Jupyter Notebook examples that demonstrate how to use EasyDiffraction for various tasks. These examples are presented in the **How to use** section of the documentation as static HTML pages.
+We have a collection of Jupyter Notebook examples that demonstrate how to use EasyDiffraction for various tasks. These examples are presented in the [How to use](how-to-use/index.md#how-to-use) section of the documentation as static HTML pages.
 
-You can also run these Jupyter Notebook examples yourself either locally or in Google Colab. The examples are available in the `examples/` directory of the EasyDiffraction repository on GitHub.
+You can also run these Jupyter Notebook examples yourself either locally or in Google Colab. 
+
+These Jupyter Notebook examples can be downloaded either one by one from the [How to use](how-to-use/index.md#how-to-use) section or all together as a zip archive from the [EasyDiffraction releases](https://github.com/EasyScience/EasyDiffractionLib/releases/latest).
 
 ### Run locally
 
-To run the examples locally, you need to install Jupyter Notebook. You can do this with the following commands:
+To run the examples locally, you need to install Jupyter Notebook or JupyterLab. Here are the steps to take in the case of Jupyter Notebook:
 
 * Install Jupyter Notebook:
   ```console
   pip install notebook
   ```
-* Download EasyDiffraction examples from GitHub, e.g., using `curl`:
+* Download EasyDiffraction examples from GitHub for the latest release, e.g., using curl:
   ```console
-  curl https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/develop | tar -xz --strip=1 EasyDiffractionLib-develop/examples
+  curl --location --remote-name https://github.com/EasyScience/EasyDiffractionLib/releases/latest/download/examples.zip
   ```
-* Run Jupyter Notebook server:
+* Unzip the downloaded archive:
+  ```console
+  unzip examples.zip
+  ```
+* Run Jupyter Notebook server in the `examples/` directory:
   ```console
   jupyter notebook examples/
   ```
@@ -77,17 +114,12 @@ To run the examples locally, you need to install Jupyter Notebook. You can do th
   ```
 * Select one of the `*.ipynb` files.
 
-### Via Google Colab <small>google account required</small> { #via-google-colab data-toc-label="Via Google Colab" }
+### Via Google Colab
 
-Google Colab is a free cloud service that allows you to run Jupyter Notebooks in the cloud. So, you can run the examples without installing anything on your local machine.
+!!! note
 
-To run the examples in Google Colab, you need to have a Google account.
+    To run the examples in Google Colab, you need to have a Google account.
 
-In the top right corner of each example, under the **How to use** section, you will find a button to open that example in Google Colab :google-colab:
+Google Colab is a free cloud service that allows you to run Jupyter Notebooks online, enabling you to run the examples without installing anything on your local machine.
 
-<!-- Abbreviations -->
-
-*[PyPI]: The Python Package Index is a repository of software for the Python programming language.
-*[pip]: Package installer for Python.
-*[GitHub]: A web-based platform for version control and collaboration.
-*[Jupyter Notebook]: An open-source web application that allows you to create and share documents that contain live code, equations, visualizations, and narrative text.
+In the top right corner of each example, under the [How to use](how-to-use/index.md#how-to-use) section, you will find a button to open that example in Google Colab :google-colab:

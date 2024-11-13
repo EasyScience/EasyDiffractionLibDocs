@@ -1,11 +1,15 @@
 [0]: #
 [1]: https://www.iucr.org/resources/cif/dictionaries/browse/cif_core
 [2]: https://www.iucr.org/resources/cif/dictionaries/browse/cif_pd
-[3]: abbreviations.md
+[3]: glossary.md
 
 # Dictionaries
 
 All parameter names used in EasyDiffraction are divided into several dictionaries given below. Each keyword in the dictionaries has one badge showing the corresponding type of dictionary, and can have one or more badges showing the type of experiment to which the keyword belongs.
+
+## Crystallographic information file
+
+EasyDiffraction input and output files use the simple, human-readable STAR/CIF data format, following the specifications of [International Union of Crystallography](https://www.iucr.org) (IUCr), wherever possible.
 
 ## Model dictionary
 
