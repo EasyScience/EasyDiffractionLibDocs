@@ -16,4 +16,4 @@ EasyDiffraction is licensed under the [BSD 3-Clause License](https://raw.githubu
 
 ## Latest release
 
-The latest release of EasyDiffraction Python library is [v0.1.4](https://github.com/EasyScience/EasyDiffractionLib/releases/tag/v0.1.4) (6 Nov 2024).
+The latest release of EasyDiffraction Python library is [v0.1.5](https://github.com/EasyScience/EasyDiffractionLib/releases/tag/v0.1.4) (13 Nov 2024).
