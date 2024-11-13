@@ -62,6 +62,7 @@ extra:
     - icon: easyscience
       link: https://easyscience.software
   ci_branch: !ENV [CI_BRANCH, master]
+  edl_latest_version: !ENV [EDL_LATEST_VERSION, v0.0.0]
 
 # Customization to be included by the theme
 extra_css:

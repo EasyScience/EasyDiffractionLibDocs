@@ -9,17 +9,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  # Set environment variable for the branch name
-  # NOTE: Use the same branch name as the one of EasyDiffractionLib. This is
-  # required to download the Jupyter notebooks from the EasyDiffractionLib repository
-  CI_BRANCH: ${{ github.head_ref || github.ref_name }}
-
 jobs:
 
   # Job 1: Build the static files for the documentation site
   build-docs:
-
     runs-on: macos-14  # Use macOS to switch to dark mode for Plotly charts
 
     steps:
@@ -27,6 +20,19 @@ jobs:
         uses: n1hility/cancel-previous-runs@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Set environment variables, to be used during building the documentation
+      - name: Set environment variables
+        run: |
+          # Set the CI_BRANCH environment variable to the branch name
+          # NOTE: Use the same branch name as the one of EasyDiffractionLib. This is
+          # required to download the Jupyter notebooks from the EasyDiffractionLib repository
+          echo "CI_BRANCH=${{ github.head_ref || github.ref_name }}" >> $GITHUB_ENV
+          # Save the latest release version of EasyDiffractionLib to EDL_LATEST_VERSION
+          # EDL_LATEST_VERSION is used in the mkdocs.yml file to set edl_latest_version
+          # edl_latest_version is then needed to display the latest release version of
+          # EasyDiffractionLib in the index.md file
+          echo "EDL_LATEST_VERSION=$(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i 'tag_name' | awk -F '"' '{print $4}')" >> $GITHUB_ENV
 
       # Activate dark mode to create documentation with Plotly charts in dark mode
       # Need a better solution to automatically switch the chart colour theme based on the mkdocs material switcher
