@@ -1,17 +1,21 @@
 [0]: #
 [1]: https://www.iucr.org/resources/cif/dictionaries/browse/cif_core
 [2]: https://www.iucr.org/resources/cif/dictionaries/browse/cif_pd
-[3]: ../misc/abbreviations.md
+[3]: glossary.md
 
-# Project dictionaries
+# Dictionaries
 
-All names for describing the EasyDiffraction project are divided into several dictionaries given below. Each keyword in the dictionaries has one badge showing the corresponding type of dictionary, and can have one or more badges showing the type of experiment to which the keyword belongs.
+All parameter names used in EasyDiffraction are divided into several dictionaries given below. Each keyword in the dictionaries has one badge showing the corresponding type of dictionary, and can have one or more badges showing the type of experiment to which the keyword belongs.
+
+## Crystallographic information file
+
+EasyDiffraction input and output files use the simple, human-readable STAR/CIF data format, following the specifications of [International Union of Crystallography](https://www.iucr.org) (IUCr), wherever possible.
 
 ## Model dictionary
 
 This dictionary provides data names for describing model parameters.
 
-### [pd-neut-cwl][3]{:.label-experiment} [pd-neut-tof][3]{:.label-experiment} [sc-neut-cwl][3]{:.label-experiment} [pd-xray][3]{:.label-experiment}
+[pd-neut-cwl][3]{:.label-experiment} [pd-neut-tof][3]{:.label-experiment} [sc-neut-cwl][3]{:.label-experiment} [pd-xray][3]{:.label-experiment}
 
 * [\_space_group](dictionaries/_space_group.md) [coreCIF][1]{:.label-cif}
     * [\_space_group.name_H-M_alt](dictionaries/_space_group.md) [coreCIF][1]{:.label-cif}
@@ -39,12 +43,12 @@ This dictionary provides data names for describing model parameters.
 
 This dictionary provides data names for describing experimental and instrumental parameters.
 
-### [pd-neut-cwl][3]{:.label-experiment} [pd-neut-tof][3]{:.label-experiment} [sc-neut-cwl][3]{:.label-experiment} [pd-xray][3]{:.label-experiment}
+[pd-neut-cwl][3]{:.label-experiment} [pd-neut-tof][3]{:.label-experiment} [sc-neut-cwl][3]{:.label-experiment} [pd-xray][3]{:.label-experiment}
 
 * [\_diffrn_radiation](dictionaries/_diffrn_radiation.md) [coreCIF][1]{:.label-cif}
     * [\_diffrn_radiation.probe](dictionaries/_diffrn_radiation.md) [coreCIF][1]{:.label-cif}
 
-### [pd-neut-cwl][3]{:.label-experiment} [sc-neut-cwl][3]{:.label-experiment} [pd-xray][3]{:.label-experiment}
+[pd-neut-cwl][3]{:.label-experiment} [sc-neut-cwl][3]{:.label-experiment} [pd-xray][3]{:.label-experiment}
 
 * [\_diffrn_radiation_wavelength](dictionaries/_diffrn_radiation_wavelength.md) [coreCIF][1]{:.label-cif}
     * [\_diffrn_radiation_wavelength.wavelength](dictionaries/_diffrn_radiation_wavelength.md) [coreCIF][1]{:.label-cif}
@@ -56,7 +60,7 @@ This dictionary provides data names for describing experimental and instrumental
     * [\_pd_phase_block.id](dictionaries/_pd_phase.md) [pdCIF][2]{:.label-cif}
     * [\_pd_phase_block.scale](dictionaries/_pd_phase.md) [customCIF][0]{:.label-cif}
 
-### [pd-neut-cwl][3]{:.label-experiment}
+[pd-neut-cwl][3]{:.label-experiment}
 
 * [\_pd_calib](dictionaries/_pd_calib.md) [pdCIF][2]{:.label-cif}
     * [\_pd_calib.2theta_offset](dictionaries/_pd_calib.md) [pdCIF][2]{:.label-cif}
@@ -75,7 +79,7 @@ This dictionary provides data names for describing experimental and instrumental
     * [\_pd_meas.intensity_total](dictionaries/_pd_meas.md) [pdCIF][2]{:.label-cif}
     * [\_pd_meas.intensity_total_su](dictionaries/_pd_meas.md) [pdCIF][2]{:.label-cif}
 
-### [pd-neut-tof][3]{:.label-experiment}
+[pd-neut-tof][3]{:.label-experiment}
 
 * [\_pd_instr](dictionaries/_pd_instr.md) [pdCIF][2]{:.label-cif}
     * [\_pd_instr.zero](dictionaries/_pd_instr.md) [customCIF][0]{:.label-cif}
@@ -94,7 +98,7 @@ This dictionary provides data names for describing experimental and instrumental
     * [\_pd_meas.intensity_total](dictionaries/_pd_meas.md) [pdCIF][2]{:.label-cif}
     * [\_pd_meas.intensity_total_su](dictionaries/_pd_meas.md) [pdCIF][2]{:.label-cif}
 
-### [sc-neut-cwl][3]{:.label-experiment}
+[sc-neut-cwl][3]{:.label-experiment}
 
 * [\_extinction](dictionaries/_extinction.md) [customCIF][0]{:.label-cif}
     * [\_extinction.model](dictionaries/_extinction.md) [customCIF][0]{:.label-cif}

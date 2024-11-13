@@ -1,20 +1,20 @@
 # Project information
 site_name: EasyDiffraction Library
-site_url: https://docs.easydiffraction.org/lib
+site_url: https://easyscience.github.io/EasyDiffractionLibDocs
 
 # Repository
-repo_url: https://github.com/easyscience/EasyDiffractionLibDocs
+repo_url: https://github.com/EasyScience/EasyDiffractionLibDocs
 edit_uri: edit/develop/docs/
 
 # Copyright
 copyright: © 2024 EasyDiffraction
 
-# Configuration
+# Sets the theme and theme specific configuration of your documentation site
 theme:
   name: material
   custom_dir: overrides
   features:
-    - content.action.edit
+    #- content.action.edit  # Temporary disable edit button (until decided on where to host the notebooks)
     #- content.action.view
     - content.code.annotate
     - content.code.copy # Auto generated button to copy a code block's content
@@ -30,14 +30,14 @@ theme:
     - toc.follow
   palette:
     # Palette toggle for light mode
-    - media: "(prefers-color-scheme: light)"
+    - media: '(prefers-color-scheme: light)'
       scheme: default
       primary: custom
       toggle:
         icon: fontawesome/solid/sun
         name: Switch to dark mode
     # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
+    - media: '(prefers-color-scheme: dark)'
       scheme: slate
       primary: custom
       toggle:
@@ -51,7 +51,7 @@ theme:
     edit: material/file-edit-outline
   favicon: assets/favicon.ico
 
-# Additional configuration
+# A set of key-value pairs, where the values can be any valid YAML construct, that will be passed to the template
 extra:
   generator: false # Disable `Made with Material for MkDocs` (bottom left)
   social: # Icons (bottom right)
@@ -61,61 +61,95 @@ extra:
       link: https://github.com/easyscience/EasyDiffractionLib
     - icon: easyscience
       link: https://easyscience.software
+  ci_branch: !ENV [CI_BRANCH, master]
 
-# Customization
+# Customization to be included by the theme
 extra_css:
   - assets/stylesheets/extra.css
 extra_javascript:
   - assets/javascripts/extra.js
 
-# Extensions
+# A list of extensions beyond the ones that MkDocs uses by default (meta, toc, tables, and fenced_code)
 markdown_extensions:
   - abbr
+  - admonition
   - attr_list
   - def_list
   - footnotes
-  - pymdownx.snippets
-  - pymdownx.highlight # whether highlighting should be carried out during build time by Pygments
-  - pymdownx.superfences # whether highlighting should be carried out during build time by Pygments
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
+  - pymdownx.highlight: # whether highlighting should be carried out during build time by Pygments
+      use_pygments: true
+      pygments_lang_class: true
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.superfences: # whether highlighting should be carried out during build time by Pygments
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed: # enables content tabs
+      alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
   - toc:
-      toc_depth: 2
+      toc_depth: 3
 
-# Plugins
+# A list of plugins (with optional configuration settings) to use when building the site
 plugins:
-  - search
+  - inline-svg
   - mkdocs-jupyter:
-      include: ["*.ipynb"] # Default: ["*.py", "*.ipynb"]
-      #ignore: ["some-irrelevant-files/*.ipynb"]
+      include: ['*.py', '*.ipynb'] # Default: ['*.py', '*.ipynb']
+      #ignore: ['*emcee*.ipynb']
       execute: true
+      execute_ignore:
+        - '*emcee*.ipynb'
       allow_errors: false
       include_source: true
       include_requirejs: true # Required for Plotly
-      ignore_h1_titles: true # Use titles difined in the nav section below
+      custom_mathjax_url: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML-full,Safe'
+      ignore_h1_titles: true # Use titles defined in the nav section below
       remove_tag_config:
         remove_input_tags:
-          - colab
+          - hide_in_docs
+  - search
 
-# Page tree
+# Determines additional directories to watch when running mkdocs serve
+watch:
+  - includes
+  - overrides
+
+# Format and layout of the global navigation for the site
 not_in_nav: |
-  project/dictionaries
-
+  dictionaries
 nav:
   - Introduction: index.md
-  - Installation:
-      - Standard: installation/standard.md
+  - EasyScience: easyscience.md
+  - Getting started: getting-started.md
+  - Glossary: glossary.md
+  - Dictionaries: dictionaries.md
+  - Project structure: project-structure.md
+  - Model: model.md
+  - Experiment: experiment.md
+  - Analysis: analysis.md
   - How to use:
+      - how-to-use/index.md
+      - Basic:
+          - Define model: examples/Define-model.ipynb
+          - Define experiment: examples/Define-experiment.ipynb
+      - Simulation:
+          - pd-xray NaCl: examples/Simulation_pd-xray_NaCl.ipynb
       - Fitting:
-          - CW LBCO-HRPT: examples/Fitting_PD-NEUT-CW_LBCO-HRPT.ipynb
-          - TOF Si-SEPD: examples/Fitting_PD-NEUT-TOF_Si-SEPD.ipynb
-          - TOF NCAF-WISH: examples/Fitting_PD-NEUT-TOF_NCAF-WISH.ipynb
+          - pd-neut-cwl LBCO-HRPT: examples/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
+          - pd-neut-tof Si-SEPD: examples/Fitting_pd-neut-tof_Si-SEPD.ipynb
+          - pd-neut-tof NCAF-WISH: examples/Fitting_pd-neut-tof_NCAF-WISH.ipynb
+      - Advanced fitting:
+          - MCMC pd-neut-tof NCAF-WISH: examples/Fitting-emcee_pd-neut-cwl_LBCO-HRPT.ipynb
       - Extra:
-          - Change minimizer: examples/Change_minimizer.ipynb
-  - Project:
-      - Dictionaries: project/dictionaries.md
-      - Structure: project/structure.md
-  - Experiment:
-      - Types: experiment/types.md
-  - Misc:
-      - Abbreviations: misc/abbreviations.md
+          - Change minimizer: examples/Change-minimizer.ipynb

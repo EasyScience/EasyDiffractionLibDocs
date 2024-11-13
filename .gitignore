@@ -4,8 +4,12 @@
 # MkDocs
 site/
 
-# misc
+# PyCharm
+.idea/
+
+# Python virtual environment
 .venv/
-public/
+
+# Jupyter Notebooks
 jupyter_execute
 .ipynb_checkpoints

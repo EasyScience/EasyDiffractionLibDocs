@@ -2,6 +2,9 @@
 
 {% block content %}
 {% if page.nb_url %}
+    <a href="https://colab.research.google.com/github/EasyScience/EasyDiffractionLib/blob/{{ config.extra.ci_branch }}/examples/{{ page.nb_url.split('/') | last }}" title="Open in Google Colab" class="md-content__button md-icon">
+        {% include ".icons/google-colab.svg" %}
+    </a>
     <a href="{{ page.nb_url }}" title="Download Notebook" class="md-content__button md-icon">
         {% include ".icons/material/download.svg" %}
     </a>
