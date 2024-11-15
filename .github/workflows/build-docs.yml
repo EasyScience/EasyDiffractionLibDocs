@@ -3,7 +3,7 @@ name: Build and deploy static site
 on:
   # Trigger the workflow on push
   push:
-    # Every branch
+    # Every branch 
     branches:
       - "**"
   # Allows you to run this workflow manually from the Actions tab
