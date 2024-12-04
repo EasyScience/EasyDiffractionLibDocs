@@ -63,6 +63,36 @@ jobs:
       - name: Install EasyDiffractionLib and its dependencies
         run: pip install 'easydiffraction[charts] @ git+https://github.com/EasyScience/EasyDiffractionLib@${{ env.CI_BRANCH }}'
 
+      # Create directories for extra files copied in the next steps
+      - name: Create directories for extra files
+        run: |
+          mkdir -p docs/assets/images/
+          mkdir -p docs/assets/javascripts/
+          mkdir -p docs/assets/stylesheets/
+          mkdir -p overrides/
+          mkdir -p overrides/partials/
+          mkdir -p overrides/.icons/
+
+      # Download and add the extra files from the CommonDocsAssets repository
+      - name: Copy CommonDocsAssets Files
+        run: |
+          git clone https://github.com/EasyScience/CommonDocsAssets.git
+          cp CommonDocsAssets/docs/assets/javascripts/extra.js docs/assets/javascripts/
+          cp CommonDocsAssets/docs/assets/stylesheets/extra.css docs/assets/stylesheets/
+          cp CommonDocsAssets/overrides/main.html overrides/
+          cp CommonDocsAssets/overrides/partials/logo.html overrides/partials/
+          cp CommonDocsAssets/overrides/.icons/google-colab.svg overrides/.icons/
+
+      # Download and add the extra files from the BrandingResources repository
+      - name: Copy BrandingResources Files
+        run: |
+          git clone https://github.com/EasyScience/BrandingResources.git
+          cp BrandingResources/EasyDiffraction/logos/edl-logo_dark.svg docs/assets/images/easydiffractionlib_dark.svg
+          cp BrandingResources/EasyDiffraction/logos/edl-logo_light.svg docs/assets/images/easydiffractionlib_light.svg
+          cp BrandingResources/EasyDiffraction/icons/ed-icon_256x256.png docs/assets/images/favicon.png
+          cp BrandingResources/EasyDiffraction/icons/ed-icon_bw.svg overrides/.icons/easydiffraction.svg
+          cp BrandingResources/EasyScience/icons/es-icon_bw.svg overrides/.icons/easyscience.svg
+
       # Download Jupyter notebooks from EasyDiffractionLib to the examples folder
       # The notebooks are used to generate the documentation
       # Download from the same branch as the current one (CI_BRANCH)
