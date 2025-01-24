@@ -27,13 +27,19 @@ jobs:
         uses: n1hility/cancel-previous-runs@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          
+
       # Save the latest release version of EasyDiffractionLib to EDL_LATEST_VERSION
       # EDL_LATEST_VERSION is used in the mkdocs.yml file to set edl_latest_version
       # edl_latest_version is then needed to display the latest release version of
       # EasyDiffractionLib in the index.md file
       - name: Get the latest release version of EasyDiffractionLib
-        run: echo "EDL_LATEST_VERSION=$(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i 'tag_name' | awk -F '"' '{print $4}')" >> $GITHUB_ENV
+        # This method is not working in CI with the following error: "API rate limit exceeded..."
+        #run: echo "EDL_LATEST_VERSION=$(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i 'tag_name' | awk -F '"' '{print $4}')" >> $GITHUB_ENV
+        # This method is not optimal and takes some more time to run, but it works and it is reliable
+        run: |
+          git clone --depth 1 https://github.com/EasyScience/EasyDiffractionLib .
+          git fetch --tags
+          echo "EDL_LATEST_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       # Activate dark mode to create documentation with Plotly charts in dark mode
       # Need a better solution to automatically switch the chart colour theme based on the mkdocs material switcher
@@ -72,6 +78,16 @@ jobs:
 
       # Create directories for extra files copied in the next steps
       - name: Create directories for extra files
+        run: |
+          mkdir -p docs/assets/images/
+          mkdir -p docs/assets/javascripts/
+          mkdir -p docs/assets/stylesheets/
+          mkdir -p overrides/
+          mkdir -p overrides/partials/
+          mkdir -p overrides/.icons/
+
+      # Make the directories for the extra files, which are copied in the next steps
+      - name: Make the directories
         run: |
           mkdir -p docs/assets/images/
           mkdir -p docs/assets/javascripts/
