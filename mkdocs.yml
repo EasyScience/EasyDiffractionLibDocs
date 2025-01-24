@@ -7,7 +7,7 @@ repo_url: https://github.com/EasyScience/EasyDiffractionLibDocs
 edit_uri: edit/develop/docs/
 
 # Copyright
-copyright: © 2024 EasyDiffraction
+copyright: © 2025 EasyDiffraction
 
 # Sets the theme and theme specific configuration of your documentation site
 theme:
@@ -47,19 +47,21 @@ theme:
     text: Mulish
     code: Roboto Mono
   icon:
-    logo: logo-lib
     edit: material/file-edit-outline
-  favicon: assets/favicon.ico
+  favicon: assets/images/favicon.png
+  logo_dark_mode: assets/images/easydiffractionlib_dark.svg
+  logo_light_mode: assets/images/easydiffractionlib_light.svg
 
-# A set of key-value pairs, where the values can be any valid YAML construct, that will be passed to the template
+# A set of key-value pairs, where the values can be any valid YAML
+# construct, that will be passed to the template
 extra:
   generator: false # Disable `Made with Material for MkDocs` (bottom left)
   social: # Icons (bottom right)
-    - icon: easydiffraction
+    - icon: easydiffraction  # File: overrides/.icons/easydiffraction.svg
       link: https://easydiffraction.org
-    - icon: fontawesome/brands/github
-      link: https://github.com/easyscience/EasyDiffractionLib
-    - icon: easyscience
+    - icon: fontawesome/brands/github  # Name as in Font Awesome
+      link: https://github.com/EasyScience/EasyDiffractionLib
+    - icon: easyscience  # File: overrides/.icons/easyscience.svg
       link: https://easyscience.software
   ci_branch: !ENV [CI_BRANCH, master]
   edl_latest_version: !ENV [EDL_LATEST_VERSION, v0.0.0]

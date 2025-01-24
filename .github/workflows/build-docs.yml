@@ -3,7 +3,7 @@ name: Build and deploy static site
 on:
   # Trigger the workflow on push
   push:
-    # Every branch
+    # Every branch 
     branches:
       - "**"
   # Allows you to run this workflow manually from the Actions tab
@@ -27,13 +27,19 @@ jobs:
         uses: n1hility/cancel-previous-runs@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          
+
       # Save the latest release version of EasyDiffractionLib to EDL_LATEST_VERSION
       # EDL_LATEST_VERSION is used in the mkdocs.yml file to set edl_latest_version
       # edl_latest_version is then needed to display the latest release version of
       # EasyDiffractionLib in the index.md file
       - name: Get the latest release version of EasyDiffractionLib
-        run: echo "EDL_LATEST_VERSION=$(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i 'tag_name' | awk -F '"' '{print $4}')" >> $GITHUB_ENV
+        # This method is not working in CI with the following error: "API rate limit exceeded..."
+        #run: echo "EDL_LATEST_VERSION=$(curl https://api.github.com/repos/EasyScience/EasyDiffractionLib/releases/latest | grep -i 'tag_name' | awk -F '"' '{print $4}')" >> $GITHUB_ENV
+        # This method is not optimal and takes some more time to run, but it works and it is reliable
+        run: |
+          git clone --depth 1 https://github.com/EasyScience/EasyDiffractionLib .
+          git fetch --tags
+          echo "EDL_LATEST_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       # Activate dark mode to create documentation with Plotly charts in dark mode
       # Need a better solution to automatically switch the chart colour theme based on the mkdocs material switcher
@@ -67,9 +73,48 @@ jobs:
 
       # Install EasyDiffractionLib to run Jupyter notebooks
       # Install with the [charts] extra
-      # Install from the same branch as the current one (CI_BRANCH)
       - name: Install EasyDiffractionLib and its dependencies
-        run: pip install 'easydiffraction[charts] @ git+https://github.com/EasyScience/EasyDiffractionLib@${{ env.CI_BRANCH }}'
+        run: pip install 'easydiffraction[charts]'
+
+      # Create directories for extra files copied in the next steps
+      - name: Create directories for extra files
+        run: |
+          mkdir -p docs/assets/images/
+          mkdir -p docs/assets/javascripts/
+          mkdir -p docs/assets/stylesheets/
+          mkdir -p overrides/
+          mkdir -p overrides/partials/
+          mkdir -p overrides/.icons/
+
+      # Make the directories for the extra files, which are copied in the next steps
+      - name: Make the directories
+        run: |
+          mkdir -p docs/assets/images/
+          mkdir -p docs/assets/javascripts/
+          mkdir -p docs/assets/stylesheets/
+          mkdir -p overrides/
+          mkdir -p overrides/partials/
+          mkdir -p overrides/.icons/
+
+      # Download and add the extra files from the CommonDocsAssets repository
+      - name: Copy CommonDocsAssets Files
+        run: |
+          git clone https://github.com/EasyScience/CommonDocsAssets.git
+          cp CommonDocsAssets/docs/assets/javascripts/extra.js docs/assets/javascripts/
+          cp CommonDocsAssets/docs/assets/stylesheets/extra.css docs/assets/stylesheets/
+          cp CommonDocsAssets/overrides/main.html overrides/
+          cp CommonDocsAssets/overrides/partials/logo.html overrides/partials/
+          cp CommonDocsAssets/overrides/.icons/google-colab.svg overrides/.icons/
+
+      # Download and add the extra files from the BrandingResources repository
+      - name: Copy BrandingResources Files
+        run: |
+          git clone https://github.com/EasyScience/BrandingResources.git
+          cp BrandingResources/EasyDiffraction/logos/edl-logo_dark.svg docs/assets/images/easydiffractionlib_dark.svg
+          cp BrandingResources/EasyDiffraction/logos/edl-logo_light.svg docs/assets/images/easydiffractionlib_light.svg
+          cp BrandingResources/EasyDiffraction/icons/ed-icon_256x256.png docs/assets/images/favicon.png
+          cp BrandingResources/EasyDiffraction/icons/ed-icon_bw.svg overrides/.icons/easydiffraction.svg
+          cp BrandingResources/EasyScience/icons/es-icon_bw.svg overrides/.icons/easyscience.svg
 
       # Download Jupyter notebooks from EasyDiffractionLib to the examples folder
       # The notebooks are used to generate the documentation
