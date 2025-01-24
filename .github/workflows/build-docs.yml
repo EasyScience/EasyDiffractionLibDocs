@@ -59,9 +59,8 @@ jobs:
 
       # Install EasyDiffractionLib to run Jupyter notebooks
       # Install with the [charts] extra
-      # Install from the same branch as the current one (CI_BRANCH)
       - name: Install EasyDiffractionLib and its dependencies
-        run: pip install 'easydiffraction[charts] @ git+https://github.com/EasyScience/EasyDiffractionLib@${{ env.CI_BRANCH }}'
+        run: pip install 'easydiffraction[charts]'
 
       # Create directories for extra files copied in the next steps
       - name: Create directories for extra files
