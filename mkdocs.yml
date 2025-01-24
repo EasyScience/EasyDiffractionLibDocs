@@ -64,6 +64,7 @@ extra:
     - icon: easyscience  # File: overrides/.icons/easyscience.svg
       link: https://easyscience.software
   ci_branch: !ENV [CI_BRANCH, master]
+  edl_latest_version: !ENV [EDL_LATEST_VERSION, v0.0.0]
 
 # Customization to be included by the theme
 extra_css:
@@ -106,6 +107,7 @@ markdown_extensions:
 # A list of plugins (with optional configuration settings) to use when building the site
 plugins:
   - inline-svg
+  - macros
   - mkdocs-jupyter:
       include: ['*.py', '*.ipynb'] # Default: ['*.py', '*.ipynb']
       #ignore: ['*emcee*.ipynb']

@@ -16,7 +16,7 @@ Below is a diagram illustrating this process:
 flowchart LR
     a(Propose<br/>model)
     b(Set/change<br/>model<br/>parameter<br/>values)
-    c{{Calculate<br/>model<br/>data}}
+    c(Calculate<br/>model<br/>data)
     d(Compare<br/>model data to<br/>experimental<br/>data)
     e(Stop<br/>iteration)
     a --> b
