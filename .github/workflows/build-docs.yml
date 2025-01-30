@@ -14,7 +14,9 @@ env:
   # Set the CI_BRANCH environment variable to be the branch name
   # NOTE: Use the same branch name as the one of EasyDiffractionLib. This is
   # required to download the Jupyter notebooks from the EasyDiffractionLib repository
+  # Set the NOTEBOOKS_DIR environment variable to be the directory containing the Jupyter notebooks
   CI_BRANCH: ${{ github.head_ref || github.ref_name }}
+  NOTEBOOKS_DIR: examples
 
 jobs:
 
@@ -110,6 +112,7 @@ jobs:
       # The following step is needed to avoid the following message during the build:
       # "Matplotlib is building the font cache; this may take a moment"
       - name: Pre-build site step
+        if: False
         run: python -c "import easydiffraction"
 
       # Create the mkdocs.yml file

@@ -3,7 +3,7 @@ theme:
   name: material
   custom_dir: overrides
   features:
-    - content.action.edit
+    #- content.action.edit # Temporary disable edit button (until decided on which branch to use and where to host the notebooks)
     #- content.action.view
     - content.code.annotate
     - content.code.copy # Auto generated button to copy a code block's content
