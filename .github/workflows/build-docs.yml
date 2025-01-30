@@ -139,7 +139,7 @@ jobs:
       # This artifact is named github-pages and is a single gzip archive containing a single tar file
       # The artifact is then used in the next job by actions/deploy-pages to deploy the static files to GitHub Pages
       # Unfortunately, the artifact is not available for download, so extra steps below are needed to do similar things
-      - name: Upload built site as artifact (for github-pages)
+      - name: Upload built site as artifact for easyscience.github.io/diffraction-lib (all branches)
         uses: actions/upload-pages-artifact@v3
         with:
           path: site/
@@ -147,7 +147,7 @@ jobs:
       # Upload the static files from the site/ directory to be used in the next job
       # This extra step is needed to allow the download of the artifact in the next job
       # for pushing its content to the branch named 'easydiffraction.org'
-      - name: Upload built site as artifact (for easydiffraction.org, master branch)
+      - name: Upload built site as artifact for gh_pages and easydiffraction.org (master branch)
         if: ${{ env.CI_BRANCH == 'master' }}
         uses: actions/upload-artifact@v4
         with:
@@ -207,5 +207,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
           REPO: self
-          BRANCH: gh_pages  # easydiffraction.org
+          BRANCH: gh_pages
           FOLDER: site
