@@ -1,20 +1,9 @@
-# Project information
-site_name: EasyDiffraction Library
-site_url: https://easyscience.github.io/EasyDiffractionLibDocs
-
-# Repository
-repo_url: https://github.com/EasyScience/EasyDiffractionLibDocs
-edit_uri: edit/develop/docs/
-
-# Copyright
-copyright: © 2025 EasyDiffraction
-
-# Sets the theme and theme specific configuration of your documentation site
+# Sets the theme and theme-specific configuration
 theme:
   name: material
   custom_dir: overrides
   features:
-    #- content.action.edit  # Temporary disable edit button (until decided on where to host the notebooks)
+    #- content.action.edit # Temporary disable edit button (until decided on which branch to use and where to host the notebooks)
     #- content.action.view
     - content.code.annotate
     - content.code.copy # Auto generated button to copy a code block's content
@@ -47,24 +36,23 @@ theme:
     text: Mulish
     code: Roboto Mono
   icon:
+    #logo: easycrystallography
     edit: material/file-edit-outline
   favicon: assets/images/favicon.png
-  logo_dark_mode: assets/images/easydiffractionlib_dark.svg
-  logo_light_mode: assets/images/easydiffractionlib_light.svg
+  logo_dark_mode: assets/images/logo_dark.svg
+  logo_light_mode: assets/images/logo_light.svg
 
 # A set of key-value pairs, where the values can be any valid YAML
 # construct, that will be passed to the template
 extra:
   generator: false # Disable `Made with Material for MkDocs` (bottom left)
   social: # Icons (bottom right)
-    - icon: easydiffraction  # File: overrides/.icons/easydiffraction.svg
-      link: https://easydiffraction.org
     - icon: fontawesome/brands/github  # Name as in Font Awesome
       link: https://github.com/EasyScience/EasyDiffractionLib
     - icon: easyscience  # File: overrides/.icons/easyscience.svg
       link: https://easyscience.software
   ci_branch: !ENV [CI_BRANCH, master]
-  edl_latest_version: !ENV [EDL_LATEST_VERSION, v0.0.0]
+  release_version: !ENV [RELEASE_VERSION, v0.0.0]
 
 # Customization to be included by the theme
 extra_css:
@@ -106,6 +94,7 @@ markdown_extensions:
 
 # A list of plugins (with optional configuration settings) to use when building the site
 plugins:
+  - autorefs
   - inline-svg
   - macros
   - mkdocs-jupyter:
@@ -122,12 +111,30 @@ plugins:
       remove_tag_config:
         remove_input_tags:
           - hide_in_docs
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_root_heading: true
+            show_source: false
+            show_submodules: true
   - search
 
 # Determines additional directories to watch when running mkdocs serve
 watch:
   - includes
   - overrides
+
+# Project information
+site_name: EasyDiffraction Library
+site_url: https://easyscience.github.io/EasyDiffractionLibDocs
+
+# Repository
+repo_url: https://github.com/EasyScience/EasyDiffractionLibDocs
+edit_uri: edit/develop/docs/
+
+# Copyright
+copyright: © 2025 EasyDiffraction
 
 # Format and layout of the global navigation for the site
 not_in_nav: |
