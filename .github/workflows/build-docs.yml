@@ -77,7 +77,6 @@ jobs:
       # Install EasyDiffractionLib to run Jupyter notebooks
       # Install with the [charts] extra
       - name: Install EasyDiffractionLib and its dependencies
-        if: False
         run: pip install 'easydiffraction[charts]'
 
       # Download and add the extra files from the easyscience/assets-docs repository
@@ -104,7 +103,6 @@ jobs:
       # The notebooks are used to generate the documentation
       # Download from the same branch as the current one (CI_BRANCH)
       - name: Download Jupyter notebooks from EasyDiffractionLib
-        if: False
         run: |
           cd docs/
           curl https://codeload.github.com/easyscience/EasyDiffractionLib/tar.gz/master | tar -xz --strip=1 EasyDiffractionLib-master/examples
@@ -112,7 +110,6 @@ jobs:
       # The following step is needed to avoid the following message during the build:
       # "Matplotlib is building the font cache; this may take a moment"
       - name: Pre-build site step
-        if: False
         run: python -c "import easydiffraction"
 
       # Create the mkdocs.yml file
